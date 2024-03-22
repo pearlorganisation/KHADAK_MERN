@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="items-center px-4 max-w-screen-xl mx-auto  md:px-8">
       <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        <div class=" px-4 mx-auto max-w-screen-xl text-center lg:pt-8 lg:px-12">
           <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
             Real Call Girls in <span className="text-red-600">Delhi</span> Get
             Contact Number

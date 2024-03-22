@@ -3,20 +3,20 @@ import React from "react";
 const CallGirlsList = () => {
   return (
     <div>
-      <div class=" bg-[#c12261] w-full my-10 flex  flex-col items-center rounded-xl border border-spacing-2 border-red-600 px-4 py-4 text-center md:flex-row md:items-start md:text-left">
-        <div class="mb-4 md:mr-6 md:mb-0 md:h-[300px]  md:w-[30%] overflow-hidden">
+      <div class=" bg-[#c12261] w-full my-10 grid grid-cols-[40%_auto] md:grid-cols-[30%_auto]  rounded-xl border border-spacing-2 border-red-600 px-4 py-4 text-left   md:text-left">
+        <div class="mb-4 md:mr-6 md:mb-0 h-[300px]  overflow-hidden">
           <img
-            class=" rounded-lg object-cover  "
+            class=" rounded-lg h-full object-cover "
             src="https://uniquegirls99.com/images/169/17089176680.jpg"
             alt=""
           />
         </div>
-        <div class="flex flex-col justify-between md:h-[300px]">
+        <div class="flex flex-col justify-between h-[300px] p-3">
           <div>
-            <p class="text-2xl font-medium text-white">
+            <p class="text-xl md:text-2xl font-medium text-white">
               Aadhya Sharma 24 year old Independant Delhi Call Girl
             </p>
-            <p class="mb-4 text-sm font-medium text-white">
+            <p class="mb-4 text-xs md:text-sm font-medium text-white">
               Hello Friends! Myself Aadhya Sharma and I am an Independent Call
               Girl. I am young and sexy 24 year old with an amazing slim figure
             </p>
