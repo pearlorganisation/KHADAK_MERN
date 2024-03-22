@@ -10,26 +10,19 @@ import jwt from "jsonwebtoken";
 // @url - auth/user
 export const createUser = async (req, res, next) => {
   try {
-    const { name, email, password, role } = req?.body?.payload;
+    const { email, password, role } = req?.body;
 
-    if (!name || !email || !password || !role) {
+    if ( !email || !password ) {
       return res.status(400).json({
         success: false,
         message: "Please provide all details",
       });
     }
 
-    let payload = pick(req?.body?.payload, [
-      "name",
-      "email",
-      "password",
-      "role",
-    ]);
-
     const salt = await bcrypt.genSalt(10);
-    payload.password = await bcrypt.hash(payload.password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    const userDoc = new userModel(payload);
+    const userDoc = new userModel({...req?.body,password:hashedPassword});
 
     await userDoc.save();
 
@@ -40,14 +33,14 @@ export const createUser = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Internal server error",
+      message: error?.message || "Internal server error",
     });
   }
 };
 
 // @url - auth/user
 export const userLogin = async (req, res) => {
-  const { email, password } = req?.body?.payload;
+  const { email, password } = req?.body;
 
   // check if user exist
   const user = await userModel.findOne({ email });
