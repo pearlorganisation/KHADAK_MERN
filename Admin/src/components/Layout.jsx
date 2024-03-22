@@ -24,7 +24,17 @@ export default function Layout() {
         label: 'Blogs',
         path: '/blog',
         icon: ''
+    },
+    {
+        label: 'Header Content',
+        path: '/header',
+        icon: ''
     }
+        , {
+        label: 'Footer Content',
+        path: '/footer',
+        icon: ''
+    },
      ]
 
     return (
