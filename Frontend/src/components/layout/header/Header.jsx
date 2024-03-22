@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <nav className="bg-[#ED2B33FF] border-b w-full md:static md:text-sm md:border-none">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
-        <div className="flex items-center justify-between py-3 md:py-5 md:block">
+        <div className="flex items-center justify-between py-3 md:block">
           <a href="javascript:void(0)">
             <img src={logo} height={80} alt="Float UI logo" />
           </a>
