@@ -5,13 +5,14 @@ import { combineReducers } from "redux";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 
 import auth from "./slices/auth";
-
+import header from "./slices/header";
 
 
 
 // Combine your individual reducers here
 const rootReducer = combineReducers({
-    auth
+    auth,
+    header,
   });
 
 
