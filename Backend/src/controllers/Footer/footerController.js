@@ -1,4 +1,4 @@
-import FooterModel from "../../models/Footer/FooterModel.js";
+import FooterModel from "../../models/footer/footerModel.js";
 
 // adding footer data in database ..
 export const createFooter = async (req, res) => {
