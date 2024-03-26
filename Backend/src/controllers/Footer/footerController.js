@@ -1,5 +1,6 @@
 import footerModel from "../../models/Footer/FooterModel.js";
 
+// adding footer data in database
 export const createFooter = async (req, res) => {
   try {
     const data = new footerModel(req.body);
@@ -13,6 +14,7 @@ export const createFooter = async (req, res) => {
   }
 };
 
+// getting data of footer from database
 export const getFooter = async (req, res) => {
   try {
     const data = await footerModel.find();
@@ -26,7 +28,7 @@ export const getFooter = async (req, res) => {
     });
   }
 };
-
+//  edit footer data controller
 export const updateFooter = async (req, res) => {
   const { _id, title, description } = req?.body;
   try {
@@ -46,6 +48,7 @@ export const updateFooter = async (req, res) => {
   }
 };
 
+// delete footer item controller
 export const DeleteFooterData = async (req, res) => {
   try {
     const { id } = req.params;
