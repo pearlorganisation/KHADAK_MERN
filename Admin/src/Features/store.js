@@ -6,6 +6,7 @@ import { encryptTransform } from "redux-persist-transform-encrypt";
 
 import auth from "./slices/auth";
 import header from "./slices/header";
+import footer from "./slices/footer";
 
 
 
@@ -13,6 +14,7 @@ import header from "./slices/header";
 const rootReducer = combineReducers({
     auth,
     header,
+    footer,
   });
 
 
