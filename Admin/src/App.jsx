@@ -10,6 +10,10 @@ import ViewLocation from "./pages/Locations/ViewLocations";
 import CreateCity from "./pages/Locations/CreateCity";
 import ViewBlogs from "./pages/Blogs/ViewBlogs";
 import CreateBlog from "./pages/Blogs/CreateBlog";
+import ViewHeaderContent from "./pages/HeaderContent/ViewHeaderContent";
+import UpdateHeaderContent from "./pages/HeaderContent/UpdateHeaderContent";
+import ViewFooterContent from "./pages/FooterContent/ViewFooterContent";
+import UpdateFooterContent from "./pages/FooterContent/UpdateFooterContent";
 
 
 
@@ -17,7 +21,7 @@ import CreateBlog from "./pages/Blogs/CreateBlog";
 
   const App = () => {
     // const { isUserLoggedIn } = useAuth();
-  const isUserLoggedIn = false
+  const isUserLoggedIn = true
 
   const getRoutes=()=>{
     if(isUserLoggedIn){
@@ -58,6 +62,23 @@ import CreateBlog from "./pages/Blogs/CreateBlog";
             {
               path: "/createBlog",
               element: <CreateBlog />,
+            },
+            {
+              path: "/header",
+              element: <ViewHeaderContent />,
+            },
+            {
+              path: "/updateHeader",
+              element: <UpdateHeaderContent />,
+            },
+    
+            {
+              path: "/footer",
+              element: <ViewFooterContent />,
+            },
+            {
+              path: "/updateFooter",
+              element: <UpdateFooterContent />,
             },
     
          
