@@ -14,6 +14,4 @@ const footerschema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const footerModel = mongoose.model("Footer", footerschema, "Footer");
-
-export default footerModel;
+export default mongoose.model("Footer", footerschema, "Footer");
