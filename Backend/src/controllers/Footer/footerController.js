@@ -17,7 +17,7 @@ export const createFooter = async (req, res) => {
 // getting data of footer from database
 export const getFooter = async (req, res) => {
   try {
-    const data = await footerModel.find();
+    const data = await FooterModel.find();
     res.status(200).json({
       message: "success",
       data: data,
@@ -32,7 +32,7 @@ export const getFooter = async (req, res) => {
 export const updateFooter = async (req, res) => {
   const { _id, title, description } = req?.body;
   try {
-    const updatedData = await footerModel.findByIdAndUpdate(
+    const updatedData = await FooterModel.findByIdAndUpdate(
       _id,
       { title, description },
       { new: true }
@@ -52,7 +52,7 @@ export const updateFooter = async (req, res) => {
 export const DeleteFooterData = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedItem = await footerModel.findByIdAndDelete(id);
+    const deletedItem = await FooterModel.findByIdAndDelete(id);
     res.status(200).json({
       message: "item deleted successfully",
     });

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const footerschema = new mongoose.Schema(
+const footerSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -14,4 +14,4 @@ const footerschema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Footer", footerschema, "Footer");
+export default mongoose.model("Footer", footerSchema, "Footer");
