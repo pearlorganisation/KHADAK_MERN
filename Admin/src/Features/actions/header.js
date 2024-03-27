@@ -6,7 +6,7 @@ export const getHeader = createAsyncThunk(
     'getHeader',
     async (payload, { rejectWithValue }) => {
       try {
-        const { data } = await instance.get('https://khadak-mern.onrender.com/heroSection', payload, {
+        const { data } = await instance.get('/heroSection', payload, {
           withCredentials: true,
         });
         console.log(data, 'datatattatatatat');
@@ -26,7 +26,7 @@ export const updateHeader = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
 
-      const response = await instance.put(`https://khadak-mern.onrender.com/heroSection/${payload?.id}`, payload, {
+      const response = await instance.put(`/heroSection/${payload?.id}`, payload, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
@@ -39,3 +39,5 @@ export const updateHeader = createAsyncThunk(
     }
   }
 );
+
+

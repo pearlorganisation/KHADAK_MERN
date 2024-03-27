@@ -1,8 +1,9 @@
-import React,{useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useNavigate } from 'react-router';
 import { Stack,Skeleton } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFooter } from '../../Features/actions/footer';
+import { deleteFooter, getFooter } from '../../Features/actions/footer';
+import Delete from '../../components/Delete';
 
 
 
@@ -12,6 +13,20 @@ const ViewFooterContent = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { footerData, isDeleted, isLoading } = useSelector((state) => state.footer);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [id, setId] = useState();
+  const handleDelete = () => {
+    dispatch(deleteFooter(id));
+
+    setShowDeleteModal(false);
+    setId('');
+  };
+
+  const handleModal = (ID) => {
+    setShowDeleteModal(true);
+    setId(ID);
+  }; 
 
     const handleCreateContent= () => {
         navigate('/createFooter');
@@ -119,6 +134,9 @@ const ViewFooterContent = () => {
           </table>
         </div>
       </div>
+      {showDeleteModal && (
+        <Delete setModal={setShowDeleteModal} handleDelete={handleDelete} />
+      )}
      </>
   )
 }
