@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.route("/").post(createFooter);
 router.route("/").get(getFooter);
-router.route("/").put(updateFooter);
+router.route("/:id").put(updateFooter);
 router.route("/:id").delete(DeleteFooterData);
 
 export default router;
