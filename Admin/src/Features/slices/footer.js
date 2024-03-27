@@ -70,9 +70,7 @@ const footerSlice = createSlice({
       .addCase(deleteFooter.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isDeleted = true;
-        state.productData = state.productData.filter(
-          (product) => product._id !== action?.payload?.payload
-        );
+        
         toast.success("Footer Deleted successfully", {
           position: "top-right",
          }); 
