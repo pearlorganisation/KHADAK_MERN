@@ -2,8 +2,8 @@ import express from "express";
 import { mongoConnect } from "./src/configs/mongoDB.js";
 import { authRouter } from "./src/routes/Auth/authRoutes.js";
 import heroSectionRouter from "./src/routes/HeroSection/heroSectionroutes.js";
-import cors from "cors"
-import footerRouter from "./src/routes/Footer/footerRoutes.js"
+import cors from "cors";
+import footerRouter from "./src/routes/Footer/footerRoutes.js";
 
 const app = express();
 const PORT = 6500;
@@ -22,6 +22,7 @@ app.use(
             "http://localhost:5174",
             "http://localhost:5010",
             "https://khadak-mern.vercel.app",
+            "https://khadak-mern-s8ce.vercel.app/",
           ],
           credentials: true,
           methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
@@ -35,6 +36,7 @@ app.use(
             "http://localhost:5010",
             "https://khadak-mern.onrender.com/api/v1",
             "https://khadak-mern.vercel.app",
+            "https://khadak-mern-s8ce.vercel.app/",
           ],
           credentials: true,
           methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
