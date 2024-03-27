@@ -3,21 +3,19 @@ import { instance } from "../../services/axiosInterceptor";
 
 //get all footer api
 export const getFooter = createAsyncThunk(
-    'getFooter',
-    async (payload, { rejectWithValue }) => {
-      try {
-        const { data } = await instance.get('https://khadak-mern.onrender.com/footer', payload, {
-          withCredentials: true,
-        });
-        console.log(data, 'datatattatatatat');
-        return data;
-      } catch (e) {
-        return rejectWithValue(e);
-      }
+  "getFooter",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await instance.get(`/footer`, payload, {
+        withCredentials: true,
+      });
+      console.log(data, "datatattatatatat");
+      return data;
+    } catch (e) {
+      return rejectWithValue(e);
     }
-  );
-
-
+  }
+);
 
 //update Footer Api
 
@@ -25,8 +23,7 @@ export const updateFooter = createAsyncThunk(
   "footer",
   async (payload, { rejectWithValue }) => {
     try {
-
-      const response = await instance.put(`https://khadak-mern.onrender.com/heroSection/${payload?.id}`, payload, {
+      const response = await instance.put(`/footer/${payload?.id}`, payload, {
         withCredentials: true,
         footers: {
           "Content-Type": "application/json",
