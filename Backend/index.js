@@ -36,7 +36,7 @@ app.use(
             "http://localhost:5010",
             "https://khadak-mern.onrender.com/api/v1",
             "https://khadak-mern.vercel.app",
-            "https://khadak-mern-s8ce.vercel.app/",
+            "https://khadak-mern-s8ce.vercel.app",
           ],
           credentials: true,
           methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
