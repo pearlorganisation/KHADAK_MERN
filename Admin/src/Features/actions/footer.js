@@ -25,7 +25,7 @@ export const getFooter = createAsyncThunk(
     'getFooter',
     async (payload, { rejectWithValue }) => {
       try {
-        const { data } = await instance.get('/footer', payload, {
+        const { data } = await instance.get('https://khadak-mern.onrender.com/footer', payload, {
           withCredentials: true,
         });
         console.log(data, 'datatattatatatat');
@@ -36,8 +36,6 @@ export const getFooter = createAsyncThunk(
     }
   );
 
-
-
 //update Footer Api
 
 export const updateFooter = createAsyncThunk(
@@ -45,7 +43,7 @@ export const updateFooter = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
 
-      const response = await instance.put(`/footer/${payload?.id}`, payload, {
+      const response = await instance.put(`https://khadak-mern.onrender.com/heroSection/${payload?.id}`, payload, {
         withCredentials: true,
         footers: {
           "Content-Type": "application/json",

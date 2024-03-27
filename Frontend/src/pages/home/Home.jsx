@@ -7,7 +7,8 @@ const Home = () => {
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
 
-  const BASE_URL = "http://localhost:6500/api/v1";
+  const BASE_URL = "https://khadak-mern.onrender.com/api/v1";
+  // http://localhost:6500/api/v1
 
   // getting the hero section data
   const getHeroSectionData = async () => {

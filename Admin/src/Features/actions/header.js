@@ -3,21 +3,19 @@ import { instance } from "../../services/axiosInterceptor";
 
 //get all header api
 export const getHeader = createAsyncThunk(
-    'getHeader',
-    async (payload, { rejectWithValue }) => {
-      try {
-        const { data } = await instance.get('/heroSection', payload, {
-          withCredentials: true,
-        });
-        console.log(data, 'datatattatatatat');
-        return data;
-      } catch (e) {
-        return rejectWithValue(e);
-      }
+  "getHeader",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await instance.get(`/heroSection`, payload, {
+        withCredentials: true,
+      });
+      console.log(data, "datatattatatatat");
+      return data;
+    } catch (e) {
+      return rejectWithValue(e);
     }
-  );
-
-
+  }
+);
 
 //update Header Api
 
@@ -25,13 +23,16 @@ export const updateHeader = createAsyncThunk(
   "header",
   async (payload, { rejectWithValue }) => {
     try {
-
-      const response = await instance.put(`/heroSection/${payload?.id}`, payload, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await instance.put(
+        `/herosection/${payload?.id}`,
+        payload,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.log(error);
