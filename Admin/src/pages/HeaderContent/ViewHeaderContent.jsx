@@ -1,20 +1,27 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useNavigate } from 'react-router';
 import { Stack,Skeleton } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { getHeader } from '../../Features/actions/header';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 
 
 
 const ViewHeaderContent = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const handleUpdateContent= () => {
-        navigate('/updateHeader');
-      };
+    const { headerData, isDeleted, isLoading } = useSelector((state) => state.header);
+console.log(headerData[0]?.title)
   
+  
+      useEffect(() => {
+        dispatch(getHeader());
+       }, []);
+
+       const updatedAtDate = headerData[0]?.updatedAt ? new Date(headerData[0]?.updatedAt) : null;
+       const formattedDate = updatedAtDate ? updatedAtDate.toISOString().split('T')[0] : '';
 
   return (
     <>
@@ -30,7 +37,9 @@ const ViewHeaderContent = () => {
           
           <div className="mt-3 md:mt-0">
             <a
-              onClick={handleUpdateContent}
+               onClick={() => {
+                navigate(`/updateHeader/${headerData[0]?._id}`);
+              }}
               className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
             >
               Update Header Content
@@ -46,9 +55,9 @@ const ViewHeaderContent = () => {
               <th className="py-3 px-6">Id</th>
                 
                 
-                <th className="py-3 px-6">Content</th>
-                <th className="py-3 px-6">Created On</th>
-                <th className="py-3 px-6">Action</th>
+                <th className="py-3 px-6">Title</th>
+                <th className="py-3 px-6">Description</th>
+                <th className="py-3 px-6">Updated On</th>
 
                 
                
@@ -56,7 +65,7 @@ const ViewHeaderContent = () => {
               </tr>
             </thead>
             <tbody className="text-gray-600 divide-y">
-            {"loading ho rha hai!" ? (
+            {isLoading ? (
             <tr>
             <td colSpan="6" className="text-center px-6 py-8">
               <Stack spacing={4}>
@@ -70,37 +79,24 @@ const ViewHeaderContent = () => {
           </tr>
           ) : (
             
-            //    Array.isArray(appointmentData) && appointmentData?.map((item, idx) => (
-                  <tr key={idx}>
+              
+                  <tr >
                     <td className="px-6 py-4 whitespace-nowrap">
-                        {/* {item?.name} */}
+                        {headerData[0]?._id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {/* {item?.email} */}
+                      {headerData[0]?.title}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.subject.subject} */}
+                    {headerData[0]?.description}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.date} */}
+                    {formattedDate}
                     </td>
                     
-                    <td className="text-right px-6 whitespace-nowrap">
-                    <a
-                        
-                        className="py-2 px-3 font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
-                      >
-                        Edit
-                      </a>
-                      <button
-                       
-                        className="py-2 leading-none px-3 font-semibold text-red-500 hover:text-red-600 duration-150 hover:bg-gray-50 rounded-lg"
-                      >
-                        Delete
-                      </button>
-                    </td>
+                    
                   </tr>
-                // ))
+                
               
               )}
             </tbody>

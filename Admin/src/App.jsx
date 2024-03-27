@@ -68,7 +68,7 @@ import UpdateFooterContent from "./pages/FooterContent/UpdateFooterContent";
               element: <ViewHeaderContent />,
             },
             {
-              path: "/updateHeader",
+              path: "/updateHeader/:id",
               element: <UpdateHeaderContent />,
             },
     
@@ -77,7 +77,7 @@ import UpdateFooterContent from "./pages/FooterContent/UpdateFooterContent";
               element: <ViewFooterContent />,
             },
             {
-              path: "/updateFooter",
+              path: "/updateFooter/:id",
               element: <UpdateFooterContent />,
             },
     

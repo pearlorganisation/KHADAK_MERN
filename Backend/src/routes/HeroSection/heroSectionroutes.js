@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.route("/").post(createHeroSection);
 router.route("/").get(getHeroSection);
-router.route("/").put(updateHeroSection);
+router.route("/:id").put(updateHeroSection);
 
 export default router;

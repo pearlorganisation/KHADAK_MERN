@@ -7,8 +7,7 @@ export const logIn = createAsyncThunk(
   "auth/userLogin",
   async (payload, { rejectWithValue }) => {
     try {
-
-      const response = await instance.post("auth/userLogin", payload, {
+      const response = await instance.post(`/auth/userLogin`, payload, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

@@ -2,8 +2,8 @@ import express from "express";
 import { mongoConnect } from "./src/configs/mongoDB.js";
 import { authRouter } from "./src/routes/Auth/authRoutes.js";
 import heroSectionRouter from "./src/routes/HeroSection/heroSectionroutes.js";
-import footerRouter from "./src/routes/Footer/footerRoutes.js";
-import cors from "cors";
+import cors from "cors"
+import footerRouter from "./src/routes/Footer/footerRoutes.js"
 
 const app = express();
 const PORT = 6500;
