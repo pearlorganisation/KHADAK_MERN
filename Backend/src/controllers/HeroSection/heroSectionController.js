@@ -34,9 +34,9 @@ export const getHeroSection = async (req, res) => {
 export const updateHeroSection = async (req, res) => {
   console.log(req.body);
   try {
-    const { title, description, _id } = req.body;
+    const { title, description } = req.body;
     const updatedHeroSection = await heroSectionModel.findByIdAndUpdate(
-      _id,
+      req?.params?.id,
       { title: title, description: description },
       { new: true }
     );

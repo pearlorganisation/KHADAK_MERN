@@ -8,7 +8,7 @@ export const logIn = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
 
-      const response = await instance.post("auth/userLogin", payload, {
+      const response = await instance.post("https://khadak-mern.onrender.com/auth/userLogin", payload, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

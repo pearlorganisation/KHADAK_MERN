@@ -1,20 +1,29 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useNavigate } from 'react-router';
 import { Stack,Skeleton } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFooter } from '../../Features/actions/footer';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 
 
 
 const ViewFooterContent = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { footerData, isDeleted, isLoading } = useSelector((state) => state.footer);
 
-    const handleUpdateContent= () => {
-        navigate('/updateFooter');
+    const handleCreateContent= () => {
+        navigate('/createFooter');
       };
   
+      useEffect(() => {
+        dispatch(getFooter());
+       }, []);
+
+       const updatedAtDate = footerData[0]?.updatedAt ? new Date(footerData[0]?.updatedAt) : null;
+       const formattedDate = updatedAtDate ? updatedAtDate.toISOString().split('T')[0] : '';
+       
 
   return (
     <>
@@ -30,10 +39,10 @@ const ViewFooterContent = () => {
           
           <div className="mt-3 md:mt-0">
             <a
-              onClick={handleUpdateContent}
+              onClick={handleCreateContent}
               className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
             >
-              Update Footer Content
+              Create Footer Content
             </a>
           </div>
           </div>
@@ -46,9 +55,10 @@ const ViewFooterContent = () => {
               <th className="py-3 px-6">Id</th>
                 
                 
-                <th className="py-3 px-6">Content</th>
+              <th className="py-3 px-6">Title</th>
+                <th className="py-3 px-6">Description</th>
                 <th className="py-3 px-6">Created On</th>
-                <th className="py-3 px-6">Action</th>
+                <th className="py-3 px-6">Actions</th>
 
                 
                
@@ -56,7 +66,7 @@ const ViewFooterContent = () => {
               </tr>
             </thead>
             <tbody className="text-gray-600 divide-y">
-            {"loading ho rha hai!" ? (
+            {isLoading ? (
             <tr>
             <td colSpan="6" className="text-center px-6 py-8">
               <Stack spacing={4}>
@@ -70,24 +80,26 @@ const ViewFooterContent = () => {
           </tr>
           ) : (
             
-            //    Array.isArray(appointmentData) && appointmentData?.map((item, idx) => (
+               Array.isArray(footerData) && footerData?.map((item, idx) => (
                   <tr key={idx}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                        {/* {item?.name} */}
+                        {item?._id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {/* {item?.email} */}
+                      {item?.title}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.subject.subject} */}
+                    {item?.description}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.date} */}
+                    {item?.createdAt}
                     </td>
                     
-                    <td className="text-right px-6 whitespace-nowrap">
+                    <td className="pr-6 whitespace-nowrap">
                     <a
-                        
+                       onClick={() => {
+                        navigate(`/updateFooter/${item?._id}`, { state: item  });
+                      }}  
                         className="py-2 px-3 font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Edit
@@ -100,7 +112,7 @@ const ViewFooterContent = () => {
                       </button>
                     </td>
                   </tr>
-                // ))
+                ))
               
               )}
             </tbody>
