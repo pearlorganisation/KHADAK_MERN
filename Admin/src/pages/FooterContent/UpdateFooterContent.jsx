@@ -76,11 +76,7 @@ const UpdateFooterContent = () => {
       ref={editor}
       value={content}
       onChange={newContent=> setContent(newContent)}
-      config={{
-        style: {
-          height: '300px', // Adjust the height as needed
-        },
-      }}
+      
     
       />
      

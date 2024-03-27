@@ -1,8 +1,9 @@
-import React,{useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useNavigate } from 'react-router';
 import { Stack,Skeleton } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFooter } from '../../Features/actions/footer';
+import { deleteFooter, getFooter } from '../../Features/actions/footer';
+import Delete from '../../components/Delete';
 
 
 
@@ -12,6 +13,20 @@ const ViewFooterContent = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { footerData, isDeleted, isLoading } = useSelector((state) => state.footer);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [id, setId] = useState();
+  const handleDelete = () => {
+    dispatch(deleteFooter(id));
+
+    setShowDeleteModal(false);
+    setId('');
+  };
+
+  const handleModal = (ID) => {
+    setShowDeleteModal(true);
+    setId(ID);
+  }; 
 
     const handleCreateContent= () => {
         navigate('/createFooter');
@@ -57,7 +72,7 @@ const ViewFooterContent = () => {
                 
               <th className="py-3 px-6">Title</th>
                 <th className="py-3 px-6">Description</th>
-                <th className="py-3 px-6">Created On</th>
+                <th className="py-3 px-6">Updated On</th>
                 <th className="py-3 px-6">Actions</th>
 
                 
@@ -88,11 +103,13 @@ const ViewFooterContent = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       {item?.title}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                    {item?.description}
+                    <td dangerouslySetInnerHTML={{
+                      __html: item?.description,
+                    }} className="px-6 py-4 whitespace-nowrap">
+                    
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    {item?.createdAt}
+                    {formattedDate}
                     </td>
                     
                     <td className="pr-6 whitespace-nowrap">
@@ -105,7 +122,9 @@ const ViewFooterContent = () => {
                         Edit
                       </a>
                       <button
-                       
+                       onClick={() => {
+                        handleModal(item?._id);
+                      }}
                         className="py-2 leading-none px-3 font-semibold text-red-500 hover:text-red-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Delete
@@ -119,6 +138,9 @@ const ViewFooterContent = () => {
           </table>
         </div>
       </div>
+      {showDeleteModal && (
+        <Delete setModal={setShowDeleteModal} handleDelete={handleDelete} />
+      )}
      </>
   )
 }

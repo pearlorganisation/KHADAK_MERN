@@ -30,20 +30,21 @@ export const getFooter = async (req, res) => {
 };
 //  edit footer data controller
 export const updateFooter = async (req, res) => {
-  const { _id, title, description } = req?.body;
+  console.log(req.body);
   try {
-    const updatedData = await FooterModel.findByIdAndUpdate(
-      _id,
-      { title, description },
+    const { title, description } = req.body;
+    const updatedFooter = await FooterModel.findByIdAndUpdate(
+      req?.params?.id,
+      { title: title, description: description },
       { new: true }
     );
     res.status(200).json({
-      message: "success",
-      data: updatedData,
+      message: "data updated successfully",
+      data: updatedFooter,
     });
   } catch (error) {
     res.status(500).json({
-      message: "Internal Server Error",
+      error: "Internal Server Error",
     });
   }
 };

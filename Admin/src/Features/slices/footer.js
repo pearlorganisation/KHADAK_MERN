@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { getFooter, updateFooter } from "../actions/footer";
+import { deleteFooter, getFooter, updateFooter } from "../actions/footer";
 
 
 // -------------------------------------------------------------------------------------------
@@ -62,7 +62,29 @@ const footerSlice = createSlice({
         toast.error(state?.errorMessage, {
           position: "top-right",
         });
-      });
+      })
+      .addCase(deleteFooter.pending, (state, action) => {
+        state.isLoading = true;
+        state.isDeleted = false;
+      })
+      .addCase(deleteFooter.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = true;
+        
+        toast.success("Footer Deleted successfully", {
+          position: "top-right",
+         }); 
+    
+      })
+      .addCase(deleteFooter.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = false;
+        state.errorMessage = action.payload;
+        toast.error(state?.errorMessage, {
+          position: "top-right",
+        });
+        
+      })
   },
 });
 

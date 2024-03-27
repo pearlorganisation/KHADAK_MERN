@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home/Home";
@@ -14,6 +15,7 @@ import ViewHeaderContent from "./pages/HeaderContent/ViewHeaderContent";
 import UpdateHeaderContent from "./pages/HeaderContent/UpdateHeaderContent";
 import ViewFooterContent from "./pages/FooterContent/ViewFooterContent";
 import UpdateFooterContent from "./pages/FooterContent/UpdateFooterContent";
+import { useSelector } from "react-redux";
 
 
 
@@ -21,7 +23,9 @@ import UpdateFooterContent from "./pages/FooterContent/UpdateFooterContent";
 
   const App = () => {
     // const { isUserLoggedIn } = useAuth();
-  const isUserLoggedIn = true
+    
+    const {isUserLoggedIn , isLoading} = useSelector((state)=>state.auth)
+    
 
   const getRoutes=()=>{
     if(isUserLoggedIn){
