@@ -4,11 +4,11 @@ const footerSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: [true, "Title is required!!"],
     },
     description: {
       type: String,
-      required: true,
+      required: [true, "Description is required!!"],
     },
   },
   { timestamps: true }

@@ -16,6 +16,7 @@ import UpdateHeaderContent from "./pages/HeaderContent/UpdateHeaderContent";
 import ViewFooterContent from "./pages/FooterContent/ViewFooterContent";
 import UpdateFooterContent from "./pages/FooterContent/UpdateFooterContent";
 import { useSelector } from "react-redux";
+import CreateFooterContent from "./pages/FooterContent/CreateFooterContent";
 
 
 
@@ -83,6 +84,10 @@ import { useSelector } from "react-redux";
             {
               path: "/updateFooter/:id",
               element: <UpdateFooterContent />,
+            },
+            {
+              path: "/createFooter/",
+              element: <CreateFooterContent />,
             },
     
          

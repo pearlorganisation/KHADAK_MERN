@@ -3,14 +3,16 @@ import FooterModel from "../../models/Footer/footerModel.js";
 // adding footer data in database ..
 export const createFooter = async (req, res) => {
   try {
+    console.log(req?.body);
     const data = new FooterModel(req.body);
-    data.save();
+
+    await data.save();
     res.status(200).json({
       message: "success",
       data: data,
     });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).send(error?.message || "Internal Server Error");
   }
 };
 

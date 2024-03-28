@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { deleteFooter, getFooter, updateFooter } from "../actions/footer";
+import { createFooter, deleteFooter, getFooter, updateFooter } from "../actions/footer";
 
 
 // -------------------------------------------------------------------------------------------
@@ -55,6 +55,28 @@ const footerSlice = createSlice({
         state.footerData = action.payload.data;
       })
       .addCase(updateFooter.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        
+        state.errorMessage = action.payload;
+        toast.error(state?.errorMessage, {
+          position: "top-right",
+        });
+      })
+      //create footer
+      .addCase(createFooter.pending, (state, action) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+       
+        state.errorMessage = "";
+      })
+      .addCase(createFooter.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+       
+        state.footerData = action.payload.data;
+      })
+      .addCase(createFooter.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         
