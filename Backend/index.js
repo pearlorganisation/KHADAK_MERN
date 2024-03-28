@@ -4,6 +4,7 @@ import { authRouter } from "./src/routes/Auth/authRoutes.js";
 import heroSectionRouter from "./src/routes/HeroSection/heroSectionroutes.js";
 import cors from "cors";
 import footerRouter from "./src/routes/Footer/footerRoutes.js";
+import locationRouter from "./src/routes/location/locationRoutes.js";
 
 const app = express();
 const PORT = 6500;
@@ -49,6 +50,7 @@ app.use(
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/heroSection", heroSectionRouter);
 app.use("/api/v1/footer", footerRouter);
+app.use("/api/v1/location", locationRouter);
 
 app.listen(PORT, () => {
   console.log(` app is running on http://localhost:${PORT}`);
