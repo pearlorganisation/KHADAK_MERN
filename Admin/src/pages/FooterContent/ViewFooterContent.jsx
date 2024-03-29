@@ -36,9 +36,7 @@ const ViewFooterContent = () => {
         dispatch(getFooter());
        }, []);
 
-       const updatedAtDate = footerData[0]?.updatedAt ? new Date(footerData[0]?.updatedAt) : null;
-       const formattedDate = updatedAtDate ? updatedAtDate.toISOString().split('T')[0] : '';
-       
+ 
 
   return (
     <>
@@ -72,7 +70,7 @@ const ViewFooterContent = () => {
                 
               <th className="py-3 px-6">Title</th>
                 <th className="py-3 px-6">Description</th>
-                <th className="py-3 px-6">Updated On</th>
+                
                 <th className="py-3 px-6">Actions</th>
 
                 
@@ -108,9 +106,7 @@ const ViewFooterContent = () => {
                     }} className="px-6 py-4 whitespace-nowrap">
                     
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                    {formattedDate}
-                    </td>
+                   
                     
                     <td className="pr-6 whitespace-nowrap">
                     <a
