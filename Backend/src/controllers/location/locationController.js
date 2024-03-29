@@ -1,4 +1,5 @@
 import { City, Locality } from "../../models/location/locationModel.js";
+import mongoose from "mongoose";
 
 // add city api
 export const addCity = async (req, res) => {
@@ -55,4 +56,47 @@ export const addLocality = async (req, res) => {
   await city.save();
 
   res.status(201).json(city);
+};
+
+export const deleteLocality = async (req, res) => {
+  try {
+    const { locality } = req.body;
+    const id = req.params.id;
+
+    const city = await City.findById(id);
+    const filteredData = city.localities.filter((i) => i !== locality);
+
+    let newCity = await City.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          localities: filteredData,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json({
+      success: true,
+
+      newCity,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const deleteCity = async (req, res) => {
+  try {
+    const id = req.params?.id;
+    const city = await City.findByIdAndDelete(id);
+    res.status(200).json({
+      message: "Successfully Delted the city",
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
