@@ -54,7 +54,7 @@ export const deleteCity = createAsyncThunk(
   "deleteCity",
   async (id, { rejectWithValue }) => {
     try {
-      const { data } = await instance.post(`/location/City/${id}`,{
+      const { data } = await instance.post(`/location/City/${id}`, {
         withCredentials: true,
       });
       console.log(data, "datatattatatatat");
@@ -64,4 +64,22 @@ export const deleteCity = createAsyncThunk(
     }
   }
 );
-
+//delete locality API
+export const deleteLocality = createAsyncThunk(
+  "deleteLocality",
+  async ({ id, locality }, { rejectWithValue }) => {
+    try {
+      const { data } = await instance.post(
+        `/location/locality/${id}`,
+        { locality },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(data, "datatattatatatat");
+      return data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
