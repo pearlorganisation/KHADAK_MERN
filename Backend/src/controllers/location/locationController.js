@@ -58,6 +58,7 @@ export const addLocality = async (req, res) => {
   res.status(201).json(city);
 };
 
+// delete paritcular locality controller
 export const deleteLocality = async (req, res) => {
   try {
     const { locality } = req.body;
@@ -89,6 +90,7 @@ export const deleteLocality = async (req, res) => {
   }
 };
 
+// delete city api controller
 export const deleteCity = async (req, res) => {
   try {
     const id = req.params?.id;
