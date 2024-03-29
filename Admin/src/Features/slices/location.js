@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { addCity, addLocality, deleteCity, getLocation } from "../actions/location";
+import { addCity, addLocality, deleteCity, deleteLocality, getLocation } from "../actions/location";
 
 
 
@@ -106,6 +106,27 @@ const locationSlice = createSlice({
         
       })
       .addCase(deleteCity.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = false;
+        state.errorMessage = action.payload;
+        toast.error(state?.errorMessage, {
+          position: "top-right",
+        });
+        
+      })
+    .addCase(deleteLocality.pending, (state, action) => {
+        state.isLoading = true;
+        state.isDeleted = false;
+        state.errorMessage = '';
+      })
+      .addCase(deleteLocality.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = true;
+        state.errorMessage = '';
+
+        
+      })
+      .addCase(deleteLocality.rejected, (state, action) => {
         state.isLoading = false;
         state.isDeleted = false;
         state.errorMessage = action.payload;

@@ -1,16 +1,19 @@
-import React,{useRef,useState} from 'react'
-import { useDispatch } from "react-redux";
+import React,{useEffect, useRef,useState} from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import {  useNavigate} from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import JoditEditor from 'jodit-react';
-import { createFooter } from '../../Features/actions/footer';
+import { createFooter, getFooter } from '../../Features/actions/footer';
+import { ClipLoader } from 'react-spinners';
+import { clearAddCityState } from '../../Features/slices/location';
+
 
 
 const CreateFooterContent = () => {
  
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+const {isLoading,isSuccess}= useSelector((state)=>state.footer)
     const editor = useRef(null)
   const [content,setContent ]=useState("");
 
@@ -29,6 +32,14 @@ const CreateFooterContent = () => {
       console.log(newData)
       dispatch(createFooter(newData));
     };
+
+    useEffect(()=>{
+     
+if(isSuccess){
+  navigate("/footer")
+  dispatch(clearAddCityState())
+}
+    },[])
 
   return (
     <div>
@@ -76,7 +87,9 @@ const CreateFooterContent = () => {
 
 <div style={{ marginTop: '4rem' }}>
             <button className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-slate-950 active:bg-indigo-600 rounded-lg duration-150">
-            Create
+            {isLoading ? (
+                <ClipLoader color="#c4c2c2" />
+              ) : (<>Create</>)}
             </button>
           </div>
 
