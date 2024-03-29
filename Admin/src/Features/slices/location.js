@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { createFooter, deleteFooter, getFooter, updateFooter } from "../actions/footer";
+import { addCity, addLocality, deleteCity, getLocation } from "../actions/location";
+
 
 
 // -------------------------------------------------------------------------------------------
@@ -11,94 +12,100 @@ const initialState = {
   isSuccess: false,
   errorMessage: "",
   isDeleted :false,
-  
-  footerData: [],
+  locationData: [],
 };
 
 // -------------------------------------- Slices------------------------------------------------
-const footerSlice = createSlice({
-  name: "footer",
+const locationSlice = createSlice({
+  name: "location",
   initialState,
-  reducers: {},
+  reducers: {
+    clearDeleteState:(state)=>{
+      state.isDeleted = false
+    },
+    clearAddCityState: (state) => {
+      state.isSuccess = false;
+     
+    },
+  },
   extraReducers: (builder) => {
     builder
-    .addCase(getFooter.pending, (state, action) => {
+    .addCase(getLocation.pending, (state, action) => {
         state.isLoading = true;
+        state.isDeleted = false;
         state.errorMessage = '';
       })
-      .addCase(getFooter.fulfilled, (state, action) => {
+      .addCase(getLocation.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isDeleted = false;
         state.errorMessage = '';
-        console.log('API Response Payload:', action.payload);
-        state.footerData = action.payload.data;
-        console.log('Reducer - get footerData:', state.footerData);
+        state.locationData = action.payload.data;
+        console.log('Reducer - get locationData:', state.locationData);
       })
-      .addCase(getFooter.rejected, (state, action) => {
+      .addCase(getLocation.rejected, (state, action) => {
         state.isLoading = false;
+        state.isDeleted = false;
         state.errorMessage = action.payload;
         toast.error(state?.errorMessage, {
           position: "top-right",
         });
         
       })
-      .addCase(updateFooter.pending, (state, action) => {
+    .addCase(addCity.pending, (state, action) => {
         state.isLoading = true;
         state.isSuccess = false;
-       
-        state.errorMessage = "";
+        state.errorMessage = '';
       })
-      .addCase(updateFooter.fulfilled, (state, action) => {
+      .addCase(addCity.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-       
-        state.footerData = action.payload.data;
+        state.errorMessage = '';
+        // state.locationData = action.payload;
+        
       })
-      .addCase(updateFooter.rejected, (state, action) => {
+      .addCase(addCity.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
-        
         state.errorMessage = action.payload;
         toast.error(state?.errorMessage, {
           position: "top-right",
         });
+        
       })
-      //create footer
-      .addCase(createFooter.pending, (state, action) => {
+    .addCase(addLocality.pending, (state, action) => {
         state.isLoading = true;
         state.isSuccess = false;
-       
-        state.errorMessage = "";
+        state.errorMessage = '';
       })
-      .addCase(createFooter.fulfilled, (state, action) => {
+      .addCase(addLocality.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-       
-        state.footerData = action.payload.data;
+        state.errorMessage = '';
+        state.locationData=action.payload.data
+        
       })
-      .addCase(createFooter.rejected, (state, action) => {
+      .addCase(addLocality.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
-        
         state.errorMessage = action.payload;
         toast.error(state?.errorMessage, {
           position: "top-right",
         });
+        
       })
-      .addCase(deleteFooter.pending, (state, action) => {
+    .addCase(deleteCity.pending, (state, action) => {
         state.isLoading = true;
         state.isDeleted = false;
+        state.errorMessage = '';
       })
-      .addCase(deleteFooter.fulfilled, (state, action) => {
+      .addCase(deleteCity.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isDeleted = true;
+        state.errorMessage = '';
+
         
-        toast.success("Footer Deleted successfully", {
-          position: "top-right",
-         }); 
-    
       })
-      .addCase(deleteFooter.rejected, (state, action) => {
+      .addCase(deleteCity.rejected, (state, action) => {
         state.isLoading = false;
         state.isDeleted = false;
         state.errorMessage = action.payload;
@@ -107,9 +114,11 @@ const footerSlice = createSlice({
         });
         
       })
+
+     
   },
 });
 
 // ===========================================Exports==================================================
-export default footerSlice.reducer;
-export const {} = footerSlice.actions;
+export default locationSlice.reducer;
+export const { clearAddCityState, clearDeleteState,} = locationSlice.actions;

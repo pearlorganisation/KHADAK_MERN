@@ -39,11 +39,31 @@ export const getFooter = createAsyncThunk(
 //update Footer Api
 
 export const updateFooter = createAsyncThunk(
-  "footer",
+  "Updatefooter",
   async (payload, { rejectWithValue }) => {
     try {
 
       const response = await instance.put(`/footer/${payload?.id}`, payload, {
+        withCredentials: true,
+        footers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error);
+    }
+  }
+);
+//create Footer Api
+
+export const createFooter = createAsyncThunk(
+  "createfooter",
+  async (payload, { rejectWithValue }) => {
+    try {
+
+      const response = await instance.post(`/footer`, payload, {
         withCredentials: true,
         footers: {
           "Content-Type": "application/json",

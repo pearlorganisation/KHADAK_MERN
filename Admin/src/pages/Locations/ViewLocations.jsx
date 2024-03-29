@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Stack, Skeleton } from "@mui/material";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCity, getLocation } from "../../Features/actions/location";
+import { clearDeleteState } from "../../Features/slices/location";
 
 const ViewLocation = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { locationData, isDeleted, isLoading } = useSelector((state) => state.location);
 
   const handleAddLocation = () => {
     navigate("/addLocation");
@@ -14,6 +19,18 @@ const ViewLocation = () => {
   const handleAddCity = () => {
     navigate("/addCity");
   };
+
+  useEffect(() => {
+    dispatch(getLocation());
+
+  if(isDeleted){
+    dispatch(getLocation());
+    dispatch(clearDeleteState())
+  }
+   }, []);
+
+
+
 
   return (
     <>
@@ -62,13 +79,14 @@ const ViewLocation = () => {
                 <th className="py-3 px-6">S.No</th>
                 <th className="py-3 px-6">City</th>
                 <th className="py-3 px-6">Locality</th>
+                <th className="py-3 px-6">Last Updated</th>
                 <th className="py-3 px-6">Action</th>
               </tr>
             </thead>
             <tbody className="text-gray-600 divide-y">
-              {false ? (
+              {isLoading ? (
                 <tr>
-                  <td colSpan="4" className="text-center px-6 py-8">
+                  <td colSpan="5" className="text-center px-6 py-8">
                     <Stack spacing={4}>
                       <Skeleton variant="rounded" height={30} />
                       <Skeleton variant="rounded" height={25} />
@@ -79,31 +97,41 @@ const ViewLocation = () => {
                   </td>
                 </tr>
               ) : (
-                //    Array.isArray(appointmentData) && appointmentData?.map((item, idx) => (
+                   Array.isArray(locationData) && locationData?.map((item, idx) => (
                 <tr key={idx}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.name} */}
+                    {idx+1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.email} */}
+                  {item?.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.subject.subject} */}
+                    {  Array.isArray(item.localities) && item?.localities.map((locality,idx)=>(
+                       <tr key={idx}>
+                      
+                       <td className="py-2 whitespace-nowrap">
+                         {Array.isArray(item.localities) &&
+                           item.localities[idx]}
+                       </td>
+                       
+                     </tr>
+                        ))
+                        }
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.date} */}
+                  {new Date(item?.updatedAt).toLocaleDateString()}
                   </td>
 
-                  <td className="text-right px-6 whitespace-nowrap">
-                    <a className="py-2 px-3 font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg">
-                      Edit
-                    </a>
-                    <button className="py-2 leading-none px-3 font-semibold text-red-500 hover:text-red-600 duration-150 hover:bg-gray-50 rounded-lg">
+                  <td className=" px-6 whitespace-nowrap">
+                 
+                    <button 
+                    onClick={()=>{ dispatch(deleteCity(item?._id))
+                    }} className="py-2 leading-none font-semibold text-red-500 hover:text-red-600 duration-150 hover:bg-gray-50 rounded-lg">
                       Delete
                     </button>
                   </td>
                 </tr>
-                // ))
+                ))
               )}
             </tbody>
           </table>
