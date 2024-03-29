@@ -23,12 +23,16 @@ const ViewLocation = () => {
   useEffect(() => {
     dispatch(getLocation());
 
-  if(isDeleted){
-    dispatch(getLocation());
-    dispatch(clearDeleteState())
-  }
-   }, []);
-
+  }, []);
+  
+  useEffect(() => {
+    if(isDeleted){
+      dispatch(getLocation());
+      dispatch(clearDeleteState())
+    }
+  }, [isDeleted])
+  
+  
 
 
 
