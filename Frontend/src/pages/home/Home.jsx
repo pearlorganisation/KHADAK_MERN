@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CallGirlsList from "../../components/CallGirlslist/CallGirlsList";
+import Location from "../../components/Location/Location";
 
 const Home = () => {
   // useState
@@ -64,6 +65,8 @@ const Home = () => {
           <CallGirlsList />
           <CallGirlsList />
           <CallGirlsList />
+
+          <Location BASE_URL={BASE_URL} />
 
           <div className=" rounded-xl p-6 mb-10 text-start bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 text-[18px]">
             {footerSectionData &&
