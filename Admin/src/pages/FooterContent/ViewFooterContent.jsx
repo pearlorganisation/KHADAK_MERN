@@ -36,7 +36,11 @@ const ViewFooterContent = () => {
         dispatch(getFooter());
        }, []);
 
- 
+ useEffect(()=>{
+  if(isDeleted){
+ dispatch(getFooter())
+  }
+ },[isDeleted])
 
   return (
     <>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select'
 
-import { addLocality } from '../../Features/actions/location';
+import { addLocality, getLocation } from '../../Features/actions/location';
 import { ClipLoader } from 'react-spinners';
 import { clearAddCityState } from '../../Features/slices/location';
 
@@ -31,6 +31,7 @@ const postData = {
     };
 
     useEffect(() => {
+      dispatch(getLocation())
       if (isSuccess) {
         navigate('/location');
         dispatch(clearAddCityState())
