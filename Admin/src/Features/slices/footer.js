@@ -24,6 +24,7 @@ const footerSlice = createSlice({
     builder
     .addCase(getFooter.pending, (state, action) => {
         state.isLoading = true;
+        state.isDeleted = false;
         state.errorMessage = '';
       })
       .addCase(getFooter.fulfilled, (state, action) => {
