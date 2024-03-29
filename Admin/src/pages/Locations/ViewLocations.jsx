@@ -5,7 +5,7 @@ import { Stack, Skeleton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCity, getLocation } from "../../Features/actions/location";
+import { deleteCity, deleteLocality, getLocation } from "../../Features/actions/location";
 import { clearDeleteState } from "../../Features/slices/location";
 
 const ViewLocation = () => {
@@ -113,9 +113,12 @@ const ViewLocation = () => {
                     {  Array.isArray(item.localities) && item?.localities.map((locality,idx)=>(
                        <tr key={idx}>
                       
-                       <td className="py-2 whitespace-nowrap">
-                         {Array.isArray(item.localities) &&
-                           item.localities[idx]}
+                       <td className="py-2 whitespace-nowrap flex gap-3">
+                        <div>
+                         {
+                           locality} </div>
+                           
+                           <button onClick={()=>dispatch(deleteLocality(item?._id, {"locality":locality}))} className="border rounded-lg text-red-500">X</button>
                        </td>
                        
                      </tr>
