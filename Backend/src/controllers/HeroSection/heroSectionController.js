@@ -1,4 +1,5 @@
 import heroSectionModel from "../../models/HeroSection/heroSectionModel.js";
+import { contactMail } from "../../utils/Mail/ContactUs/contactMail.js";
 
 // saving herosection data in database
 export const createHeroSection = async (req, res) => {

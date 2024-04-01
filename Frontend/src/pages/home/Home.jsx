@@ -8,8 +8,8 @@ const Home = () => {
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
 
-  const BASE_URL = "https://khadak-mern.onrender.com/api/v1";
-  // http://localhost:6500/api/v1
+  // const BASE_URL = "https://khadak-mern.onrender.com/api/v1";
+  const BASE_URL = "http://localhost:6500/api/v1";
 
   // getting the hero section data
   const getHeroSectionData = async () => {
@@ -36,6 +36,7 @@ const Home = () => {
   useEffect(() => {
     getHeroSectionData();
     FooterSection();
+
     console.log(footerSectionData);
   }, []);
 
@@ -62,11 +63,9 @@ const Home = () => {
       </section>
       <section class=" dark:bg-gray-900">
         <div class=" px-4 mx-auto max-w-screen-xl text-center  lg:px-12">
-          <CallGirlsList />
-          <CallGirlsList />
-          <CallGirlsList />
-
-          <Location BASE_URL={BASE_URL} />
+          <CallGirlsList BASE_URL={BASE_URL} />
+          {/* <CallGirlsList />
+          <CallGirlsList /> */}
 
           <div className=" rounded-xl p-6 mb-10 text-start bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 text-[18px]">
             {footerSectionData &&
@@ -87,6 +86,8 @@ const Home = () => {
                 );
               })}
           </div>
+
+          <Location BASE_URL={BASE_URL} />
         </div>
       </section>
     </div>
