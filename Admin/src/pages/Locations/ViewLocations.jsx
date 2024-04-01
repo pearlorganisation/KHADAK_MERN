@@ -110,17 +110,17 @@ const ViewLocation = () => {
                   {item?.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {  Array.isArray(item.localities) && item?.localities.map((locality,idx)=>(
-                       <tr key={idx}>
+                    {  Array.isArray(item.localities) && item?.localities.map((locality,locIdx)=>(
+                       <tr key={locIdx}>
                       
                        <td className="py-2 whitespace-nowrap flex gap-3">
                         <div>
                          {
                            locality} </div>
                            
-                           <button onClick={()=>dispatch(deleteLocality(item?._id, {"locality":locality}))} className="border rounded-lg text-red-500">X</button>
+                           <button onClick={()=>dispatch(deleteLocality( {"id":item?._id,locality:locality}))} className="border rounded-lg text-red-500">X</button>
                        </td>
-                       
+                        
                      </tr>
                         ))
                         }

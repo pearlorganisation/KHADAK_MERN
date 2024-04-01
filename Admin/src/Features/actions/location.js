@@ -67,8 +67,8 @@ export const deleteCity = createAsyncThunk(
 //delete locality API
 export const deleteLocality = createAsyncThunk(
   "deleteLocality",
-  async (id,payload, { rejectWithValue }) => {
-    console.log(id, payload)
+  async ({id,payload}, { rejectWithValue }) => {
+    console.log(id, locality)
     try {
       const { data } = await instance.post(`/location/locality/${id}`,payload,{
         withCredentials: true,

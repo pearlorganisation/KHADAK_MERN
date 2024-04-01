@@ -1,7 +1,23 @@
 import React,{useRef, useState} from 'react'
 import JoditEditor from 'jodit-react';
+import Select from 'react-select'
+
+import { useForm,Controller } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 
 const CreateContact = () => {
+  const dispatch =useDispatch();
+  const navigate= useNavigate();
+
+  const {locationData}=  useSelector((state)=>state.location)
+  const [localityOptions, setLocalityOptions] = useState([]);
+
+
+  const {
+    register,
+    handleSubmit, formState: { errors },control } = useForm();
 
   const editor = useRef(null)
   const [content,setContent ]=useState("");
@@ -25,6 +41,21 @@ const CreateContact = () => {
     }; 
 
 
+    const onSubmit = (data) => {
+      console.log(data)
+      // const {city,localityName}= data
+      // const cityValue = city.value; 
+      // const postData = {
+      //   localityName,
+      //   cityName: cityValue,
+        
+      // };
+      //      console.log(postData)
+
+            // dispatch(addLocality(postData));
+          };
+
+
 
   return (
     <div>
@@ -36,7 +67,7 @@ const CreateContact = () => {
       </div>
 
       <div className="bg-white rounded-lg shadow p-4 py-6  sm:rounded-lg sm:max-w-5xl mt-8 mx-auto">
-      <form className="space-y-6 mx-8 sm:mx-2 text-slate-600"  >
+      <form className="space-y-6 mx-8 sm:mx-2 text-slate-600" onSubmit={handleSubmit(onSubmit)} >
         
         <div className="w-full">
             <label className="font-medium">Title</label>
@@ -58,7 +89,7 @@ const CreateContact = () => {
             <img class="mt-2 w-20 h:20 sm:w-40 sm:h-40 rounded" src={photo || defaultPhoto} alt="No Image"/>
             <label htmlFor="file_input" className="flex
             " >
-             <div className=" mt-4 px-[10px] py-[5px] text-white font-semibold bg-rose-500 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg ">Click here to upload</div></label>
+             <div className=" mt-4 px-[10px] py-[5px] text-white bg-slate-600 font-semiboldbg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg ">Click here to upload</div></label>
             {/* <label htmlFor='file_input'  className="w-full px-[10px] py-[10px] text-white font-semibold bg-rose-500 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-full ">Click here to upload </label> */}
            
             <input
@@ -71,7 +102,8 @@ const CreateContact = () => {
                     </span>
                   )} */}
           </div>
-          <div className="w-full">
+          <div className="w-full space-y-4">
+            <div>
             <label className="font-medium">Whatsapp Number</label>
             <input
             // {...register('price', { required: 'Price is required' })}
@@ -83,6 +115,61 @@ const CreateContact = () => {
                       Price of Product is required
                     </span>
                   )} */}
+                  </div>
+                  <div>
+            <label className="font-medium">City</label>
+            <Controller
+                                control={control}
+                                name="city"
+                                render={({ field }) => (
+                                    <Select
+                                        {...field}
+                                        options={locationData.map(item => ({ value: item?.name, label: item?.name }))}
+                                        onChange={(selectedOption) => {
+                                            field.onChange(selectedOption);
+                                            const selectedCityData = locationData.find(item => item.name === selectedOption.value);
+                                            setLocalityOptions(selectedCityData ? selectedCityData.localities.map(locality => ({ value: locality, label: locality })) : []);
+                                        }}
+                                        className="mt-2"
+                                        placeholder="Choose City"
+                                        styles={{
+                                            control: (provided) => ({
+                                                ...provided,
+                                                border: '1px solid #CBD5E1',
+                                                borderRadius: '0.400rem',
+                                                height: '40px',
+                                            }),
+                                            placeholder: (provided) => ({
+                                                ...provided,
+                                                color: '#9CA3AF',
+                                            }),
+                                        }}
+                                    />
+                                     )}
+                                      rules={{ required: true }}
+                                      
+                                  />
+                                  {errors?.city && (
+                                            <span className="text-red-500">
+                                                City is required
+                                            </span>
+                                        )}
+                  </div>
+                  <div>
+            <label className="font-medium">Locality</label>
+            <Controller
+                                control={control}
+                                name="locality"
+                                render={({ field }) => (
+                                    <Select
+                                        {...field}
+                                        options={localityOptions}
+                                        className="mt-2"
+                                        placeholder="Choose Locality"
+                                    />
+                                )}
+                            />
+                  </div>
           </div>
           </div>
           <label className="block font-medium">Description</label>
@@ -94,11 +181,11 @@ const CreateContact = () => {
       ref={editor}
       value={content}
       onChange={newContent=> setContent(newContent)}
-      config={{
-        style: {
-          height: '300px', // Adjust the height as needed
-        },
-      }}
+      // config={{
+      //   style: {
+      //     height: '300px', // Adjust the height as needed
+      //   },
+      // }}
     
       />
     

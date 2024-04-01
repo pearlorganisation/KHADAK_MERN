@@ -87,7 +87,7 @@ const postData = {
                                   />
                                   {errors?.city && (
                                             <span className="text-red-500">
-                                                Subject is required
+                                                City is required
                                             </span>
                                         )}
           </div>
