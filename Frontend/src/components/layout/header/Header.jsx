@@ -1,24 +1,25 @@
 import { useState } from "react";
 import logo from "../../../assets/delhimazzaLogo.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [state, setState] = useState(false);
 
   // Replace javascript:void(0) paths with your paths
   const navigation = [
-    { title: "Home", path: "javascript:void(0)" },
+    { title: "Home", path: "/" },
     { title: "Call Girls", path: "javascript:void(0)" },
-    { title: "Contact Us", path: "javascript:void(0)" },
-    { title: "Blog Us", path: "javascript:void(0)" },
+    { title: "Contact Us", path: "/contact" },
+    { title: "Blog Us", path: "/blog" },
   ];
 
   return (
     <nav className="bg-[#ED2B33FF] border-b w-full md:static md:text-sm md:border-none">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:block">
-          <a href="javascript:void(0)">
-            <img src={logo} height={80} alt="Float UI logo" />
-          </a>
+          <Link to="/">
+            <img src={logo} height={80} alt="Delhimazza.jpg" />
+          </Link>
           <div className="md:hidden">
             <button
               className="text-[#F4E0B9] hover:text-gray-800"
@@ -68,9 +69,9 @@ const Header = () => {
                   key={idx}
                   className="text-white text-bold md:text-lg hover:text-[#F4E0B9]"
                 >
-                  <a href={item.path} className="block">
+                  <Link to={item.path} className="block">
                     {item.title}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

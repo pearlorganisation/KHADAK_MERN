@@ -5,13 +5,19 @@ import { Stack, Skeleton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCity, deleteLocality, getLocation } from "../../Features/actions/location";
+import {
+  deleteCity,
+  deleteLocality,
+  getLocation,
+} from "../../Features/actions/location";
 import { clearDeleteState } from "../../Features/slices/location";
 
 const ViewLocation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { locationData, isDeleted, isLoading } = useSelector((state) => state.location);
+  const { locationData, isDeleted, isLoading } = useSelector(
+    (state) => state.location
+  );
 
   const handleAddLocation = () => {
     navigate("/addLocation");
@@ -22,19 +28,14 @@ const ViewLocation = () => {
 
   useEffect(() => {
     dispatch(getLocation());
-
   }, []);
-  
+
   useEffect(() => {
-    if(isDeleted){
+    if (isDeleted) {
       dispatch(getLocation());
-      dispatch(clearDeleteState())
+      dispatch(clearDeleteState());
     }
-  }, [isDeleted])
-  
-  
-
-
+  }, [isDeleted]);
 
   return (
     <>
@@ -101,43 +102,49 @@ const ViewLocation = () => {
                   </td>
                 </tr>
               ) : (
-                   Array.isArray(locationData) && locationData?.map((item, idx) => (
-                <tr key={idx}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {idx+1}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                  {item?.name}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {  Array.isArray(item.localities) && item?.localities.map((locality,locIdx)=>(
-                       <tr key={locIdx}>
-                      
-                       <td className="py-2 whitespace-nowrap flex gap-3">
-                        <div>
-                         {
-                           locality} </div>
-                           
-                           <button onClick={()=>dispatch(deleteLocality( {"id":item?._id,locality:locality}))} className="border rounded-lg text-red-500">X</button>
-                       </td>
-                        
-                     </tr>
-                        ))
-                        }
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(item?.updatedAt).toLocaleDateString()}
-                  </td>
+                Array.isArray(locationData) &&
+                locationData?.map((item, idx) => (
+                  <tr key={idx}>
+                    <td className="px-6 py-4 whitespace-nowrap">{idx + 1}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {item?.name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {Array.isArray(item.localities) &&
+                        item?.localities.map((locality, idx) => (
+                          <tr key={idx}>
+                            <td className="py-2 whitespace-nowrap flex gap-3">
+                              <div>{locality} </div>
 
-                  <td className=" px-6 whitespace-nowrap">
-                 
-                    <button 
-                    onClick={()=>{ dispatch(deleteCity(item?._id))
-                    }} className="py-2 leading-none font-semibold text-red-500 hover:text-red-600 duration-150 hover:bg-gray-50 rounded-lg">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
+                              <button
+                                onClick={() =>
+                                  dispatch(
+                                    deleteLocality({ id: item?._id, locality })
+                                  )
+                                }
+                                className="border rounded-lg text-red-500"
+                              >
+                                X
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {new Date(item?.updatedAt).toLocaleDateString()}
+                    </td>
+
+                    <td className=" px-6 whitespace-nowrap">
+                      <button
+                        onClick={() => {
+                          dispatch(deleteCity(item?._id));
+                        }}
+                        className="py-2 leading-none font-semibold text-red-500 hover:text-red-600 duration-150 hover:bg-gray-50 rounded-lg"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
                 ))
               )}
             </tbody>

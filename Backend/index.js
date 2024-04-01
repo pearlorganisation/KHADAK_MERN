@@ -5,6 +5,8 @@ import heroSectionRouter from "./src/routes/HeroSection/heroSectionroutes.js";
 import cors from "cors";
 import footerRouter from "./src/routes/Footer/footerRoutes.js";
 import locationRouter from "./src/routes/location/locationRoutes.js";
+import contactRouter from "./src/routes/contact/contactRoute.js";
+import mailRouter from "./src/routes/Mail/mailRoutes.js";
 
 const app = express();
 const PORT = 6500;
@@ -12,6 +14,7 @@ const PORT = 6500;
 // mongoConnect :: connecting the mongodb database
 mongoConnect();
 
+app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 
 app.use(
@@ -22,6 +25,7 @@ app.use(
             "http://localhost:5173",
             "http://localhost:5174",
             "http://localhost:5010",
+            "http://localhost:5175/",
             "https://khadak-mern.vercel.app",
             "https://khadak-mern-s8ce.vercel.app/",
           ],
@@ -35,6 +39,7 @@ app.use(
             "http://localhost:5173",
             "http://localhost:5174",
             "http://localhost:5010",
+            "http://localhost:5176/",
             "https://khadak-mern.onrender.com/api/v1",
             "https://khadak-mern.vercel.app",
             "https://khadak-mern-s8ce.vercel.app",
@@ -51,6 +56,8 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/heroSection", heroSectionRouter);
 app.use("/api/v1/footer", footerRouter);
 app.use("/api/v1/location", locationRouter);
+app.use("/api/v1/contact", contactRouter);
+app.use("/api/v1/mail", mailRouter);
 
 app.listen(PORT, () => {
   console.log(` app is running on http://localhost:${PORT}`);
