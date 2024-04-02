@@ -7,6 +7,9 @@ import Layout from "./components/layout/Layout.jsx";
 import Home from "./pages/home/Home.jsx";
 import Contact from "./pages/contact/Contact.jsx";
 import Blogs from "./pages/blogs/Blogs.jsx";
+import CallGirls from "./pages/call girls/CallGirls.jsx";
+import { store } from "./features/store.js";
+import { Provider } from "react-redux";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,14 +29,20 @@ function App() {
           path: "/blog",
           element: <Blogs />,
         },
+        {
+          path: "/call-girls",
+          element: <CallGirls />,
+        },
       ],
     },
   ]);
 
   return (
-    <RouterProvider router={router}>
-      <Layout />
-    </RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}>
+        <Layout />
+      </RouterProvider>
+    </Provider>
   );
 }
 
