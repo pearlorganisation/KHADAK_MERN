@@ -1,8 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+// import { getContact } from "../../features/slices/contactSlice";
 
 const CallGirlsList = ({ BASE_URL }) => {
   const [contactData, setContactData] = useState(null);
+  const { selectedLocality } = useSelector((state) => state.location);
 
   const getContacts = async () => {
     try {
