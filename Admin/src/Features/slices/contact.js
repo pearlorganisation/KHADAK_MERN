@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { createContact, getContacts } from "../actions/contact";
+import { createContact, getContacts, updateContact } from "../actions/contact";
 
 
 // -------------------------------------------------------------------------------------------
@@ -60,6 +60,28 @@ const contactSlice = createSlice({
         state.contactData = action.payload.data;
       })
       .addCase(createContact.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        
+        state.errorMessage = action.payload;
+        toast.error(state?.errorMessage, {
+          position: "top-right",
+        });
+      })
+      //update contact
+      .addCase(updateContact.pending, (state, action) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+       
+        state.errorMessage = "";
+      })
+      .addCase(updateContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+       
+        state.contactData = action.payload.data;
+      })
+      .addCase(updateContact.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         

@@ -89,7 +89,7 @@ const ViewContact = () => {
             <tbody className="text-gray-600 divide-y">
             {isLoading ? (
             <tr>
-            <td colSpan="6" className="text-center px-6 py-8">
+            <td colSpan="8" className="text-center px-6 py-8">
               <Stack spacing={4}>
                 <Skeleton variant="rounded" height={30} />
                 <Skeleton variant="rounded" height={25}/>
@@ -127,7 +127,9 @@ const ViewContact = () => {
                     
                     <td className="px-6 whitespace-nowrap">
                     <a
-                        
+                        onClick={() => {
+                          navigate(`/updateContact/${item?._id}`, { state: item  });
+                        }}  
                         className="py-2  font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Edit

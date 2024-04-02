@@ -18,7 +18,28 @@ export const createContact = createAsyncThunk(
         return response;
       } catch (error) {
         console.log(error);
-        return rejectWithValue(error);
+        return rejectWithValue(error.message);
+      }
+    }
+  );
+
+//update contact Api
+
+export const updateContact = createAsyncThunk(
+    "updateContact",
+    async ({id,payload}, { rejectWithValue }) => {
+      try {
+  
+        const response = await instance.put(`/contact/${id}`, payload, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        return response;
+      } catch (error) {
+        // console.log(error);
+        return rejectWithValue(error.message);
       }
     }
   );
@@ -39,7 +60,7 @@ export const getContacts = createAsyncThunk(
         return response.data;
       } catch (error) {
         console.log(error);
-        return rejectWithValue(error);
+        return rejectWithValue(error.message);
       }
     }
   );
