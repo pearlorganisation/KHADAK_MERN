@@ -27,9 +27,9 @@ const Location = ({ BASE_URL }) => {
             return (
               <div className="my-8">
                 {/* <h1 className="text-3xl text-left text-rose-500">{data?.name}</h1> */}
-                <div className="flex  flex-wrap text-blue-400 w-full">
+                <div className="flex  flex-wrap text-pink-800 w-full">
                   {data?.localities.map((locality) => {
-                    return <p className="text-xl mx-5">{locality}</p>;
+                    return <p className="text-xl mx-5 text-bold">{locality}</p>;
                   })}
                 </div>
               </div>
