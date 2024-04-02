@@ -55,7 +55,7 @@ const CreateBlog = () => {
             <img class="mt-2 w-20 h:20 sm:w-40 sm:h-40 rounded" src={photo || defaultPhoto} alt="No Image"/>
             <label htmlFor="file_input" className="flex
             " >
-             <div className=" mt-4 px-[10px] py-[5px] text-white font-semibold bg-rose-500 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg ">Click here to upload</div></label>
+             <div className=" mt-4 px-[10px] py-[5px] text-white font-semibold bg-blue-600 bg-transparent outline-none border  shadow-sm rounded-lg ">Click here to upload</div></label>
            
             <input
             //  {...register('productImg', { required: 'Photo is required',onChange:(e)=>{handlePhotoChange(e)} })}
@@ -77,11 +77,11 @@ const CreateBlog = () => {
       ref={editor}
       value={content}
       onChange={newContent=> setContent(newContent)}
-      config={{
-        style: {
-          height: '300px', // Adjust the height as needed
-        },
-      }}
+      // config={{
+      //   style: {
+      //     height: '300px', // Adjust the height as needed
+      //   },
+      // }}
     
       />
     
