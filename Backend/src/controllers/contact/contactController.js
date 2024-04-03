@@ -40,10 +40,39 @@ export const createContact = async (req, res) => {
 
 export const getContact = async (req, res) => {
   try {
-    const data = await Contact.find();
+    const { locality, city } = req?.query;
+
+    let pipeline = [];
+
+    if (city && locality) {
+      pipeline.push({
+        $match: {
+          $and: [{ locality }, { city }],
+        },
+      });
+    } else if (locality) {
+      pipeline.push({
+        $match: {
+          locality,
+        },
+      });
+    } else if (city) {
+      console.log("this is the city", city);
+      pipeline.push({
+        $match: {
+          city: {
+            $regex: `${city}`,
+            $options: "i",
+          },
+        },
+      });
+    }
+
+    const result = await Contact.aggregate(pipeline);
+
     res.status(200).json({
       message: "true",
-      data: data,
+      data: result,
     });
   } catch (error) {
     res.status(500).json({
