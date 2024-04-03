@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   contactData: null,
+  cityName: "Delhi",
 };
 
 export const contactSlice = createSlice({
@@ -11,10 +12,13 @@ export const contactSlice = createSlice({
     getContact: (state, action) => {
       return (state.contactData = action?.payload);
     },
+    changeCity: (state, action) => {
+      state.cityName = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { getContact } = contactSlice.actions;
+export const { getContact, changeCity } = contactSlice.actions;
 
 export default contactSlice.reducer;

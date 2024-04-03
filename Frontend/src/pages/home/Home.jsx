@@ -2,14 +2,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CallGirlsList from "../../components/CallGirlslist/CallGirlsList";
 import Location from "../../components/Location/Location";
+import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   // useState
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
 
-  // const BASE_URL = "https://khadak-mern.onrender.com/api/v1";
-  const BASE_URL = "http://localhost:6500/api/v1";
+  // -----------------------------------Hooks----------------------------------------
+  const { cityName } = useSelector((state) => state.contact);
+  const [searchParams, setSearchParams] = useSearchParams();
+  // --------------------------------------------------------------------------------
+
+  const BASE_URL = "https://khadak-mern.onrender.com/api/v1";
+  // const BASE_URL = "http://localhost:6500/api/v1";
 
   // getting the hero section data
   const getHeroSectionData = async () => {
@@ -37,7 +44,10 @@ const Home = () => {
     getHeroSectionData();
     FooterSection();
 
-    console.log(footerSectionData);
+    setSearchParams((params) => {
+      params.set("city", `${cityName}`);
+      return params;
+    });
   }, []);
 
   return (

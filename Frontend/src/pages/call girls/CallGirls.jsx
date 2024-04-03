@@ -1,9 +1,23 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { changeCity } from "../../features/slices/contactSlice";
 
 const CallGirls = () => {
   const locationData = useSelector((state) => state?.location?.locationData);
-  console.log(locationData);
+
+  // --------------------------------------Hooks-------------------------------------------
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  // ------------------------------------------------------------------------------------------
+
+  // --------------------------------------Functions-------------------------------------------
+  const cityHandler = (e, cityName) => {
+    dispatch(changeCity(cityName));
+    navigate("/");
+  };
+  // ------------------------------------------------------------------------------------------
 
   return (
     <div className=" flex justify-center bg-pink-100">
@@ -13,10 +27,15 @@ const CallGirls = () => {
           locationData?.map((data) => {
             return (
               <div>
-                <h1 className="text-2xl text-pink-600 cursor-pointer">
+                <h1
+                  className="text-2xl text-pink-600 font-bold bg-white p-3 cursor-pointer m-2"
+                  onClick={(e) => {
+                    cityHandler(e, data?.name);
+                  }}
+                >
                   {data?.name}
                 </h1>
-                <ul className="flex justify-start gap-6">
+                {/* <ul className="flex justify-start gap-6">
                   {data?.localities?.map((item) => {
                     return (
                       <li className=" p-3 bg-gray-300 rounded-full cursor-pointer text-md text-bold shadow-md">
@@ -24,21 +43,10 @@ const CallGirls = () => {
                       </li>
                     );
                   })}
-                </ul>
+                </ul> */}
               </div>
             );
           })}
-        <div>
-          <h1 className="text-2xl text-pink-600 cursor-pointer">Delhi</h1>
-          <ul className="flex justify-start gap-6">
-            <li className=" p-3 bg-gray-300 rounded-full cursor-pointer text-md text-bold shadow-md">
-              Connaught Place
-            </li>
-            <li className=" p-3 bg-gray-300 rounded-full cursor-pointer">
-              karawal nagar
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   );
