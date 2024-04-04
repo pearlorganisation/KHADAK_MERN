@@ -41,7 +41,7 @@ export const createContact = async (req, res) => {
 export const getContact = async (req, res) => {
   try {
     const { locality, city } = req?.query;
-
+    console.log(locality, city);
     let pipeline = [];
 
     if (city && locality) {
@@ -68,7 +68,10 @@ export const getContact = async (req, res) => {
       });
     }
 
-    const result = await Contact.aggregate(pipeline);
+    const result =
+      locality || city
+        ? await Contact.aggregate(pipeline)
+        : await Contact.find();
 
     res.status(200).json({
       message: "true",
@@ -76,8 +79,7 @@ export const getContact = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-
-      message:error.message || "Internal Server Error",
+      message: error?.message || "Internal Server Error",
     });
   }
 };

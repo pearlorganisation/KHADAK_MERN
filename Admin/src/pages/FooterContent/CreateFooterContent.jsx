@@ -6,6 +6,7 @@ import JoditEditor from 'jodit-react';
 import { createFooter, getFooter } from '../../Features/actions/footer';
 import { ClipLoader } from 'react-spinners';
 import { clearAddCityState } from '../../Features/slices/location';
+import { clearSuccessFooterState } from '../../Features/slices/footer';
 
 
 
@@ -33,11 +34,11 @@ const {isLoading,isSuccess}= useSelector((state)=>state.footer)
       dispatch(createFooter(newData));
     };
 
-    useEffect(()=>{
+useEffect(()=>{
      
 if(isSuccess){
   navigate("/footer")
-  dispatch(clearAddCityState())
+  dispatch( clearSuccessFooterState())
 }
     },[])
 

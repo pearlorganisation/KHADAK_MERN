@@ -22,7 +22,7 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/contact",
+          path: "/contact-us",
           element: <Contact />,
         },
         {
