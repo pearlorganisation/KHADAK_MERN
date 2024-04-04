@@ -2,9 +2,9 @@ import { Blog } from "../../models/blogModel/blogModel.js";
 import { v2 as cloudinary } from "cloudinary";
 
 export const createBlog = async (req, res) => {
-  console.log(req.file);
+  console.log(req?.file);
   try {
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(req?.file?.path);
 
     console.log(result);
     if (result) {
