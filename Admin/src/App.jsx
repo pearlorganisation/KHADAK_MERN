@@ -17,6 +17,7 @@ import ViewFooterContent from "./pages/FooterContent/ViewFooterContent";
 import UpdateFooterContent from "./pages/FooterContent/UpdateFooterContent";
 import { useSelector } from "react-redux";
 import CreateFooterContent from "./pages/FooterContent/CreateFooterContent";
+import UpdateContact from "./pages/Contacts/UpdateContact";
 
 
 
@@ -47,6 +48,10 @@ import CreateFooterContent from "./pages/FooterContent/CreateFooterContent";
             {
               path: "/createContact",
               element: <CreateContact />,
+            },
+            {
+              path: "/updateContact/:key",
+              element: <UpdateContact/>,
             },
             {
               path: "/location",

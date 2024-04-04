@@ -122,7 +122,7 @@ const ViewLocation = () => {
                                     deleteLocality({ id: item?._id, locality })
                                   )
                                 }
-                                className="border rounded-lg text-red-500"
+                                className="border bg-red-500 px-2 rounded-lg text-white"
                               >
                                 X
                               </button>

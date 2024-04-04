@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { getHeader, updateHeader } from "../actions/header";
+import { createBlog, getBlogs} from "../actions/blog";
 
 
 // -------------------------------------------------------------------------------------------
@@ -12,32 +12,32 @@ const initialState = {
   errorMessage: "",
   isDeleted :false,
   
-  headerData: [],
+  blogData: [],
 };
 
 // -------------------------------------- Slices------------------------------------------------
-const headerSlice = createSlice({
-  name: "header",
+const blogSlice = createSlice({
+  name: "blog",
   initialState,
-  reducers: { 
-    clearSuccessState: (state) => {
-    state.isSuccess = false;
-},},
+  reducers: {},
   extraReducers: (builder) => {
     builder
-    .addCase(getHeader.pending, (state, action) => {
+    .addCase(getBlogs.pending, (state, action) => {
         state.isLoading = true;
-        state.errorMessage = '';
-      })
-      .addCase(getHeader.fulfilled, (state, action) => {
-        state.isLoading = false;
+        
         state.isDeleted = false;
         state.errorMessage = '';
-        console.log('API Response Payload:', action.payload);
-        state.headerData = action.payload.data;
-        console.log('Reducer - get headerData:', state.headerData);
       })
-      .addCase(getHeader.rejected, (state, action) => {
+      .addCase(getBlogs.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = false;
+       
+        state.errorMessage = '';
+        console.log('API Response Payload:', action.payload);
+        state.blogData = action.payload.data;
+        console.log('Reducer - get blogData:', state.blogData);
+      })
+      .addCase(getBlogs.rejected, (state, action) => {
         state.isLoading = false;
         state.errorMessage = action.payload;
         toast.error(state?.errorMessage, {
@@ -45,19 +45,21 @@ const headerSlice = createSlice({
         });
         
       })
-      .addCase(updateHeader.pending, (state, action) => {
+     
+      //create blog
+      .addCase(createBlog.pending, (state, action) => {
         state.isLoading = true;
         state.isSuccess = false;
-       
         state.errorMessage = "";
+      
       })
-      .addCase(updateHeader.fulfilled, (state, action) => {
+      .addCase(createBlog.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
        
-        state.headerData = action.payload.data;
+        state.blogData = action.payload.data;
       })
-      .addCase(updateHeader.rejected, (state, action) => {
+      .addCase(createBlog.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         
@@ -65,10 +67,12 @@ const headerSlice = createSlice({
         toast.error(state?.errorMessage, {
           position: "top-right",
         });
-      });
+      })
+     
+    
   },
 });
 
 // ===========================================Exports==================================================
-export default headerSlice.reducer;
-export const { clearSuccessState} = headerSlice.actions;
+export default blogSlice.reducer;
+export const {} = blogSlice.actions;

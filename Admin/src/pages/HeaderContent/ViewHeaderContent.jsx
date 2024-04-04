@@ -50,7 +50,6 @@ const ViewHeaderContent = () => {
           <table className="w-full table-auto text-sm text-left">
             <thead className="bg-gray-50 text-gray-600 font-medium border-b">
               <tr>
-                <th className="py-3 px-6">Id</th>
 
                 <th className="py-3 px-6">Title</th>
                 <th className="py-3 px-6">Description</th>
@@ -72,9 +71,6 @@ const ViewHeaderContent = () => {
                 </tr>
               ) : (
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {headerData[0]?._id}
-                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {headerData[0]?.title}
                   </td>

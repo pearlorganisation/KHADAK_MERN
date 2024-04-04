@@ -8,6 +8,8 @@ import auth from "./slices/auth";
 import header from "./slices/header";
 import footer from "./slices/footer";
 import location from "./slices/location";
+import contact from "./slices/contact";
+import blog from "./slices/blog";
 
 
 
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
     header,
     footer,
     location,
+    contact,
+    blog,
   });
 
 
