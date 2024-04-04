@@ -188,9 +188,9 @@ const {city,locality}= newData
           </div>
           </div>
           <label className="block font-medium">Description</label>
-    <textarea 
-    {...register('description')}
-     rows="5" class="hidden resize-none w-full mt-2 me-[250px] px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg" placeholder="Leave a comment..."></textarea>
+    {/* <textarea 
+    // {...register('description')}
+    //  rows="5" class="hidden resize-none w-full mt-2 me-[250px] px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg" placeholder="Leave a comment..."></textarea> */}
      
       <JoditEditor
       ref={editor}

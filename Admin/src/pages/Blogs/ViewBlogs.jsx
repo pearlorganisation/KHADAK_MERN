@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { Stack,Skeleton } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBlogs } from '../../Features/actions/blog';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 
 
 
 const ViewBlog = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const {isLoading,blogData}= useSelector((state)=>state.blog)
 
     const handleAddBlog= () => {
         navigate('/createBlog');
       };
   
+
+      useEffect(
+       ()  => {
+          dispatch(getBlogs());
+        }, []
+      )
 
   return (
     <>
@@ -46,8 +55,8 @@ const ViewBlog = () => {
               <th className="py-3 px-6">Id</th>
                 <th className="py-3 px-6">Title</th>
                 <th className="py-3 px-6">Image</th>
-                <th className="py-3 px-6">Content</th>
-                <th className="py-3 px-6">Created On</th>
+                <th className="py-3 px-6">Description</th>
+        
                 <th className="py-3 px-6">Action</th>
 
                 
@@ -56,7 +65,7 @@ const ViewBlog = () => {
               </tr>
             </thead>
             <tbody className="text-gray-600 divide-y">
-            {"loading ho rha hai!" ? (
+            {isLoading ? (
             <tr>
             <td colSpan="6" className="text-center px-6 py-8">
               <Stack spacing={4}>
@@ -70,25 +79,26 @@ const ViewBlog = () => {
           </tr>
           ) : (
             
-            //    Array.isArray(appointmentData) && appointmentData?.map((item, idx) => (
+               Array.isArray(blogData) && blogData?.map((item, idx) => (
                   <tr key={idx}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                        {/* {item?.name} */}
+                        {idx+1}.
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {/* {item?.email} */}
+                        {item?.title}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap min-h-40 min-w-48">
+                      <img className='h-40 w-48 rounded-lg' src={item?.profileImage} />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.subject.subject} */}
+                    {item?.description}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.date} */}
-                    </td>
+                   
                     
-                    <td className="text-right px-6 whitespace-nowrap">
+                    <td className=" px-6 whitespace-nowrap">
                     <a
                         
-                        className="py-2 px-3 font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
+                        className="py-2  font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Edit
                       </a>
@@ -100,7 +110,7 @@ const ViewBlog = () => {
                       </button>
                     </td>
                   </tr>
-                // ))
+                ))
               
               )}
             </tbody>
