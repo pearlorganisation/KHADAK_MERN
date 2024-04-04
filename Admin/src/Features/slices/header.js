@@ -19,7 +19,10 @@ const initialState = {
 const headerSlice = createSlice({
   name: "header",
   initialState,
-  reducers: {},
+  reducers: { 
+    clearSuccessState: (state) => {
+    state.isSuccess = false;
+},},
   extraReducers: (builder) => {
     builder
     .addCase(getHeader.pending, (state, action) => {
@@ -68,4 +71,4 @@ const headerSlice = createSlice({
 
 // ===========================================Exports==================================================
 export default headerSlice.reducer;
-export const {} = headerSlice.actions;
+export const { clearSuccessState} = headerSlice.actions;

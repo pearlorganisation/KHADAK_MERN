@@ -100,7 +100,7 @@ const ViewFooterContent = () => {
                Array.isArray(footerData) && footerData?.map((item, idx) => (
                   <tr key={idx}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                        {item?._id}
+                        {idx+1}.
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {item?.title}
