@@ -19,7 +19,11 @@ const initialState = {
 const footerSlice = createSlice({
   name: "footer",
   initialState,
-  reducers: {},
+  reducers: {
+    clearSuccessFooterState:(state)=>{
+      state.isSuccess = false;
+    }
+  },
   extraReducers: (builder) => {
     builder
     .addCase(getFooter.pending, (state, action) => {
@@ -115,4 +119,4 @@ const footerSlice = createSlice({
 
 // ===========================================Exports==================================================
 export default footerSlice.reducer;
-export const {} = footerSlice.actions;
+export const { clearSuccessFooterState} = footerSlice.actions;
