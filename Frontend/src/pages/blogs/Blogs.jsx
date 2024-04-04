@@ -5,7 +5,7 @@ const Blogs = () => {
   const [blogData, setBlogData] = useState(null);
 
   const getBlogData = async () => {
-    const data = await fetch("http://localhost:6500/api/v1/blog");
+    const data = await fetch("https://khadak-mern.onrender.com/api/v1/blog");
     const updatedData = await data.json();
     setBlogData(updatedData?.data);
   };
