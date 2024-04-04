@@ -72,7 +72,7 @@ const ViewFooterContent = () => {
               <th className="py-3 px-6">Id</th>
                 
                 
-              <th className="py-3 px-6">Title</th>
+              
                 <th className="py-3 px-6">Description</th>
                 
                 <th className="py-3 px-6">Actions</th>
@@ -102,9 +102,7 @@ const ViewFooterContent = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                         {idx+1}.
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {item?.title}
-                    </td>
+                    
                     <td dangerouslySetInnerHTML={{
                       __html: item?.description,
                     }} className="px-6 py-4 whitespace-nowrap">

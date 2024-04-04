@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import JoditEditor from 'jodit-react';
 import { createFooter, getFooter } from '../../Features/actions/footer';
 import { ClipLoader } from 'react-spinners';
-import { clearAddCityState } from '../../Features/slices/location';
+
 import { clearSuccessFooterState } from '../../Features/slices/footer';
 
 
@@ -27,7 +27,7 @@ const {isLoading,isSuccess}= useSelector((state)=>state.footer)
       const htmlContent = editor.current.value;
   
       const newData = {
-        ...data,
+       
         description: htmlContent.toString() // Add the HTML content to the data
       };
       console.log(newData)
@@ -40,7 +40,7 @@ if(isSuccess){
   navigate("/footer")
   dispatch( clearSuccessFooterState())
 }
-    },[])
+    },[isSuccess])
 
   return (
     <div>
@@ -56,25 +56,13 @@ if(isSuccess){
    
   
     
-      <div className="w-full">
-        <label className="font-medium">Title</label>
-        <input 
-        {...register('title', { required: 'Title is required' })}
-          type="text"
-          className="w-full mt-2  px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg"
-        />
-         {errors.title && (
-                <span className="text-red-500">
-                  Name of Product is required
-                </span>
-              )}
-      </div>
+    
       
       <label className="block font-medium">Content</label>
-    <textarea 
+    {/* <textarea 
     {...register('description')}
      class="hidden resize-none w-full mt-2 me-[250px] px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg" placeholder="Leave a comment..."></textarea>
-     
+      */}
       <JoditEditor
       ref={editor}
       value={content}

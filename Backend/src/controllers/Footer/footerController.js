@@ -3,7 +3,7 @@ import FooterModel from "../../models/Footer/footerModel.js";
 // adding footer data in database ..
 export const createFooter = async (req, res) => {
   try {
-    console.log(req?.body);
+    console.log(req?.body,"footer");
     const data = new FooterModel(req.body);
 
     await data.save();
@@ -34,10 +34,10 @@ export const getFooter = async (req, res) => {
 export const updateFooter = async (req, res) => {
   console.log(req.body);
   try {
-    const { title, description } = req.body;
+    const {  description } = req.body;
     const updatedFooter = await FooterModel.findByIdAndUpdate(
       req?.params?.id,
-      { title: title, description: description },
+      {description: description },
       { new: true }
     );
     res.status(200).json({

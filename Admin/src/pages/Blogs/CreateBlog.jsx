@@ -1,14 +1,18 @@
-import React,{useRef, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import JoditEditor from 'jodit-react';
 import { useForm } from 'react-hook-form';
 import { createBlog } from '../../Features/actions/blog';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
+import { clearSuccessBlog } from '../../Features/slices/blog';
 
 const CreateBlog = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
+
+  const {isSuccess,isLoading} = useSelector((state)=>state.blog)
 
   const editor = useRef(null)
   const [content,setContent ]=useState("");
@@ -58,6 +62,12 @@ const CreateBlog = () => {
       console.log("formdata",formData.getAll("profileImage"))
             };
 
+            useEffect(()=>{
+              if(isSuccess){
+                navigate("/blog")
+                dispatch(clearSuccessBlog())
+              }
+              },[isSuccess])
 
   return (
     <div>
@@ -94,7 +104,7 @@ const CreateBlog = () => {
            
             <input
              {...register('profileImage', { required: 'Photo is required',onChange:(e)=>{handlePhotoChange(e)} })}
-           onChange={handlePhotoChange}
+           
              className="hidden" id="file_input" type="file"/>
              {errors?.profileImage && (
                     <span className="text-red-500">
@@ -124,7 +134,9 @@ const CreateBlog = () => {
 <div style={{ marginTop: '4rem' }}>
                 <button 
                 type='submit' className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-slate-950 active:bg-indigo-600 rounded-lg duration-150">
-                Create
+                 {isLoading ? (
+                <ClipLoader color="#c4c2c2" />
+              ) : (<>Create</>)}
                 </button>
               </div>
 

@@ -1,18 +1,20 @@
-import React,{useRef, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import JoditEditor from 'jodit-react';
 import Select from 'react-select'
-
+import { ClipLoader } from 'react-spinners';
 import { useForm,Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createContact } from '../../Features/actions/contact';
+import { clearSuccessContact } from '../../Features/slices/contact';
+import { getLocation } from '../../Features/actions/location';
 
 
 const CreateContact = () => {
   const dispatch =useDispatch();
   const navigate= useNavigate();
 
-  
+  const {isLoading,isSuccess}= useSelector((state)=>state.contact)
 
   const {locationData}=  useSelector((state)=>state.location)
   const [localityOptions, setLocalityOptions] = useState([]);
@@ -71,7 +73,16 @@ const {city,locality}= newData
     console.log("formdata",formData.getAll("profileImage"))
           };
 
+useEffect(()=>{
+if(isSuccess){
+  navigate("/contact")
+  dispatch(clearSuccessContact())
+}
+},[isSuccess])
 
+useEffect(()=>{
+dispatch(getLocation())
+},[])
 
   return (
     <div>
@@ -208,7 +219,9 @@ const {city,locality}= newData
 
 <div style={{ marginTop: '4rem' }}>
                 <button className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-slate-950 active:bg-indigo-600 rounded-lg duration-150" >
-                Submit
+                {isLoading ? (
+                <ClipLoader color="#c4c2c2" />
+              ) : (<>Create</>)}
                 </button>
               </div>
 

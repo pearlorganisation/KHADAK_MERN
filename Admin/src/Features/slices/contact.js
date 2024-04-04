@@ -11,7 +11,6 @@ const initialState = {
   isSuccess: false,
   errorMessage: "",
   isDeleted :false,
-  
   contactData: [],
 };
 
@@ -19,7 +18,11 @@ const initialState = {
 const contactSlice = createSlice({
   name: "contact",
   initialState,
-  reducers: {},
+  reducers: {
+    clearSuccessContact:(state)=>{
+      state.isSuccess = false
+    }
+  },
   extraReducers: (builder) => {
     builder
     .addCase(getContacts.pending, (state, action) => {
@@ -96,4 +99,4 @@ const contactSlice = createSlice({
 
 // ===========================================Exports==================================================
 export default contactSlice.reducer;
-export const {} = contactSlice.actions;
+export const {clearSuccessContact} = contactSlice.actions;
