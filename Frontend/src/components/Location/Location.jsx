@@ -43,7 +43,7 @@ const Location = ({ BASE_URL }) => {
       {Array.isArray(location) &&
         location.length > 0 &&
         location.map((data) => {
-          if (data?.name == selectedCity) {
+          if (data?.name?.toLowerCase() == selectedCity) {
             return (
               <div className="my-8">
                 {/* <h1 className="text-3xl text-left text-rose-500">{data?.name}</h1> */}

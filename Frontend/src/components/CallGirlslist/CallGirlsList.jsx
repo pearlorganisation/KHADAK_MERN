@@ -78,8 +78,11 @@ const CallGirlsList = ({ BASE_URL }) => {
                     <p class="text-xl md:text-2xl font-medium text-white">
                       {data?.title}
                     </p>
-                    <p class="mb-4 text-xs md:text-sm font-medium text-white">
-                      {data?.description}
+                    <p
+                      dangerouslySetInnerHTML={{ __html: data?.description }}
+                      class="mb-4 text-xs md:text-sm font-medium text-white"
+                    >
+                      {/* {data?.description} */}
                     </p>
                   </div>
 

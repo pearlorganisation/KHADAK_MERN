@@ -7,6 +7,7 @@ import footerRouter from "./src/routes/Footer/footerRoutes.js";
 import locationRouter from "./src/routes/location/locationRoutes.js";
 import contactRouter from "./src/routes/contact/contactRoute.js";
 import mailRouter from "./src/routes/Mail/mailRoutes.js";
+import blogRouter from "./src/routes/blog/blogRoutes.js";
 
 const app = express();
 const PORT = 6500;
@@ -58,6 +59,7 @@ app.use("/api/v1/footer", footerRouter);
 app.use("/api/v1/location", locationRouter);
 app.use("/api/v1/contact", contactRouter);
 app.use("/api/v1/mail", mailRouter);
+app.use("/api/v1/blog", blogRouter);
 
 app.listen(PORT, () => {
   console.log(` app is running on http://localhost:${PORT}`);
