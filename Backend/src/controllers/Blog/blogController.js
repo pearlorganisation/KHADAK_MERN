@@ -27,3 +27,23 @@ export const createBlog = async (req, res) => {
     res.status(500).json({ error: error?.message || "Internal server error" });
   }
 };
+
+export const getBlog = async (req, res) => {
+  try {
+    const blogs = await Blog.find();
+    if (blogs) {
+      res.status(200).json({
+        success: "true",
+        data: blogs,
+      });
+    } else {
+      res.status(404).json({
+        message: "Data not found",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "Internal Server Error",
+    });
+  }
+};
