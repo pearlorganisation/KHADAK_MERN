@@ -14,7 +14,7 @@ const UpdateFooterContent = () => {
   const navigate = useNavigate();
 
     const editor = useRef(null)
-  const [content,setContent ]=useState("");
+  const [content,setContent ]=useState(item?.description || "");
 
   const {
     register,
@@ -23,7 +23,7 @@ const UpdateFooterContent = () => {
   } = useForm({
     defaultValues:{
       title: item?.title|| "",
-      description:item?.description||"",
+      
     }
     });
 
@@ -60,11 +60,7 @@ const UpdateFooterContent = () => {
           type="text"
           className="w-full mt-2  px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg"
         />
-         {/* {errors.productName && (
-                <span className="text-red-500">
-                  Name of Product is required
-                </span>
-              )} */}
+      
       </div>
       
       <label className="block font-medium">Content</label>

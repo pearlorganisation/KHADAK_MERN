@@ -4,15 +4,15 @@ import Select from 'react-select'
 
 import { useForm,Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { createContact } from '../../Features/actions/contact';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { updateContact } from '../../Features/actions/contact';
 
 
-const CreateContact = () => {
+const UpdateContact = () => {
   const dispatch =useDispatch();
   const navigate= useNavigate();
 
-  
+  const { state: item } = useLocation();
 
   const {locationData}=  useSelector((state)=>state.location)
   const [localityOptions, setLocalityOptions] = useState([]);
@@ -21,13 +21,19 @@ const CreateContact = () => {
 
   const {
     register,
-    handleSubmit, formState: { errors },control } = useForm();
+    handleSubmit,control } = useForm({
+        defaultValues:{
+          title: item?.title|| "",
+          profileImage: item?.profileImage|| "",
+          phoneNumber: item?.phoneNumber|| "",
+  }
+        });
 
   const editor = useRef(null)
-  const [content,setContent ]=useState("");
+  const [content,setContent ]=useState(item?.description || "");
 
   const [selectedPhoto,setSelectedPhoto]=useState("")
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState([item?.profileImage]||"");
   const defaultPhoto =
     "https://via.placeholder.com/130?text=No+Image+Selected";
 
@@ -46,9 +52,11 @@ const CreateContact = () => {
 
 
     const onSubmit = (data) => {
+        console.log(data)
       const htmlContent = editor.current.value;
       const newData = {
         ...data,
+    
         description: htmlContent.toString() 
       };
       console.log(newData)
@@ -67,7 +75,8 @@ const {city,locality}= newData
        formData.append("city",cityValue); 
        formData.append("locality",localityValue); 
        formData.append("description",newData?.description); 
-    dispatch(createContact(formData))
+    dispatch(updateContact({id:item._id, payload:formData}))
+
     console.log("formdata",formData.getAll("profileImage"))
           };
 
@@ -78,7 +87,7 @@ const {city,locality}= newData
         <div className="bg-gray-100">
         <div className=" flex justify-center">
         <h3 className="text-2xl font-semibold sm:text-3xl">
-          Create contact details
+          Update contact details
         </h3>
       </div>
 
@@ -88,15 +97,11 @@ const {city,locality}= newData
         <div className="w-full">
             <label className="font-medium">Name</label>
             <input 
-            {...register('title', { required: 'Name is required' })}
+            {...register('title')}
               type="text"
               className="w-full mt-2  px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg"
             />
-             {errors.title && (
-                    <span className="text-red-500">
-                      Name of Product is required
-                    </span>
-                  )}
+            
           </div>
           <div className="sm:flex space-y-6 sm:space-y-0 justify-between gap-10">
           <div className="w-full">
@@ -109,28 +114,20 @@ const {city,locality}= newData
             {/* <label htmlFor='file_input'  className="w-full px-[10px] py-[10px] text-white font-semibold bg-rose-500 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-full ">Click here to upload </label> */}
            
             <input
-             {...register('profileImage', { required: 'Profile Photo is required', onChange:(e)=>{handlePhotoChange(e)} })}
+             {...register('profileImage', {  onChange:(e)=>{handlePhotoChange(e)} })}
           
              className="hidden" id="file_input" type="file"/>
-             {errors.profileImage && (
-                    <span className="text-red-500">
-                      Profile Photo is required
-                    </span>
-                  )}
+           
           </div>
           <div className="w-full space-y-4">
             <div>
             <label className="font-medium">Whatsapp Number</label>
             <input
-            {...register('phoneNumber', { required: 'Whatsapp Number is required' })}
+            {...register('phoneNumber')}
               type="text"
               className="w-full mt-2  px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg"
             />
-             {errors.phoneNumber && (
-                    <span className="text-red-500">
-                      Whatsapp Number is required
-                    </span>
-                  )}
+           
                   </div>
                   <div>
             <label className="font-medium">City</label>
@@ -141,6 +138,10 @@ const {city,locality}= newData
                                     <Select
                                         {...field}
                                         options={locationData.map(item => ({ value: item?.name, label: item?.name }))}
+
+                                        defaultValue={ (locationData.map(item => ({ value: item?.name, label: item?.name }))).
+                                    find( (c) => c.value === item?.city)  } // Set default value
+
                                         onChange={(selectedOption) => {
                                             field.onChange(selectedOption);
                                             const selectedCityData = locationData.find(item => item.name === selectedOption.value);
@@ -160,16 +161,13 @@ const {city,locality}= newData
                                                 color: '#9CA3AF',
                                             }),
                                         }}
+                                        
                                     />
                                      )}
                                       rules={{ required: true }}
                                       
                                   />
-                                  {/* {errors?.city && (
-                                            <span className="text-red-500">
-                                                City is required
-                                            </span>
-                                        )} */}
+                              
                   </div>
                   <div>
             <label className="font-medium">Locality</label>
@@ -180,6 +178,7 @@ const {city,locality}= newData
                                     <Select
                                         {...field}
                                         options={localityOptions}
+                                        defaultValue={localityOptions.find(option => option.value === item?.locality)}
                                         className="mt-2"
                                         placeholder="Choose Locality"
                                     />
@@ -220,4 +219,4 @@ const {city,locality}= newData
   )
 }
 
-export default CreateContact
+export default UpdateContact

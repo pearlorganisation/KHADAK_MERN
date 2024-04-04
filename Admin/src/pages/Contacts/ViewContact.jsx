@@ -1,19 +1,51 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import { useNavigate } from 'react-router';
 import { Stack,Skeleton } from '@mui/material';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from '../../Features/actions/contact';
+import Delete from '../../components/Delete';
+
 
 
 
 
 const ViewContact = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { contactData, isDeleted, isLoading } = useSelector(
+      (state) => state.contact
+    );
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [id, setId] = useState();
+
+  const handleDelete = () => {
+    // dispatch(delete(id));
+    setShowDeleteModal(false);
+    setId('');
+  };
+
+  const handleModal = (ID) => {
+    setShowDeleteModal(true);
+    setId(ID);
+  };
+
 
     const handleAddContact= () => {
         navigate('/createContact');
       };
+
+      useEffect(() => {
+        dispatch(getContacts());
+      }, []);
+    
+      useEffect(() => {
+        dispatch(getContacts());
+      }, []);
+    
 
   return (
     <>
@@ -43,19 +75,21 @@ const ViewContact = () => {
             <thead className="bg-gray-50 text-gray-600 font-medium border-b">
               <tr>
               <th className="py-3 px-6">S.No</th>
-                <th className="py-3 px-6">Image</th>
-                <th className="py-3 px-6">Gender</th>
+                <th className="py-3 px-6">Profile Photo</th>
+                <th className="py-3 px-6">Name</th>
                 <th className="py-3 px-6">City</th>
-                <th className="py-3 px-6">Status</th>
+                <th className="py-3 px-6">Locality</th>
+                <th className="py-3 px-6">Whatsapp</th>
+                <th className="py-3 px-6">Description</th>
                 <th className="py-3 px-6">Action</th>
                
                
               </tr>
             </thead>
             <tbody className="text-gray-600 divide-y">
-            {"loading ho rha hai!" ? (
+            {isLoading ? (
             <tr>
-            <td colSpan="6" className="text-center px-6 py-8">
+            <td colSpan="8" className="text-center px-6 py-8">
               <Stack spacing={4}>
                 <Skeleton variant="rounded" height={30} />
                 <Skeleton variant="rounded" height={25}/>
@@ -67,43 +101,59 @@ const ViewContact = () => {
           </tr>
           ) : (
             
-            //    Array.isArray(appointmentData) && appointmentData?.map((item, idx) => (
+               Array.isArray(contactData) && contactData?.map((item, idx) => (
                   <tr key={idx}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                        {/* {item?.name} */}
+                        {idx+1}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap min-h-40 min-w-48">
+                      <img className='h-40 w-48 rounded-lg' src={item?.profileImage} />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {/* {item?.email} */}
+                      {item?.title}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.subject.subject} */}
+                    {item?.city}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    {/* {item?.date} */}
+                    {item?.locality}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                    {item?.phoneNumber}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                    {item?.description}
                     </td>
                     
-                    <td className="text-right px-6 whitespace-nowrap">
+                    <td className="px-6 whitespace-nowrap">
                     <a
-                        
-                        className="py-2 px-3 font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
+                        onClick={() => {
+                          navigate(`/updateContact/${item?._id}`, { state: item  });
+                        }}  
+                        className="py-2  font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Edit
                       </a>
                       <button
-                       
+                        onClick={() => {
+                          handleModal(item?._id);
+                        }}
                         className="py-2 leading-none px-3 font-semibold text-red-500 hover:text-red-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Delete
                       </button>
                     </td>
                   </tr>
-                // ))
+                ))
               
               )}
             </tbody>
           </table>
         </div>
       </div>
+      {showDeleteModal && (
+        <Delete setModal={setShowDeleteModal} handleDelete={handleDelete} />
+      )}
      </>
   )
 }
