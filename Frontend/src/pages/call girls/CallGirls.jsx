@@ -15,7 +15,7 @@ const CallGirls = () => {
   // --------------------------------------Functions-------------------------------------------
   const cityHandler = (e, cityName) => {
     dispatch(changeCity(cityName.toLowerCase()));
-    navigate("/");
+    navigate(`/call-girls-in-${cityName.toLowerCase()}`);
   };
   // ------------------------------------------------------------------------------------------
 
