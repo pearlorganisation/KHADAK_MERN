@@ -75,7 +75,7 @@ if(isSuccess){
 
 
 <div style={{ marginTop: '4rem' }}>
-            <button className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-slate-950 active:bg-indigo-600 rounded-lg duration-150">
+            <button className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-blue-800 active:bg-indigo-600 rounded-lg duration-150">
             {isLoading ? (
                 <ClipLoader color="#c4c2c2" />
               ) : (<>Create</>)}

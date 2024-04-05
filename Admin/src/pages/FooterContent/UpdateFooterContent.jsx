@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import JoditEditor from 'jodit-react';
 import { updateFooter } from '../../Features/actions/footer';
 import { clearSuccessFooterState } from '../../Features/slices/footer';
+import { ClipLoader } from 'react-spinners';
 
 
 const UpdateFooterContent = () => {
@@ -82,8 +83,11 @@ const UpdateFooterContent = () => {
 
 
 <div style={{ marginTop: '4rem' }}>
-            <button className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-slate-950 active:bg-indigo-600 rounded-lg duration-150">
-            Update
+            <button
+             disabled={isLoading} className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-indigo-800 active:bg-indigo-600 rounded-lg duration-150">
+            {isLoading ? (
+                <ClipLoader color="#c4c2c2" />
+              ) : (<>Update</>)}
             </button>
           </div>
 

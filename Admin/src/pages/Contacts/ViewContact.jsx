@@ -49,7 +49,7 @@ const ViewContact = () => {
 
   return (
     <>
-      <div className="max-w-screen-xl mt-10 mx-auto px-4 md:px-8">
+      <div className="max-w-screen-xl mt-10 mx-auto px-4 md:px-8   ">
         <div className="items-start justify-between md:flex">
           <div >
             <h3 className="px-1 text-gray-800 text-xl font-bold sm:text-2xl">
@@ -66,11 +66,11 @@ const ViewContact = () => {
             </a>
           </div>
         </div>
-        <div className='flex mt-10 gap-2'>
+        {/* <div className='flex mt-10 gap-2'>
             <div><input type='text'  className="px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg" placeholder='Search City'/></div>
             <div className='p-1 px-2 border border-slate-300 bg-indigo-600 rounded-lg text-xl text-white'><FontAwesomeIcon icon={faMagnifyingGlass} /></div>
-        </div>
-        <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+        </div> */}
+        <div className="mt-12 shadow-sm border rounded-lg h-screen overflow-x-auto ">
           <table className="w-full table-auto text-sm text-left">
             <thead className="bg-gray-50 text-gray-600 font-medium border-b">
               <tr>
