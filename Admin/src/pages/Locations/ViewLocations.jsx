@@ -65,7 +65,7 @@ const ViewLocation = () => {
             </div>
           </div>
         </div>
-        <div className="flex mt-10 gap-2">
+        {/* <div className="flex mt-10 gap-2">
           <div>
             <input
               type="text"
@@ -76,7 +76,7 @@ const ViewLocation = () => {
           <div className="p-1 px-2 border border-slate-300 bg-indigo-600 rounded-lg text-xl text-white">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </div>
-        </div>
+        </div> */}
         <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
           <table className="w-full table-auto text-sm text-left">
             <thead className="bg-gray-50 text-gray-600 font-medium border-b">

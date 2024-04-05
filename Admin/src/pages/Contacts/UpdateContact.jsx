@@ -1,11 +1,13 @@
-import React,{useRef, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import JoditEditor from 'jodit-react';
 import Select from 'react-select'
-
+import { ClipLoader } from 'react-spinners';
 import { useForm,Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate} from 'react-router-dom';
 import { updateContact } from '../../Features/actions/contact';
+import { getLocation } from '../../Features/actions/location';
+import { clearSuccessContact } from '../../Features/slices/contact';
 
 
 const UpdateContact = () => {
@@ -14,14 +16,16 @@ const UpdateContact = () => {
 
   const { state: item } = useLocation();
 
+  const {isLoading,isSuccess}= useSelector((state)=>state.contact)
+
   const {locationData}=  useSelector((state)=>state.location)
   const [localityOptions, setLocalityOptions] = useState([]);
 
-
+console.log(localityOptions)
 
   const {
     register,
-    handleSubmit,control } = useForm({
+    handleSubmit,control,resetField,setValue } = useForm({
         defaultValues:{
           title: item?.title|| "",
           profileImage: item?.profileImage|| "",
@@ -80,8 +84,28 @@ const {city,locality}= newData
     console.log("formdata",formData.getAll("profileImage"))
           };
 
+          useEffect(()=>{
+            if(isSuccess){
+              navigate("/contact")
+              dispatch(clearSuccessContact())
+            }
+            },[isSuccess])
 
+          useEffect(()=>{
+            dispatch(getLocation())
+            },[])
+           
+            const temp  = locationData.find(item2 => {
+          
+               const temp2 = item2?.localities.some(ite =>{
 
+                return ite === item?.locality
+              })
+           
+              return temp2
+              
+            })
+            console.log(temp?.localities?.map(it => ({ value: it, label: it }))?.find( im => im.value === item?.locality),"temp")
   return (
     <div>
         <div className="bg-gray-100">
@@ -143,6 +167,7 @@ const {city,locality}= newData
                                     find( (c) => c.value === item?.city)  } // Set default value
 
                                         onChange={(selectedOption) => {
+                                          resetField('locality')
                                             field.onChange(selectedOption);
                                             const selectedCityData = locationData.find(item => item.name === selectedOption.value);
                                             setLocalityOptions(selectedCityData ? selectedCityData.localities.map(locality => ({ value: locality, label: locality })) : []);
@@ -177,8 +202,9 @@ const {city,locality}= newData
                                 render={({ field }) => (
                                     <Select
                                         {...field}
+                                        // value={field?.value || null}
                                         options={localityOptions}
-                                        defaultValue={localityOptions.find(option => option.value === item?.locality)}
+                                        defaultValue={ temp?.localities?.map(it => ({ value: it, label: it }))?.find( im => im.value === item?.locality) } 
                                         className="mt-2"
                                         placeholder="Choose Locality"
                                     />
@@ -206,8 +232,10 @@ const {city,locality}= newData
     
 
 <div style={{ marginTop: '4rem' }}>
-                <button className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-slate-950 active:bg-indigo-600 rounded-lg duration-150" >
-                Submit
+                <button className="w-full px-4 py-2 text-white bg-blue-700  font-medium hover:bg-blue-800 active:bg-indigo-600 rounded-lg duration-150" >
+                {isLoading ? (
+                <ClipLoader color="#c4c2c2" />
+              ) : (<>Update</>)}
                 </button>
               </div>
 

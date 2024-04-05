@@ -71,7 +71,7 @@ export default function Layout() {
             </button>
 
             {/*  <!-- Side Navigation --> */}
-            <div className="flex">
+            <div className="flex h-screen">
                 <aside
                     id="nav-menu-4"
                     aria-label="Side navigation"
@@ -108,7 +108,7 @@ export default function Layout() {
                     </div>
                     <nav
                         aria-label="side navigation"
-                        className="flex-1 divide-y divide-slate-100 overflow-auto"
+                        className="flex-1 divide-y divide-slate-100 overflow-hidden"
                     >
                         <div>
                             <ul className="flex flex-1 flex-col gap-1 py-3">
@@ -186,9 +186,9 @@ export default function Layout() {
 
                     </footer>
                 </aside>
-                <div className="w-full">
-                    <Outlet />
-                </div>
+                <div className="w-screen overflow-x-hidden  ">
+    <Outlet />
+</div>
             </div>
 
             {/*  <!-- Backdrop --> */}
