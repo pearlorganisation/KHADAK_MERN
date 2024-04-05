@@ -33,6 +33,18 @@ function App() {
           path: "/call-girls",
           element: <CallGirls />,
         },
+        {
+          path: "/:city",
+          element: <Home />,
+        },
+        {
+          path: "/:city/",
+          element: <Home />,
+        },
+        {
+          path: "/:city/:locality",
+          element: <Home />,
+        },
       ],
     },
   ]);

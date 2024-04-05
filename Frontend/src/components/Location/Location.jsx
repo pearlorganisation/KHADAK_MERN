@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getLocationData,
   selectedLocation,
 } from "../../features/slices/locationSlice";
-import { useSearchParams } from "react-router-dom";
+import {
+  Navigate,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 
 const Location = ({ BASE_URL }) => {
   const [location, setLocation] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const params = useParams();
 
-  const selectedCity = searchParams.get("city");
+  // const selectedCity = params?.city;
+  const selectedCity = useSelector((state) => state?.contact?.cityName);
   console.log("selectedcity", selectedCity);
 
   const dispatch = useDispatch();
@@ -27,10 +35,7 @@ const Location = ({ BASE_URL }) => {
   };
 
   const localityHandler = (locality) => {
-    setSearchParams((params) => {
-      params.set("locality", locality.toString().replaceAll(" ", "%"));
-      return params;
-    });
+    navigate(`/call-girls-in-${selectedCity}/${locality.toLowerCase()}`);
   };
 
   console.log(location);

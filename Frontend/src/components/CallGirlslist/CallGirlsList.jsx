@@ -1,39 +1,41 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 // import { getContact } from "../../features/slices/contactSlice";
 
 const CallGirlsList = ({ BASE_URL }) => {
   // -----------------------------------Hooks----------------------------------------
-  const [searchParams, setSearchParams] = useSearchParams();
+  const params = useParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const { cityName } = useSelector((state) => state.contact);
   // --------------------------------------------------------------------------------
   const [contactData, setContactData] = useState(null);
   const { selectedLocality } = useSelector((state) => state.location);
 
   const getContacts = async (url) => {
+    console.log(url, "hii");
     try {
       const response = await axios.get(
-        `${BASE_URL}/contact${url ? `?${url}` : ""}`
+        `${BASE_URL}/contact/?city=${url ? url : ""}`
       );
       setContactData(response?.data?.data);
     } catch (error) {
       console.log(error?.message);
     }
   };
-  console.log(contactData);
+
+  // console.log(contactData, "hiii");
   useEffect(() => {
     const url = (() => {
-      return `city=${
-        searchParams.get("city") ? searchParams.get("city") : cityName
-      }`;
+      const city = cityName;
+      return city;
     })();
 
     console.log("this is the url", url);
 
-    console.log("this is the city", searchParams.get("city"));
+    // console.log("this is the city", searchParams.get("city"));
 
     getContacts(url);
   }, []);
@@ -43,9 +45,8 @@ const CallGirlsList = ({ BASE_URL }) => {
         contactData?.length > 0 &&
         contactData
           .filter((data) => {
-            if (searchParams.get("locality")) {
-              let queryLocality = searchParams
-                .get("locality")
+            if (params?.locality) {
+              let queryLocality = params?.locality
                 ?.toString()
                 ?.split("%")
                 ?.join("")

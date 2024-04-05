@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CallGirlsList from "../../components/CallGirlslist/CallGirlsList";
 import Location from "../../components/Location/Location";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Home = () => {
+  const params = useParams();
+  console.log(params);
   // useState
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
@@ -16,6 +18,7 @@ const Home = () => {
   // --------------------------------------------------------------------------------
 
   const BASE_URL = "https://khadak-mern.onrender.com/api/v1";
+
   // const BASE_URL = "http://localhost:6500/api/v1";
 
   // getting the hero section data
@@ -44,12 +47,11 @@ const Home = () => {
     getHeroSectionData();
     FooterSection();
 
-    setSearchParams((params) => {
-      params.set("city", `${cityName}`);
-      return params;
-    });
+    // setSearchParams((params) => {
+    //   params.set("city", `${cityName}`);
+    //   return params;
+    // });
   }, []);
-
   return (
     <div className="items-center px-4 max-w-screen-xl mx-auto  md:px-8">
       <section class="bg-white dark:bg-gray-900">
@@ -63,7 +65,12 @@ const Home = () => {
           )}
           {heroSectionData ? (
             <div
-              dangerouslySetInnerHTML={{ __html: heroSectionData?.description }}
+              dangerouslySetInnerHTML={{
+                __html: heroSectionData?.description?.replace(
+                  /\[city\]/g,
+                  cityName || "delhi"
+                ),
+              }}
               class="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
             ></div>
           ) : (
@@ -83,10 +90,10 @@ const Home = () => {
               footerSectionData.map((data) => {
                 return (
                   <>
-                    <p className="text-3xl font-semibold text-rose-500 mt-7 mb-3 ">
+                    {/* <p className="text-3xl font-semibold text-rose-500 mt-7 mb-3 ">
                       {" "}
                       {data?.title}kk
-                    </p>
+                    </p> */}
                     <div
                       dangerouslySetInnerHTML={{
                         __html: data?.description,
