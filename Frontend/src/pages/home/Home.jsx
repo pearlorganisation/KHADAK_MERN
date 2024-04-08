@@ -46,6 +46,7 @@ const Home = () => {
   useEffect(() => {
     getHeroSectionData();
     FooterSection();
+    
 
     // setSearchParams((params) => {
     //   params.set("city", `${cityName}`);
@@ -57,8 +58,11 @@ const Home = () => {
       <section class="bg-white dark:bg-gray-900">
         <div class=" px-4 mx-auto max-w-screen-xl text-center lg:pt-8 lg:px-12">
           {heroSectionData ? (
-            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-              {heroSectionData?.title}
+            <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+              {heroSectionData?.title?.replace(
+                /\[city\]/g,
+                cityName[0].toUpperCase() + cityName.slice(1) || "Delhi"
+              )}
             </h1>
           ) : (
             "loading"
@@ -68,7 +72,7 @@ const Home = () => {
               dangerouslySetInnerHTML={{
                 __html: heroSectionData?.description?.replace(
                   /\[city\]/g,
-                  cityName || "delhi"
+                  cityName[0].toUpperCase() + cityName.slice(1) || "delhi"
                 ),
               }}
               class="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
