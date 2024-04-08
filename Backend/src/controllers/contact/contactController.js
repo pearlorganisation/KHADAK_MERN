@@ -124,3 +124,19 @@ export const updateContact = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+
+// delete contact controller
+export const DeleteContactData = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Contact.findByIdAndDelete(id);
+    res.status(200).json({
+      message: "item deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "Internal Server Error",
+    });
+  }
+};
