@@ -90,8 +90,11 @@ const ViewBlog = () => {
                     <td className="px-6 py-4 whitespace-nowrap min-h-40 min-w-48">
                       <img className='h-40 w-48 rounded-lg' src={item?.profileImage} />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                    {item?.description}
+                    <td
+                    dangerouslySetInnerHTML={{
+                      __html: item?.description,
+                    }} className="px-6 py-4 whitespace-nowrap">
+                   
                     </td>
                    
                     
