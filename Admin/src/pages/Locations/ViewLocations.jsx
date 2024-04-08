@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Stack, Skeleton } from "@mui/material";
 
@@ -18,6 +18,8 @@ const ViewLocation = () => {
   const { locationData, isDeleted, isLoading } = useSelector(
     (state) => state.location
   );
+
+  const [search ,setSearch]= useState("")
 
   const handleAddLocation = () => {
     navigate("/addLocation");
@@ -65,18 +67,19 @@ const ViewLocation = () => {
             </div>
           </div>
         </div>
-        {/* <div className="flex mt-10 gap-2">
+        <div className="flex mt-10 gap-2">
           <div>
             <input
+            onChange={(e)=>{setSearch(e.target.value)}}
               type="text"
               className="px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg"
-              placeholder="Search City"
+              placeholder="Search City or Locality"
             />
           </div>
           <div className="p-1 px-2 border border-slate-300 bg-indigo-600 rounded-lg text-xl text-white">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </div>
-        </div> */}
+        </div>
         <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
           <table className="w-full table-auto text-sm text-left">
             <thead className="bg-gray-50 text-gray-600 font-medium border-b">
@@ -102,8 +105,13 @@ const ViewLocation = () => {
                   </td>
                 </tr>
               ) : (
-                Array.isArray(locationData) &&
-                locationData?.map((item, idx) => (
+                Array?.isArray(locationData) &&
+                locationData?.filter((item)=>{
+                  return search === '' 
+                  ? item :
+                   item.name.toLowerCase().includes(search.toLowerCase()) || 
+                   (Array.isArray(item.localities) && item.localities.some(locality => locality.toLowerCase().includes(search.toLowerCase())));
+                 })?.map((item, idx) => (
                   <tr key={idx}>
                     <td className="px-6 py-4 whitespace-nowrap">{idx + 1}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -147,6 +155,25 @@ const ViewLocation = () => {
                   </tr>
                 ))
               )}
+             {/* No results found message */}
+{!isLoading && 
+  Array.isArray(locationData) && 
+  locationData
+    .filter((item) => {
+      return search === '' 
+        ? item 
+        : item.name.toLowerCase().includes(search.toLowerCase()) ||
+          (Array.isArray(item.localities) && 
+          item.localities.some(locality => locality.toLowerCase().includes(search.toLowerCase())));
+    })
+    .length === 0 && (
+      <tr>
+        <td colSpan="5" className="text-center px-6 py-8">
+          No results found.
+        </td>
+      </tr>
+    )
+}
             </tbody>
           </table>
         </div>

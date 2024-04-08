@@ -19,6 +19,8 @@ const ViewContact = () => {
       (state) => state.contact
     );
 
+    const [search,setSearch]= useState("")
+
     const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [id, setId] = useState();
 
@@ -66,10 +68,10 @@ const ViewContact = () => {
             </a>
           </div>
         </div>
-        {/* <div className='flex mt-10 gap-2'>
-            <div><input type='text'  className="px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg" placeholder='Search City'/></div>
+        <div className='flex mt-10 gap-2'>
+            <div><input onChange={(e)=>setSearch(e.target.value)} type='text'  className="px-5 py-2 text-gray-500 border-slate-300 bg-transparent outline-none border focus:border-teal-400 shadow-sm rounded-lg" placeholder='Search City'/></div>
             <div className='p-1 px-2 border border-slate-300 bg-indigo-600 rounded-lg text-xl text-white'><FontAwesomeIcon icon={faMagnifyingGlass} /></div>
-        </div> */}
+        </div>
         <div className="mt-12 shadow-sm border rounded-lg h-screen overflow-x-auto ">
           <table className="w-full table-auto text-sm text-left">
             <thead className="bg-gray-50 text-gray-600 font-medium border-b">
@@ -101,7 +103,11 @@ const ViewContact = () => {
           </tr>
           ) : (
             
-               Array.isArray(contactData) && contactData?.map((item, idx) => (
+               Array?.isArray(contactData) && contactData?.filter((item)=>{
+                return search === '' 
+                ? item :
+                 item?.city?.toLowerCase()?.includes(search?.toLowerCase())
+               }).map((item, idx) => (
                   <tr key={idx}>
                     <td className="px-6 py-4 whitespace-nowrap">
                         {idx+1}
@@ -121,8 +127,10 @@ const ViewContact = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                     {item?.phoneNumber}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                    {item?.description}
+                    <td dangerouslySetInnerHTML={{
+                      __html: item?.description,
+                    }} className="px-6 py-4 whitespace-nowrap">
+                   
                     </td>
                     
                     <td className="px-6 whitespace-nowrap">
@@ -147,6 +155,23 @@ const ViewContact = () => {
                 ))
               
               )}
+              {/* No results found message */}
+{!isLoading && 
+  Array.isArray(contactData) && 
+  contactData
+    .filter((item) => {
+      return search === '' 
+        ? item 
+        : item.city.toLowerCase().includes(search.toLowerCase());
+    })
+    .length === 0 && (
+      <tr>
+        <td colSpan="5" className="text-center px-6 py-8">
+          No results found.
+        </td>
+      </tr>
+    )
+}
             </tbody>
           </table>
         </div>
