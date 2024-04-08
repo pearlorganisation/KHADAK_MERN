@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { changeCity } from "../../features/slices/contactSlice";
+import { changeCity, changeLocality } from "../../features/slices/contactSlice";
 
 const CallGirls = () => {
   const locationData = useSelector((state) => state?.location?.locationData);
@@ -15,7 +15,8 @@ const CallGirls = () => {
   // --------------------------------------Functions-------------------------------------------
   const cityHandler = (e, cityName) => {
     dispatch(changeCity(cityName.toLowerCase()));
-    navigate(`/call-girls-in-${cityName.toLowerCase()}`);
+    dispatch(changeLocality(""));
+    navigate(`/call-girls-in-${cityName.toLowerCase()}/`);
   };
   // ------------------------------------------------------------------------------------------
 

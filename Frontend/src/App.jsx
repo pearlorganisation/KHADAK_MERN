@@ -41,10 +41,10 @@ function App() {
           path: "/:city/",
           element: <Home />,
         },
-        {
-          path: "/:city/:locality",
-          element: <Home />,
-        },
+        // {
+        //   path: "/:city/:locality",
+        //   element: <Home />,
+        // },
       ],
     },
   ]);

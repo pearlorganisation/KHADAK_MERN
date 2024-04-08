@@ -1,9 +1,17 @@
 import { useState } from "react";
 import logo from "../../../assets/delhimazzaLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  changeCity,
+  changeLocality,
+} from "../../../features/slices/contactSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const [state, setState] = useState(false);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   // Replace javascript:void(0) paths with your paths
   const navigation = [
@@ -69,9 +77,20 @@ const Header = () => {
                   key={idx}
                   className="text-white text-bold md:text-lg hover:text-[#F4E0B9]"
                 >
-                  <Link to={item.path} className="block">
+                  <div
+                    className="block"
+                    onClick={() => {
+                      if (item.path == "/") {
+                        dispatch(changeCity("Delhi"));
+                        dispatch(changeLocality(""));
+                        navigate(`/call-girls-in-delhi/`);
+                      } else {
+                        navigate(item.path);
+                      }
+                    }}
+                  >
                     {item.title}
-                  </Link>
+                  </div>
                 </li>
               );
             })}

@@ -11,6 +11,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import { changeLocality } from "../../features/slices/contactSlice";
 
 const Location = ({ BASE_URL }) => {
   const [location, setLocation] = useState();
@@ -35,7 +36,10 @@ const Location = ({ BASE_URL }) => {
   };
 
   const localityHandler = (locality) => {
-    navigate(`/call-girls-in-${selectedCity}/${locality.toLowerCase()}`);
+    dispatch(changeLocality(locality));
+    navigate(
+      `/call-girls-in-${locality.toLowerCase().trim().replace(/ /g, "-")}/`
+    );
   };
 
   console.log(location);
