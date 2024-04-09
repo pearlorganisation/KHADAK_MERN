@@ -30,7 +30,7 @@ function App() {
           element: <Blogs />,
         },
         {
-          path: "/readMore",
+          path: "/blogDetail/:title",
           element: <BlogReadMore />,
         },
         {
