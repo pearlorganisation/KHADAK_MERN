@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   locationData: null,
-  selectedLocality: null,
+  selectedLocality: "Delhi",
 };
 
 export const locationslice = createSlice({
