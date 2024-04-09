@@ -48,6 +48,45 @@ export const getBlog = async (req, res) => {
   }
 };
 
+// update blog controller
+export const updateBlog = async (req, res) => {
+  const { key } = req.params; // Assuming the key is passed in the URL params
+  console.log(req.file);
+  try {
+    let updateFields = {};
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req?.file?.path);
+      if (result) {
+        updateFields.profileImage = result?.secure_url;
+      }
+    }
+
+    if (req.body.title) updateFields.title = req.body?.title;
+    if (req.body.description) updateFields.description = req.body?.description;
+
+    const updatedBlog = await Blog.findOneAndUpdate(
+      { _id: key },
+      updateFields,
+      {
+        new: true,
+      }
+    );
+
+    if (updatedBlog) {
+      res.status(200).json({
+        success: true,
+        updatedBlog,
+      });
+    } else {
+      res.status(404).json({
+        message: "blog not found",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error?.message || "Internal server error" });
+  }
+};
+
 // delete blog controller
 export const DeleteBlogData = async (req, res) => {
   try {
