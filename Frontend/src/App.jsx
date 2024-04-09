@@ -1,4 +1,3 @@
-import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -10,6 +9,7 @@ import Blogs from "./pages/blogs/Blogs.jsx";
 import CallGirls from "./pages/call girls/CallGirls.jsx";
 import { store } from "./features/store.js";
 import { Provider } from "react-redux";
+import BlogReadMore from "./pages/blogs/BlogReadMore.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +28,10 @@ function App() {
         {
           path: "/blog",
           element: <Blogs />,
+        },
+        {
+          path: "/blogDetail/:title",
+          element: <BlogReadMore />,
         },
         {
           path: "/call-girls",

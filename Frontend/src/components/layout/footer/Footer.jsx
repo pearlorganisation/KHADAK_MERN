@@ -16,7 +16,7 @@ const Footer = () => {
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
                 <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  Call Delhi
+                  DelhiMazza
                 </h2>
                 <ul class="text-black dark:text-gray-400 font-medium">
                   <li class="mb-4">
@@ -34,7 +34,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div>
+              {/* <div>
                 <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                   Follow us
                 </h2>
@@ -56,7 +56,7 @@ const Footer = () => {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div>
                 <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                   Legal
@@ -79,9 +79,9 @@ const Footer = () => {
           <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
           <div class="sm:flex sm:items-center sm:justify-between">
             <span class="text-sm text-black sm:text-center dark:text-gray-400">
-              © 2023{" "}
-              <Link href="/" class="hover:underline">
-                Call Delhi
+              © 2020{" "}
+              <Link href="/" class="hover:underline uppercase">
+                DelhiMazza
               </Link>
               . All Rights Reserved.
             </span>
