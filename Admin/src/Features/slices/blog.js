@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { createBlog, getBlogs} from "../actions/blog";
+import { createBlog, deleteBlog, getBlogs} from "../actions/blog";
 
 
 // -------------------------------------------------------------------------------------------
@@ -72,7 +72,28 @@ const blogSlice = createSlice({
           position: "top-right",
         });
       })
-     
+      .addCase(deleteBlog.pending, (state, action) => {
+        state.isLoading = true;
+        state.isDeleted = false;
+      })
+      .addCase(deleteBlog.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = true;
+        
+        toast.success("Footer Deleted successfully", {
+          position: "top-right",
+         }); 
+    
+      })
+      .addCase(deleteBlog.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = false;
+        state.errorMessage = action.payload;
+        toast.error(state?.errorMessage, {
+          position: "top-right",
+        });
+        
+      })
     
   },
 });

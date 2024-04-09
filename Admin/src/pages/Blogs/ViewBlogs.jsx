@@ -2,7 +2,10 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { Stack,Skeleton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBlogs } from '../../Features/actions/blog';
+import { deleteBlog, getBlogs } from '../../Features/actions/blog';
+import { useState } from 'react';
+import Delete from '../../components/Delete';
+
 
 
 
@@ -12,18 +15,37 @@ const ViewBlog = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const {isLoading,blogData}= useSelector((state)=>state.blog)
+    const {isLoading,blogData,isDeleted}= useSelector((state)=>state.blog)
 
     const handleAddBlog= () => {
         navigate('/createBlog');
       };
   
+      const [showDeleteModal, setShowDeleteModal] = useState(false);
+      const [id, setId] = useState();
+    
+      const handleDelete = () => {
+        dispatch(deleteBlog(id));
+        setShowDeleteModal(false);
+        setId('');
+      };
+    
+      const handleModal = (ID) => {
+        setShowDeleteModal(true);
+        setId(ID);
+      };
 
       useEffect(
        ()  => {
           dispatch(getBlogs());
         }, []
       )
+
+      useEffect(()=>{
+        if(isDeleted){
+       dispatch(getBlogs())
+        }
+       },[isDeleted])
 
   return (
     <>
@@ -106,7 +128,9 @@ const ViewBlog = () => {
                         Edit
                       </a>
                       <button
-                       
+                        onClick={() => {
+                          handleModal(item?._id);
+                        }}
                         className="py-2 leading-none px-3 font-semibold text-red-500 hover:text-red-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Delete
@@ -120,6 +144,9 @@ const ViewBlog = () => {
           </table>
         </div>
       </div>
+      {showDeleteModal && (
+        <Delete setModal={setShowDeleteModal} handleDelete={handleDelete} />
+      )}
      </>
   )
 }

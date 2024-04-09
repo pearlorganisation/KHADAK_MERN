@@ -42,4 +42,22 @@ export const getBlogs = createAsyncThunk(
       }
     }
   );
+
+  //delete Blog api
+export const deleteBlog = createAsyncThunk(
+  'deleteBlog',
+  async (id, { rejectWithValue }) => {
+    try {
+      console.log(id, 'id');
+      const response = await instance.delete(
+        `/blog/${id}`,
+        
+        { withCredentials: true }
+      );
+      return response;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
   

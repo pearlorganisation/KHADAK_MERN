@@ -5,7 +5,7 @@ import { Stack,Skeleton } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from '../../Features/actions/contact';
+import { deleteContact, getContacts } from '../../Features/actions/contact';
 import Delete from '../../components/Delete';
 
 
@@ -25,7 +25,7 @@ const ViewContact = () => {
   const [id, setId] = useState();
 
   const handleDelete = () => {
-    // dispatch(delete(id));
+    dispatch(deleteContact(id));
     setShowDeleteModal(false);
     setId('');
   };
@@ -44,9 +44,11 @@ const ViewContact = () => {
         dispatch(getContacts());
       }, []);
     
-      useEffect(() => {
-        dispatch(getContacts());
-      }, []);
+      useEffect(()=>{
+        if(isDeleted){
+       dispatch(getContacts())
+        }
+       },[isDeleted])
     
 
   return (
@@ -94,10 +96,14 @@ const ViewContact = () => {
             <td colSpan="8" className="text-center px-6 py-8">
               <Stack spacing={4}>
                 <Skeleton variant="rounded" height={30} />
+                <Skeleton variant="rounded" height={30} />
+                <Skeleton variant="rounded" height={30} />
+                <Skeleton variant="rounded" height={25} />
+                <Skeleton variant="rounded" height={25}/>
                 <Skeleton variant="rounded" height={25}/>
                 <Skeleton variant="rounded" height={20}/>
                 <Skeleton variant="rounded" height={20}/>
-                <Skeleton variant="rounded" height={20}/>
+                
               </Stack>
             </td>
           </tr>
