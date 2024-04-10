@@ -22,19 +22,19 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/contact-us",
+          path: "/contact-us/",
           element: <Contact />,
         },
         {
-          path: "/blog",
+          path: "/blog/",
           element: <Blogs />,
         },
         {
-          path: "/blogDetail/:title",
+          path: "/blog/:title",
           element: <BlogReadMore />,
         },
         {
-          path: "/call-girls",
+          path: "/call-girls/",
           element: <CallGirls />,
         },
         {

@@ -42,4 +42,43 @@ export const getBlogs = createAsyncThunk(
       }
     }
   );
+
+  //delete Blog api
+export const deleteBlog = createAsyncThunk(
+  'deleteBlog',
+  async (id, { rejectWithValue }) => {
+    try {
+      console.log(id, 'id');
+      const response = await instance.delete(
+        `/blog/${id}`,
+        
+        { withCredentials: true }
+      );
+      return response;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
+
+//update blog Api
+
+export const updateBlog = createAsyncThunk(
+  "updateBlog",
+  async ({id,payload}, { rejectWithValue }) => {
+    try {
+
+      const response = await instance.put(`/blog/${id}`, payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response;
+    } catch (error) {
+    
+      return rejectWithValue(error.message);
+    }
+  }
+);
   

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Blogs = () => {
   // -----------------------------useState------------------------------------------
@@ -70,10 +71,10 @@ const Blogs = () => {
                   <div
                     onClick={() => {
                       navigate(
-                        `/blogDetail/${data?.title
+                        `/blog/${data?.title
                           ?.toLowerCase()
                           .trim()
-                          .replace(/ /g, "-")}`,
+                          .replace(/ /g, "-")}`,  
                         { state: data }
                       );
                     }}

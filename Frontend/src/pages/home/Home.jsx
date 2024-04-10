@@ -4,6 +4,7 @@ import CallGirlsList from "../../components/CallGirlslist/CallGirlsList";
 import Location from "../../components/Location/Location";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const params = useParams();
@@ -11,9 +12,10 @@ const Home = () => {
   // useState
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(null);
 
   // -----------------------------------Hooks----------------------------------------
-  const { cityName } = useSelector((state) => state.contact);
+  const { cityName, locality } = useSelector((state) => state.contact);
   const [searchParams, setSearchParams] = useSearchParams();
   // --------------------------------------------------------------------------------
 
@@ -42,17 +44,27 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    if (heroSectionData) {
+      setMetaDescription(
+        document.getElementById("HeroSectionDescription")?.textContent
+      );
+    }
+  }, [heroSectionData, locality]);
+
   // useEffects
   useEffect(() => {
     getHeroSectionData();
     FooterSection();
-    
 
     // setSearchParams((params) => {
     //   params.set("city", `${cityName}`);
     //   return params;
     // });
   }, []);
+
+  // function
+
   return (
     <div className="items-center px-4 max-w-screen-xl mx-auto  md:px-8">
       <section class="bg-white dark:bg-gray-900">
@@ -61,18 +73,37 @@ const Home = () => {
             <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
               {heroSectionData?.title?.replace(
                 /\[city\]/g,
-                cityName[0].toUpperCase() + cityName.slice(1) || "Delhi"
+                (locality && locality[0]?.toUpperCase() + locality.slice(1)) ||
+                  cityName[0].toUpperCase() + cityName.slice(1) ||
+                  "Delhi"
               )}
             </h1>
           ) : (
             "loading"
           )}
+          <Helmet>
+            <title>
+              {" "}
+              {`${heroSectionData?.title?.replace(
+                /\[city\]/g,
+                (locality && locality[0]?.toUpperCase() + locality?.slice(1)) ||
+                  cityName[0].toUpperCase() + cityName.slice(1) ||
+                  "Delhi"
+              )}`}
+            </title>
+            <meta name="description" content={`${metaDescription}`} />
+          </Helmet>
+
           {heroSectionData ? (
             <div
+              id="HeroSectionDescription"
               dangerouslySetInnerHTML={{
                 __html: heroSectionData?.description?.replace(
                   /\[city\]/g,
-                  cityName[0].toUpperCase() + cityName.slice(1) || "delhi"
+                  (locality &&
+                    locality[0]?.toUpperCase() + locality.slice(1)) ||
+                    cityName[0].toUpperCase() + cityName.slice(1) ||
+                    "delhi"
                 ),
               }}
               class="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
@@ -100,7 +131,13 @@ const Home = () => {
                     </p> */}
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: data?.description,
+                        __html: data?.description?.replace(
+                          /\[city\]/g,
+                          (locality &&
+                            locality[0]?.toUpperCase() + locality.slice(1)) ||
+                            cityName[0].toUpperCase() + cityName.slice(1) ||
+                            "Delhi"
+                        ),
                       }}
                     ></div>
                   </>

@@ -60,7 +60,6 @@ console.log(localityOptions)
       const htmlContent = editor.current.value;
       const newData = {
         ...data,
-    
         description: htmlContent.toString() 
       };
       console.log(newData)
@@ -73,15 +72,16 @@ const {city,locality}= newData
       formData.append("title",newData?.title)
       formData.append("phoneNumber",newData?.phoneNumber)
       Array.from(newData?.profileImage).forEach((img) => {
-        console.log(img)
+       
         formData.append("profileImage",img)
         })
        formData.append("city",cityValue); 
        formData.append("locality",localityValue); 
        formData.append("description",newData?.description); 
+
     dispatch(updateContact({id:item._id, payload:formData}))
 
-    console.log("formdata",formData.getAll("profileImage"))
+ console.log(item._id)
           };
 
           useEffect(()=>{
