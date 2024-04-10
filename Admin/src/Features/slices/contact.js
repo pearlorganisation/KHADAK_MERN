@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { createContact, getContacts, updateContact } from "../actions/contact";
+import { createContact, deleteContact, getContacts, updateContact } from "../actions/contact";
 
 
 // -------------------------------------------------------------------------------------------
@@ -92,6 +92,28 @@ const contactSlice = createSlice({
         toast.error(state?.errorMessage, {
           position: "top-right",
         });
+      })
+      .addCase(deleteContact.pending, (state, action) => {
+        state.isLoading = true;
+        state.isDeleted = false;
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = true;
+        
+        toast.success("Footer Deleted successfully", {
+          position: "top-right",
+         }); 
+    
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isDeleted = false;
+        state.errorMessage = action.payload;
+        toast.error(state?.errorMessage, {
+          position: "top-right",
+        });
+        
       })
     
   },

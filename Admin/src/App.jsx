@@ -18,6 +18,7 @@ import UpdateFooterContent from "./pages/FooterContent/UpdateFooterContent";
 import { useSelector } from "react-redux";
 import CreateFooterContent from "./pages/FooterContent/CreateFooterContent";
 import UpdateContact from "./pages/Contacts/UpdateContact";
+import UpdateBlog from "./pages/Blogs/UpdateBlog";
 
 
 
@@ -74,11 +75,15 @@ import UpdateContact from "./pages/Contacts/UpdateContact";
               element: <CreateBlog />,
             },
             {
+              path: "/updateBlog/:id",
+              element: <UpdateBlog />,
+            },
+            {
               path: "/header",
               element: <ViewHeaderContent />,
             },
             {
-              path: "/updateHeader/:id",
+              path: "/updateHeader/:key",
               element: <UpdateHeaderContent />,
             },
     

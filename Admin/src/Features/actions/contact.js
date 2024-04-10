@@ -64,4 +64,23 @@ export const getContacts = createAsyncThunk(
       }
     }
   );
+
+
+  //delete Contact api
+export const deleteContact = createAsyncThunk(
+  'deleteContact',
+  async (id, { rejectWithValue }) => {
+    try {
+      console.log(id, 'id');
+      const response = await instance.delete(
+        `/contact/${id}`,
+        
+        { withCredentials: true }
+      );
+      return response;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
   
