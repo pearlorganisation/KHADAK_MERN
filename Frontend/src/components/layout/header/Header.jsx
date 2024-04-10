@@ -16,9 +16,9 @@ const Header = () => {
   // Replace javascript:void(0) paths with your paths
   const navigation = [
     { title: "Home", path: "/" },
-    { title: "Call Girls", path: "/call-girls" },
-    { title: "Contact Us", path: "/contact-us" },
-    { title: "Blog Us", path: "/blog" },
+    { title: "Call Girls", path: "/call-girls/" },
+    { title: "Contact Us", path: "/contact-us/" },
+    { title: "Blog Us", path: "/blog/" },
   ];
 
   return (
@@ -78,12 +78,12 @@ const Header = () => {
                   className="text-white text-bold md:text-lg hover:text-[#F4E0B9]"
                 >
                   <div
-                    className="block"
+                    className="block cursor-pointer"
                     onClick={() => {
                       if (item.path == "/") {
                         dispatch(changeCity("Delhi"));
                         dispatch(changeLocality(""));
-                        navigate(`/call-girls-in-delhi/`);
+                        navigate(`/`);
                       } else {
                         navigate(item.path);
                       }

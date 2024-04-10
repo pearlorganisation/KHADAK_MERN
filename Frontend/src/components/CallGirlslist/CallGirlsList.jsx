@@ -69,14 +69,14 @@ const CallGirlsList = ({ BASE_URL }) => {
               <div class=" bg-[#c12261] w-full my-10 grid grid-cols-[40%_auto] md:grid-cols-[30%_auto]  rounded-xl border border-spacing-2 border-red-600 px-4 py-4 text-left   md:text-left">
                 <div class="mb-4 md:mr-6 md:mb-0 h-[200px] md:h-[300px]  overflow-hidden">
                   <img
-                    class="rounded-lg h-full object-cover"
+                    class="rounded-lg h-full w-full object-cover"
                     src={data?.profileImage}
                     alt=""
                   />
                 </div>
                 <div class="flex flex-col justify-between  h-auto md:h-[300px] p-3">
                   <div>
-                    <p class="text-xs sm:text-lg md:text-2xl font-medium text-white">
+                    <p class="text-text-lg leading-4 sm:text-lg md:text-2xl font-medium text-white mb-2">
                       {data?.title}
                     </p>
                     <p

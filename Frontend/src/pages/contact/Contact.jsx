@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const Contact = () => {
   const [fullName, setFullName] = useState("");
@@ -40,6 +41,16 @@ const Contact = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>
+          Contact Us - Delhi Mazza Call Girls and Escort Profiles Contact Us -
+          Delhi Mazza Call Girls and Escort Profiles
+        </title>
+        <meta
+          name="description"
+          content="Contact Us at Delhi Mazza For Advertising, Booking and Reports Profile Listing"
+        />
+      </Helmet>
       <div class="max-w-screen-md mx-auto p-5">
         <div class="text-center mb-16">
           <p class="mt-4 text-sm leading-7 text-gray-500 font-regular uppercase">

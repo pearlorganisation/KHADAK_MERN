@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Blogs = () => {
   // -----------------------------useState------------------------------------------
@@ -66,11 +67,20 @@ const Blogs = () => {
                   </a>
                   <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     {data?.description}
+                    <Helmet>
+                      <title>
+                        Blog - Delhi Mazza Call Girls & Escorts Latest News
+                      </title>
+                      <meta
+                        name="description"
+                        content="Delhi Mazza Call Girls & Escorts blogs, Latest News, Article and Contact WhatsApp Number with Profile List in Indian Cities"
+                      />
+                    </Helmet>
                   </p>
                   <div
                     onClick={() => {
                       navigate(
-                        `/blogDetail/${data?.title
+                        `/blog/${data?.title
                           ?.toLowerCase()
                           .trim()
                           .replace(/ /g, "-")}`,
