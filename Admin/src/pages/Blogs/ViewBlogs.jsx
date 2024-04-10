@@ -115,14 +115,14 @@ const ViewBlog = () => {
                     <td
                     dangerouslySetInnerHTML={{
                       __html: item?.description,
-                    }} className="px-6 py-4 whitespace-nowrap">
+                    }} className="px-6 py-4 whitespace-pre-wrap">
                    
                     </td>
                    
                     
                     <td className=" px-6 whitespace-nowrap">
                     <a
-                        
+                        onClick={()=>{navigate(`/updateBlog/${item._id}`,{state:item})}}
                         className="py-2  font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Edit

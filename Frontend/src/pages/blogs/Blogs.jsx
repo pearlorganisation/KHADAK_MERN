@@ -67,13 +67,14 @@ const Blogs = () => {
                   <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     {data?.description}
                   </p>
-                  <Link
+                  <div
+            
                     onClick={() => {
                       navigate(
                         `/blogDetail/${data?.title
                           ?.toLowerCase()
                           .trim()
-                          .replace(/ /g, "-")}`,
+                          .replace(/ /g, "-")}`,  
                         { state: data }
                       );
                     }}
@@ -95,7 +96,7 @@ const Blogs = () => {
                         d="M1 5h12m0 0L9 1m4 4L9 9"
                       />
                     </svg>
-                  </Link>
+                  </div>
                 </div>
               </div>
             );

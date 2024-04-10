@@ -60,4 +60,25 @@ export const deleteBlog = createAsyncThunk(
     }
   }
 );
+
+//update blog Api
+
+export const updateBlog = createAsyncThunk(
+  "updateBlog",
+  async ({id,payload}, { rejectWithValue }) => {
+    try {
+
+      const response = await instance.put(`/blog/${id}`, payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response;
+    } catch (error) {
+    
+      return rejectWithValue(error.message);
+    }
+  }
+);
   

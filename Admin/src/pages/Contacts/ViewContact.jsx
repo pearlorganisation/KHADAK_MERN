@@ -83,9 +83,9 @@ const ViewContact = () => {
                 <th className="py-3 px-6">Name</th>
                 <th className="py-3 px-6">City</th>
                 <th className="py-3 px-6">Locality</th>
-                <th className="py-3 px-6">Whatsapp</th>
-                <th className="py-3 px-6">Description</th>
-                <th className="py-3 px-6">Action</th>
+                {/* <th className="py-3 px-6">Whatsapp</th> */}
+                {/* <th className="py-3 px-6">Description</th> */}
+                <th className="py-3 px-3">Actions</th>
                
                
               </tr>
@@ -130,16 +130,16 @@ const ViewContact = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                     {item?.locality}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    {/* <td className="px-6 py-4 whitespace-nowrap">
                     {item?.phoneNumber}
                     </td>
                     <td dangerouslySetInnerHTML={{
                       __html: item?.description,
                     }} className="px-6 py-4 whitespace-nowrap">
                    
-                    </td>
+                    </td> */}
                     
-                    <td className="px-6 whitespace-nowrap">
+                    <td className="pe-2 whitespace-nowrap">
                     <a
                         onClick={() => {
                           navigate(`/updateContact/${item?._id}`, { state: item  });
