@@ -10,7 +10,7 @@ export const getHeader = createAsyncThunk(
         withCredentials: true,
       });
       console.log(data, "datatattatatatat");
-      return data;
+      return data; 
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -24,7 +24,7 @@ export const updateHeader = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await instance.put(
-        `/herosection/${payload?.id}`,
+        `/herosection/${payload?.key}`,
         payload,
         {
           withCredentials: true,
@@ -33,7 +33,7 @@ export const updateHeader = createAsyncThunk(
           },
         }
       );
-      return response.data;
+      return response;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error);
