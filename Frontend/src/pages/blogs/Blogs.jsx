@@ -8,7 +8,7 @@ const Blogs = () => {
   const navigate = useNavigate();
 
   const getBlogData = async () => {
-    const data = await fetch("https://khadak-mern.onrender.com/api/v1/blog");
+    const data = await fetch(`${import.meta.env.VITE_BASE_URL}/blog`);
     const updatedData = await data.json();
     setBlogData(updatedData?.data);
   };

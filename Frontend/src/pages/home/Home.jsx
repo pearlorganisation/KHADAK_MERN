@@ -25,7 +25,8 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   // --------------------------------------------------------------------------------
 
-  const BASE_URL = "https://khadak-mern.onrender.com/api/v1";
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  console.log(BASE_URL);
 
   // const BASE_URL = "http://localhost:6500/api/v1";
 
@@ -33,7 +34,7 @@ const Home = () => {
   const getHeroSectionData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/heroSection`);
-      console.log(response?.data?.data[0]);
+      console.log(response?.data);
       setHeroSectionData(response?.data?.data[0]);
     } catch (error) {
       console.log(error.message);
