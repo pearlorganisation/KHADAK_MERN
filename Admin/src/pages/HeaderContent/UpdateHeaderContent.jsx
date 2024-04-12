@@ -11,7 +11,8 @@ const UpdateHeaderContent = () => {
   const { headerData, isSuccess, isLoading } = useSelector(
     (state) => state.header
   );
-  const { id } = useParams();
+  const  {key}  = useParams();
+  // const key = useParams().key
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,11 +32,12 @@ const UpdateHeaderContent = () => {
 
     const newData = {
       ...data,
-      id,
+      key,
       description: htmlContent.toString(), // Add the HTML content to the data
     };
     dispatch(updateHeader(newData));
     console.log(newData);
+  
   };
 
   useEffect(() => {

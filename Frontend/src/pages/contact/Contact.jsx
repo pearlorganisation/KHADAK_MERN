@@ -42,10 +42,7 @@ const Contact = () => {
   return (
     <div>
       <Helmet>
-        <title>
-          Contact Us - Delhi Mazza Call Girls and Escort Profiles Contact Us -
-          Delhi Mazza Call Girls and Escort Profiles
-        </title>
+        <title>Contact Us - Delhi Mazza Call Girls and Escort Profiles</title>
         <meta
           name="description"
           content="Contact Us at Delhi Mazza For Advertising, Booking and Reports Profile Listing"

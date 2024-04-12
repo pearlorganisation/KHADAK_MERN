@@ -5,6 +5,7 @@ import Location from "../../components/Location/Location";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
+import CallGirls from "../call girls/CallGirls";
 
 const Home = () => {
   const params = useParams();
@@ -12,7 +13,12 @@ const Home = () => {
   // useState
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
-  const [metaDescription, setMetaDescription] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(
+    " Being one of the top call girls in [city] adverts it features best call girl Contact Numbers, and online escort girl booking 24x7 for Home And Hotel Room Services."
+  );
+  const [metaTitle, setMetaTitle] = useState(
+    "Call Girls in [city], Escort Service Available 24x7 in [city]"
+  );
 
   // -----------------------------------Hooks----------------------------------------
   const { cityName, locality } = useSelector((state) => state.contact);
@@ -43,14 +49,6 @@ const Home = () => {
       console.log(error.message);
     }
   };
-
-  useEffect(() => {
-    if (heroSectionData) {
-      setMetaDescription(
-        document.getElementById("HeroSectionDescription")?.textContent
-      );
-    }
-  }, [heroSectionData, locality]);
 
   // useEffects
   useEffect(() => {
@@ -84,14 +82,22 @@ const Home = () => {
           <Helmet>
             <title>
               {" "}
-              {`${heroSectionData?.title?.replace(
+              {`${metaTitle?.replace(
                 /\[city\]/g,
                 (locality && locality[0]?.toUpperCase() + locality?.slice(1)) ||
                   cityName[0].toUpperCase() + cityName.slice(1) ||
                   "Delhi"
               )}`}
             </title>
-            <meta name="description" content={`${metaDescription}`} />
+            <meta
+              name="description"
+              content={`${metaDescription?.replace(
+                /\[city\]/g,
+                (locality && locality[0]?.toUpperCase() + locality?.slice(1)) ||
+                  cityName[0].toUpperCase() + cityName.slice(1) ||
+                  "Delhi"
+              )}`}
+            />
           </Helmet>
 
           {heroSectionData ? (
@@ -146,6 +152,7 @@ const Home = () => {
           </div>
 
           <Location BASE_URL={BASE_URL} />
+          <CallGirls />
         </div>
       </section>
     </div>
