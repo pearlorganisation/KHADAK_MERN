@@ -33,10 +33,7 @@ function App() {
           path: "/blog/:title",
           element: <BlogReadMore />,
         },
-        {
-          path: "/call-girls/",
-          element: <CallGirls />,
-        },
+
         {
           path: "/:city",
           element: <Home />,

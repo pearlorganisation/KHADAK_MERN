@@ -16,7 +16,7 @@ const Header = () => {
   // Replace javascript:void(0) paths with your paths
   const navigation = [
     { title: "Home", path: "/" },
-    { title: "Call Girls", path: "/call-girls/" },
+    // { title: "Call Girls", path: "/call-girls/" },
     { title: "Contact Us", path: "/contact-us/" },
     { title: "Blog Us", path: "/blog/" },
   ];
