@@ -25,10 +25,7 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="https://tailwindcss.com/"
-                      class="hover:underline"
-                    >
+                    <Link to="contact-us/" class="hover:underline">
                       Contact-us
                     </Link>
                   </li>

@@ -19,7 +19,9 @@ const CallGirls = () => {
     if (cityName?.toLowerCase() == "delhi") {
       navigate("/");
     } else {
-      navigate(`/call-girls-in-${cityName.toLowerCase()}/`);
+      navigate(
+        `/call-girls-in-${cityName.toLowerCase().trim().replace(/ /g, "-")}/`
+      );
     }
   };
   // ------------------------------------------------------------------------------------------
