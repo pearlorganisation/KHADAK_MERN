@@ -9,15 +9,10 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   errorMessage: "",
-  isOtpSentSuccessfully: false,
-  isLogInSuccess: false,
-  isLogoutSuccess: false,
+ 
   isUserLoggedIn: false,
   loggedInUserData: {},
-  isOtpVerified: false,
-  isOtpMailSent: false,
-  isPasswordReset: false,
-  isMailSent: false,
+
   userData: [],
 };
 
