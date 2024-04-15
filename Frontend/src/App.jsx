@@ -11,7 +11,11 @@ import { store } from "./features/store.js";
 import { Provider } from "react-redux";
 import BlogReadMore from "./pages/blogs/BlogReadMore.jsx";
 
+
 function App() {
+
+
+  
   const router = createBrowserRouter([
     {
       path: "/",
