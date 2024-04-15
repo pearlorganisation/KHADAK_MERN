@@ -78,7 +78,7 @@ const ViewContact = () => {
           <table className="w-full table-auto text-sm text-left">
             <thead className="bg-gray-50 text-gray-600 font-medium border-b">
               <tr>
-              <th className="py-3 px-6">S.No</th>
+              <th className="py-3 ps-2">S.No</th>
                 <th className="py-3 px-6">Profile Photo</th>
                 <th className="py-3 px-6">Name</th>
                 <th className="py-3 px-6">City</th>
@@ -115,10 +115,10 @@ const ViewContact = () => {
                  item?.city?.toLowerCase()?.includes(search?.toLowerCase())
                }).map((item, idx) => (
                   <tr key={idx}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                        {idx+1}
+                    <td className="py-3 ps-2 whitespace-nowrap">
+                        {idx+1}.
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap min-h-40 min-w-48">
+                    <td className="py-3 ps-2 pe-4 whitespace-nowrap min-h-40 min-w-48">
                       <img className='h-40 w-48 rounded-lg' src={item?.profileImage} />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
