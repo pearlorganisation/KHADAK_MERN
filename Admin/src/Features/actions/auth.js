@@ -15,8 +15,8 @@ export const logIn = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      console.log(error);
-      return rejectWithValue(error);
+      
+      return rejectWithValue(error.message);
     }
   }
 );
