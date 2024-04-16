@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CallGirlsList from "../../components/CallGirlslist/CallGirlsList";
 import Location from "../../components/Location/Location";
-import { useParams, useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import CallGirls from "../call girls/CallGirls";
+import { changeCity, changeLocality } from "../../features/slices/contactSlice";
 
 const Home = () => {
   const params = useParams();
-  console.log(params);
+  const navigate = useNavigate();
+  const city = params?.city?.toString()?.toLowerCase();
+  console.log("hii", params);
+
   // useState
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
@@ -23,8 +27,13 @@ const Home = () => {
   // -----------------------------------Hooks----------------------------------------
   const { cityName, locality } = useSelector((state) => state.contact);
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
   // --------------------------------------------------------------------------------
 
+  if (!params.city) {
+    dispatch(changeCity("Delhi"));
+    dispatch(changeLocality(""));
+  }
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   console.log(BASE_URL);
 
@@ -50,18 +59,28 @@ const Home = () => {
       console.log(error.message);
     }
   };
-
+  if (heroSectionData) {
+    heroSectionData?.description?.replace(
+      /\[location\]/g,
+      (
+        locality && locality[0]?.toLowerCase() + locality.slice(1)
+      )?.toLowerCase() ||
+        cityName[0].toLowerCase() + cityName.slice(1)?.toLowerCase() ||
+        "delhi"
+    );
+  }
   // useEffects
   useEffect(() => {
     getHeroSectionData();
     FooterSection();
+    // navigate(`${params?.city?.toLowerCase()}`);
 
     // setSearchParams((params) => {
     //   params.set("city", `${cityName}`);
     //   return params;
     // });
   }, []);
-
+  console.log("helllo", cityName, locality);
   // function
 
   return (
@@ -105,15 +124,27 @@ const Home = () => {
             <div
               id="HeroSectionDescription"
               dangerouslySetInnerHTML={{
-                __html: heroSectionData?.description?.replace(
-                  /\[city\]/g,
-                  (locality &&
-                    locality[0]?.toUpperCase() + locality.slice(1)) ||
-                    cityName[0].toUpperCase() + cityName.slice(1) ||
-                    "delhi"
-                ),
+                __html: heroSectionData?.description
+                  ?.replace(
+                    /\[city\]/g,
+                    (locality &&
+                      locality[0]?.toUpperCase() + locality.slice(1)) ||
+                      (cityName &&
+                        cityName[0].toUpperCase() + cityName.slice(1)) ||
+                      "Delhi"
+                  )
+                  ?.replace(
+                    /\[location\]/g,
+                    (locality && locality?.toString().toLowerCase())
+                      .trim()
+                      .replace(/ /g, "-") ||
+                      (cityName && cityName?.toString().toLowerCase())
+                        .trim()
+                        .replace(/ /g, "-") ||
+                      "delhi"
+                  ),
               }}
-              class="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
+              className="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
             ></div>
           ) : (
             "loading"
@@ -138,13 +169,24 @@ const Home = () => {
                     </p> */}
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: data?.description?.replace(
-                          /\[city\]/g,
-                          (locality &&
-                            locality[0]?.toUpperCase() + locality.slice(1)) ||
-                            cityName[0].toUpperCase() + cityName.slice(1) ||
-                            "Delhi"
-                        ),
+                        __html: data?.description
+                          ?.replace(
+                            /\[city\]/g,
+                            (locality &&
+                              locality[0]?.toUpperCase() + locality.slice(1)) ||
+                              cityName[0].toUpperCase() + cityName.slice(1) ||
+                              "Delhi"
+                          )
+                          ?.replace(
+                            /\[location\]/g,
+                            (locality && locality?.toString().toLowerCase())
+                              .trim()
+                              .replace(/ /g, "-") ||
+                              (cityName && cityName?.toString().toLowerCase())
+                                .trim()
+                                .replace(/ /g, "-") ||
+                              "delhi"
+                          ),
                       }}
                     ></div>
                   </>

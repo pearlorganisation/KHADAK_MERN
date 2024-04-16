@@ -35,6 +35,16 @@ export default function Layout() {
         path: '/footer',
         icon: ''
     },
+    {
+        label: 'Delhi Header Content',
+        path: '/delhiHeader',
+        icon: ''
+    }
+        , {
+        label: 'Delhi Footer Content',
+        path: '/delhiFooter',
+        icon: ''
+    },
      ]
 
     return (

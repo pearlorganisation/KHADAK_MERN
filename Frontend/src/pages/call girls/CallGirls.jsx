@@ -27,11 +27,11 @@ const CallGirls = () => {
   // ------------------------------------------------------------------------------------------
 
   return (
-    <div className=" flex justify-center flex-col bg-pink-100">
+    <div className=" flex justify-center flex-col bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 ">
       <h1 className="text-bold md:text-3xl text-2xl lg:text-4xl">
         Find Us in More Top Cities in India
       </h1>
-      <div className=" bg-pink-200 p-3 flex gap-2 overflow-hidden flex-wrap">
+      <div className=" bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700  p-3 flex gap-2 overflow-hidden flex-wrap">
         {Array.isArray(locationData) &&
           locationData.length > 0 &&
           locationData?.map((data) => {
