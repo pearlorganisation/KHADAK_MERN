@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "nodemailer": "^6.9.13",
+    "path": "^0.12.7"
+  }
+}

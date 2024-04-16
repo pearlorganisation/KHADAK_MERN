@@ -10,6 +10,8 @@ import footer from "./slices/footer";
 import location from "./slices/location";
 import contact from "./slices/contact";
 import blog from "./slices/blog";
+import delhiHeader from "./slices/delhiHeader";
+import delhiFooter from "./slices/delhiFooter";
 
 
 
@@ -18,7 +20,9 @@ import blog from "./slices/blog";
 const rootReducer = combineReducers({
     auth,
     header,
+    delhiHeader,
     footer,
+    delhiFooter,
     location,
     contact,
     blog,

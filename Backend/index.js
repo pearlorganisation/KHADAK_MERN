@@ -2,12 +2,19 @@ import express from "express";
 import { mongoConnect } from "./src/configs/mongoDB.js";
 import { authRouter } from "./src/routes/Auth/authRoutes.js";
 import heroSectionRouter from "./src/routes/HeroSection/heroSectionroutes.js";
+
+import delhiHeroSectionRouter from "./src/routes/HeroSection/delhiHeroSectionRoutes.js";
+
 import cors from "cors";
 import footerRouter from "./src/routes/Footer/footerRoutes.js";
+
+import delhiFooterRouter from "./src/routes/Footer/delhiFooterRoutes.js";
+
 import locationRouter from "./src/routes/location/locationRoutes.js";
 import contactRouter from "./src/routes/contact/contactRoute.js";
 import mailRouter from "./src/routes/Mail/mailRoutes.js";
 import blogRouter from "./src/routes/blog/blogRoutes.js";
+import emailRouter from "./src/routes/email/emailRoutes.js"
 
 const app = express();
 const PORT = 6500;
@@ -74,6 +81,9 @@ app.use("/api/v1/location", locationRouter);
 app.use("/api/v1/contact", contactRouter);
 app.use("/api/v1/mail", mailRouter);
 app.use("/api/v1/blog", blogRouter);
+app.use("/api/v1/email", emailRouter)
+app.use("/api/v1/delhiHeroSection",delhiHeroSectionRouter);
+app.use("/api/v1/delhiFooter",delhiFooterRouter)
 
 app.listen(PORT, () => {
   console.log(` app is running on http://localhost:${PORT}`);
