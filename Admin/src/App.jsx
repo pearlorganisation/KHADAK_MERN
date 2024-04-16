@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
@@ -19,6 +19,12 @@ import { useSelector } from "react-redux";
 import CreateFooterContent from "./pages/FooterContent/CreateFooterContent";
 import UpdateContact from "./pages/Contacts/UpdateContact";
 import UpdateBlog from "./pages/Blogs/UpdateBlog";
+import OtpVerification from "./pages/Auth/OtpVerification";
+import ViewDelhiHeaderContent from "./pages/DelhiHeaderContent/ViewHeaderContent";
+import UpdateDelhiHeaderContent from "./pages/DelhiHeaderContent/UpdateHeaderContent";
+import ViewDelhiFooterContent from "./pages/DelhiFooterContent/ViewFooterContent";
+import UpdateDelhiFooterContent from "./pages/DelhiFooterContent/UpdateFooterContent";
+import CreateDelhiFooterContent from "./pages/DelhiFooterContent/CreateFooterContent";
 
 
 
@@ -27,9 +33,11 @@ import UpdateBlog from "./pages/Blogs/UpdateBlog";
   const App = () => {
     // const { isUserLoggedIn } = useAuth();
     
-    const {isUserLoggedIn , isLoading} = useSelector((state)=>state.auth)
-    
+    // const {isUserLoggedIn , isLoading} = useSelector((state)=>state.auth)
+    const isUserLoggedIn = true
+useEffect(()=>{
 
+},[isUserLoggedIn])
   const getRoutes=()=>{
     if(isUserLoggedIn){
       return [
@@ -86,6 +94,17 @@ import UpdateBlog from "./pages/Blogs/UpdateBlog";
               path: "/updateHeader/:key",
               element: <UpdateHeaderContent />,
             },
+
+
+            {
+              path: "/delhiHeader",
+              element: <ViewDelhiHeaderContent />,
+            },
+            {
+              path: "/updateDelhiHeader/:key",
+              element: <UpdateDelhiHeaderContent />,
+            },
+
     
             {
               path: "/footer",
@@ -99,6 +118,20 @@ import UpdateBlog from "./pages/Blogs/UpdateBlog";
               path: "/createFooter/",
               element: <CreateFooterContent />,
             },
+
+
+            {
+              path: "/delhiFooter",
+              element: <ViewDelhiFooterContent />,
+            },
+            {
+              path: "/updateDelhiFooter/:id",
+              element: <UpdateDelhiFooterContent />,
+            },
+            {
+              path: "/createDelhiFooter/",
+              element: <CreateDelhiFooterContent />,
+            },
     
          
           ],
@@ -110,6 +143,11 @@ import UpdateBlog from "./pages/Blogs/UpdateBlog";
       return [{
         path:"/",
         element: <Login />,
+
+      },
+      {
+        path:"/otpVerification",
+        element: <OtpVerification/>,
 
       }]
     }

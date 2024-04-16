@@ -20,3 +20,21 @@ export const logIn = createAsyncThunk(
     }
   }
 );
+
+//verify OTP Api 
+export const verifyOTP = createAsyncThunk(
+  "email/verifyOtp",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await instance.post("/email/verifyOtp", payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error?.message);
+    }
+  }
+);

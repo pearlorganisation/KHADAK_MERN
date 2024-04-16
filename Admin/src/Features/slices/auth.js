@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { logIn } from "../actions/auth";
+import { logIn, verifyOTP } from "../actions/auth";
 
 // -------------------------------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   errorMessage: "",
- 
+  
   isUserLoggedIn: false,
   loggedInUserData: {},
 
@@ -35,7 +35,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.loggedInUserData = action.payload;
-        state.isUserLoggedIn = true;
+        state.isUserLoggedIn = false;
         state.isLogInSuccess = true;
         state.userData = action.payload.data;
       })
@@ -48,7 +48,30 @@ const authSlice = createSlice({
         toast.error(state?.errorMessage, {
           position: "top-right",
         });
-      });
+      })
+      // verifyOtp
+      .addCase(verifyOTP.pending, (state, action) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isUserLoggedIn = false;
+        state.errorMessage = "";
+      })
+      .addCase(verifyOTP.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isUserLoggedIn= true;
+        
+      })
+      .addCase(verifyOTP.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isUserLoggedIn = false;  
+        state.errorMessage = action.payload;
+        toast.error(state?.errorMessage, {
+          position: "top-right",
+        });
+      })
+      
   },
 });
 

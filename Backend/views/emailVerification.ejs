@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify your login</title>
+
+    <style type="text/css">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            padding: 1rem 2rem;
+            vertical-align: top;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+            background-color: #ffffff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .header-logo {
+            background-color: #00373E;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .header-logo h2 {
+            margin: 0;
+        }
+
+        .content {
+            padding: 40px;
+            background-color: #f8f8f8;
+        }
+
+        h1 {
+            margin: 1rem 0;
+            color: #333333;
+        }
+
+        strong {
+            font-size: 130%;
+            color: #007bff;
+        }
+
+        .otp {
+            font-size: 24px;
+            color: #007bff;
+            margin: 0;
+        }
+
+        .info-message {
+            color: #555555;
+            font-size: 18px;
+
+        }
+
+        .footer {
+            padding: 10px;
+            color: #999999;
+            text-align: center;
+            background-color: #f8f8f8;
+            border-radius: 0 0 12px 12px;
+            font-size: 18px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <table role="presentation" style="border-spacing: 0;">
+        <tr>
+            <td>
+                <table class="container">
+                    <tr>
+                        <td class="header-logo">
+                            <h2>Khadak</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content">
+                            <div style="color: #333333; text-align: left;">
+                                <h1>Verification code</h1>
+                                <p class="info-message">Please use the verification code below to log in.</p>
+                                <p class="otp"><strong>
+                                        <%= otp%>
+                                    </strong></p>
+                                <p class="info-message">This OTP is valid for 5 minutes.</p>
+                                <p class="info-message">If you didn’t request this, you can ignore this email.</p>
+                                <p>Thanks,<br>The Khadak team</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="footer">
+                            <p>© All copyrights reserved to @khadak 2020.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

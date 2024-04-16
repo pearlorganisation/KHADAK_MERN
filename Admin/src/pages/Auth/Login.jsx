@@ -17,6 +17,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     dispatch(logIn(data));
+    navigate("/otpVerification")
   };
 
   return (
@@ -55,11 +56,7 @@ const Login = () => {
           <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
             Sign in
           </button>
-          <div className="text-center">
-            <a href="javascript:void(0)" className="hover:text-indigo-600">
-              Forgot password?
-            </a>
-          </div>
+         
         </form>
       </div>
     </main>
