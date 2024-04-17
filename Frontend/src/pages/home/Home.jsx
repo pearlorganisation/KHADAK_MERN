@@ -2,22 +2,40 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CallGirlsList from "../../components/CallGirlslist/CallGirlsList";
 import Location from "../../components/Location/Location";
-import { useParams, useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
+import CallGirls from "../call girls/CallGirls";
+import { changeCity, changeLocality } from "../../features/slices/contactSlice";
 
 const Home = () => {
   const params = useParams();
-  console.log(params);
+  const navigate = useNavigate();
+  const city = params?.city?.toString()?.toLowerCase();
+  console.log("hii", params);
+
   // useState
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(
+    " Being one of the top call girls in [city] adverts it features best call girl Contact Numbers, and online escort girl booking 24x7 for Home And Hotel Room Services."
+  );
+  const [metaTitle, setMetaTitle] = useState(
+    "Call Girls in [city], Escort Service Available 24x7 in [city]"
+  );
 
   // -----------------------------------Hooks----------------------------------------
-  const { cityName } = useSelector((state) => state.contact);
+  const { cityName, locality } = useSelector((state) => state.contact);
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
   // --------------------------------------------------------------------------------
 
-  const BASE_URL = "https://khadak-mern.onrender.com/api/v1";
+  if (!params.city) {
+    dispatch(changeCity("Delhi"));
+    dispatch(changeLocality(""));
+  }
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  console.log(BASE_URL);
 
   // const BASE_URL = "http://localhost:6500/api/v1";
 
@@ -25,7 +43,7 @@ const Home = () => {
   const getHeroSectionData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/heroSection`);
-      console.log(response?.data?.data[0]);
+      console.log(response?.data);
       setHeroSectionData(response?.data?.data[0]);
     } catch (error) {
       console.log(error.message);
@@ -41,18 +59,30 @@ const Home = () => {
       console.log(error.message);
     }
   };
-
+  if (heroSectionData) {
+    heroSectionData?.description?.replace(
+      /\[location\]/g,
+      (
+        locality && locality[0]?.toLowerCase() + locality.slice(1)
+      )?.toLowerCase() ||
+        cityName[0].toLowerCase() + cityName.slice(1)?.toLowerCase() ||
+        "delhi"
+    );
+  }
   // useEffects
   useEffect(() => {
     getHeroSectionData();
     FooterSection();
-    
+    // navigate(`${params?.city?.toLowerCase()}`);
 
     // setSearchParams((params) => {
     //   params.set("city", `${cityName}`);
     //   return params;
     // });
   }, []);
+  console.log("helllo", cityName, locality);
+  // function
+
   return (
     <div className="items-center px-4 max-w-screen-xl mx-auto  md:px-8">
       <section class="bg-white dark:bg-gray-900">
@@ -61,21 +91,60 @@ const Home = () => {
             <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
               {heroSectionData?.title?.replace(
                 /\[city\]/g,
-                cityName[0].toUpperCase() + cityName.slice(1) || "Delhi"
+                (locality && locality[0]?.toUpperCase() + locality.slice(1)) ||
+                  cityName[0].toUpperCase() + cityName.slice(1) ||
+                  "Delhi"
               )}
             </h1>
           ) : (
             "loading"
           )}
+          <Helmet>
+            <title>
+              {" "}
+              {`${metaTitle?.replace(
+                /\[city\]/g,
+                (locality && locality[0]?.toUpperCase() + locality?.slice(1)) ||
+                  cityName[0].toUpperCase() + cityName.slice(1) ||
+                  "Delhi"
+              )}`}
+            </title>
+            <meta
+              name="description"
+              content={`${metaDescription?.replace(
+                /\[city\]/g,
+                (locality && locality[0]?.toUpperCase() + locality?.slice(1)) ||
+                  cityName[0].toUpperCase() + cityName.slice(1) ||
+                  "Delhi"
+              )}`}
+            />
+          </Helmet>
+
           {heroSectionData ? (
             <div
+              id="HeroSectionDescription"
               dangerouslySetInnerHTML={{
-                __html: heroSectionData?.description?.replace(
-                  /\[city\]/g,
-                  cityName[0].toUpperCase() + cityName.slice(1) || "delhi"
-                ),
+                __html: heroSectionData?.description
+                  ?.replace(
+                    /\[city\]/g,
+                    (locality &&
+                      locality[0]?.toUpperCase() + locality.slice(1)) ||
+                      (cityName &&
+                        cityName[0].toUpperCase() + cityName.slice(1)) ||
+                      "Delhi"
+                  )
+                  ?.replace(
+                    /\[location\]/g,
+                    (locality && locality?.toString().toLowerCase())
+                      .trim()
+                      .replace(/ /g, "-") ||
+                      (cityName && cityName?.toString().toLowerCase())
+                        .trim()
+                        .replace(/ /g, "-") ||
+                      "delhi"
+                  ),
               }}
-              class="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
+              className="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
             ></div>
           ) : (
             "loading"
@@ -100,7 +169,24 @@ const Home = () => {
                     </p> */}
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: data?.description,
+                        __html: data?.description
+                          ?.replace(
+                            /\[city\]/g,
+                            (locality &&
+                              locality[0]?.toUpperCase() + locality.slice(1)) ||
+                              cityName[0].toUpperCase() + cityName.slice(1) ||
+                              "Delhi"
+                          )
+                          ?.replace(
+                            /\[location\]/g,
+                            (locality && locality?.toString().toLowerCase())
+                              .trim()
+                              .replace(/ /g, "-") ||
+                              (cityName && cityName?.toString().toLowerCase())
+                                .trim()
+                                .replace(/ /g, "-") ||
+                              "delhi"
+                          ),
                       }}
                     ></div>
                   </>
@@ -109,6 +195,7 @@ const Home = () => {
           </div>
 
           <Location BASE_URL={BASE_URL} />
+          <CallGirls />
         </div>
       </section>
     </div>

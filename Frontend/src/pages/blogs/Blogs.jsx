@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Blogs = () => {
   // -----------------------------useState------------------------------------------
@@ -7,7 +8,7 @@ const Blogs = () => {
   const navigate = useNavigate();
 
   const getBlogData = async () => {
-    const data = await fetch("https://khadak-mern.onrender.com/api/v1/blog");
+    const data = await fetch(`${import.meta.env.VITE_BASE_URL}/blog`);
     const updatedData = await data.json();
     setBlogData(updatedData?.data);
   };
@@ -43,6 +44,13 @@ const Blogs = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Blog - Delhi Mazza Call Girls & Escorts Latest News</title>
+        <meta
+          name="description"
+          content="Delhi Mazza Call Girls & Escorts blogs, Latest News, Article and Contact WhatsApp Number with Profile List in Indian Cities"
+        />
+      </Helmet>
       <h1 className="text-2xl font-bold text-center mb-4">Blog</h1>
       <div className="w-full  flex justify-center gap-10 flex-wrap">
         {Array.isArray(blogData) &&
@@ -64,17 +72,17 @@ const Blogs = () => {
                       {data?.title}
                     </h5>
                   </a>
-                  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {data?.description}
-                  </p>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: data?.description }}
+                    class="mb-3 font-normal text-gray-700 dark:text-gray-400"
+                  ></p>
                   <div
-            
                     onClick={() => {
                       navigate(
-                        `/blogDetail/${data?.title
+                        `/blog/${data?.title
                           ?.toLowerCase()
                           .trim()
-                          .replace(/ /g, "-")}`,  
+                          .replace(/ /g, "-")}`,
                         { state: data }
                       );
                     }}

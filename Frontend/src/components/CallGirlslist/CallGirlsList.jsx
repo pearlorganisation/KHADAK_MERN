@@ -66,31 +66,38 @@ const CallGirlsList = ({ BASE_URL }) => {
           })
           .map((data) => {
             return (
-              <div class=" bg-[#c12261] w-full my-10 grid grid-cols-[40%_auto] md:grid-cols-[30%_auto]  rounded-xl border border-spacing-2 border-red-600 px-4 py-4 text-left   md:text-left">
+              <div class=" bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 w-full my-10 grid grid-cols-[40%_auto] md:grid-cols-[30%_auto]  rounded-xl border border-spacing-2 border-red-600 px-4 py-4 text-left   md:text-left">
                 <div class="mb-4 md:mr-6 md:mb-0 h-[200px] md:h-[300px]  overflow-hidden">
                   <img
-                    class="rounded-lg h-full object-cover"
+                    class="rounded-lg h-full w-full object-cover"
                     src={data?.profileImage}
                     alt=""
                   />
                 </div>
                 <div class="flex flex-col justify-between  h-auto md:h-[300px] p-3">
                   <div>
-                    <p class="text-xs sm:text-lg md:text-2xl font-medium text-white">
+                    <p class="text-text-lg leading-4 sm:text-lg md:text-2xl font-medium text-gray-700 mb-2">
                       {data?.title}
                     </p>
                     <p
                       dangerouslySetInnerHTML={{ __html: data?.description }}
-                      class="mb-4 text-xs md:text-sm line-clamp-5 md:line-clamp-4 font-medium text-white"
+                      class="mb-4 text-xs md:text-sm line-clamp-5 md:line-clamp-4 font-medium text-gray-700"
                     >
                       {/* {data?.description} */}
                     </p>
                   </div>
 
                   <div class=" grid sm:grid-cols-2 gap-3 text-xs md:text-lg">
-                    <button class="w-full rounded-lg border-2 bg-green-600 px-2 py-1  md:px-4 md:py-2 font-medium text-white">
+                    <a
+                      href={`https://api.whatsapp.com/send?phone=${encodeURIComponent(
+                        data?.phoneNumber
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="w-full rounded-lg border-2 bg-green-600 px-2 py-1  md:px-4 md:py-2 font-medium text-white"
+                    >
                       WhatsApp
-                    </button>
+                    </a>
                     <button class="w-full rounded-lg border-2 border-transparent bg-blue-600 px-2 py-1  md:px-4 md:py-2 font-medium text-white">
                       Call Now
                     </button>

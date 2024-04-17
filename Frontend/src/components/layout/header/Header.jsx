@@ -16,9 +16,9 @@ const Header = () => {
   // Replace javascript:void(0) paths with your paths
   const navigation = [
     { title: "Home", path: "/" },
-    { title: "Call Girls", path: "/call-girls" },
-    { title: "Contact Us", path: "/contact-us" },
-    { title: "Blog Us", path: "/blog" },
+    // { title: "Call Girls", path: "/call-girls/" },
+    { title: "Contact Us", path: "/contact-us/" },
+    { title: "Blog Us", path: "/blog/" },
   ];
 
   return (
@@ -26,7 +26,15 @@ const Header = () => {
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:block">
           <Link to="/">
-            <img src={logo} height={80} alt="Delhimazza.jpg" />
+            <img
+              onClick={() => {
+                dispatch(changeCity("Delhi"));
+                dispatch(changeLocality(""));
+              }}
+              src={logo}
+              height={80}
+              alt="Delhimazza.jpg"
+            />
           </Link>
           <div className="md:hidden">
             <button
@@ -78,12 +86,12 @@ const Header = () => {
                   className="text-white text-bold md:text-lg hover:text-[#F4E0B9]"
                 >
                   <div
-                    className="block"
+                    className="block cursor-pointer"
                     onClick={() => {
                       if (item.path == "/") {
                         dispatch(changeCity("Delhi"));
                         dispatch(changeLocality(""));
-                        navigate(`/call-girls-in-delhi/`);
+                        navigate(`/`);
                       } else {
                         navigate(item.path);
                       }
