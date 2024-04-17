@@ -111,9 +111,9 @@ const Home = () => {
   // function
 
   return (
-    <div className="items-center px-4 max-w-screen-xl mx-auto  md:px-8">
+    <div className="items-center px-4 max-w-screen-2xl mx-auto md:px-8">
       <section class="bg-white dark:bg-gray-900">
-        <div class=" px-4 mx-auto max-w-screen-xl text-center lg:pt-8 lg:px-12">
+        <div class=" px-4 mx-auto max-w-screen-xl text-center pt-4 lg:pt-8 lg:px-12">
           {heroSectionData ? (
             <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
               {heroSectionData?.title?.replace(
