@@ -1,11 +1,12 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
 import { logIn } from "../../Features/actions/auth";
 
 const Login = () => {
+  const {userData,isLoading}= useSelector((state)=>state.auth)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,8 +18,14 @@ const Login = () => {
 
   const onSubmit = (data) => {
     dispatch(logIn(data));
-    navigate("/otpVerification")
+    
   };
+
+  useEffect(()=>{
+ if(userData?.success){
+  navigate("/otpVerification")
+ }
+  },[userData, navigate])
 
   return (
     <main className="w-full bg-gray-100 h-screen flex flex-col items-center justify-center px-4">
@@ -53,8 +60,10 @@ const Login = () => {
               <span className="text-red-500">Password is required</span>
             )}
           </div>
-          <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
-            Sign in
+          <button disabled={isLoading} className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+          {isLoading ? (
+                <ClipLoader color="#c4c2c2" />
+              ) : (<>Log In</>)}
           </button>
          
         </form>

@@ -13,10 +13,10 @@ export const logIn = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      return response.data;
+      return response;
     } catch (error) {
       
-      return rejectWithValue(error.message);
+      return rejectWithValue(error?.message);
     }
   }
 );

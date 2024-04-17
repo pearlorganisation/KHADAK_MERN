@@ -9,7 +9,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   errorMessage: "",
-  
+  isLogInSuccess: false,
   isUserLoggedIn: false,
   loggedInUserData: {},
 
@@ -28,25 +28,26 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.isSuccess = false;
         state.isLogInSuccess = false;
-        state.isUserLoggedIn = false;
+      
         state.errorMessage = "";
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.loggedInUserData = action.payload;
-        state.isUserLoggedIn = false;
         state.isLogInSuccess = true;
         state.userData = action.payload.data;
+        toast.success("OTP sent to your email successfully", {
+          position: "top-center",
+         }); 
       })
       .addCase(logIn.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isLogInSuccess = false;
-        state.isUserLoggedIn = false;
         state.errorMessage = action.payload;
         toast.error(state?.errorMessage, {
-          position: "top-right",
+          position: "top-center",
         });
       })
       // verifyOtp

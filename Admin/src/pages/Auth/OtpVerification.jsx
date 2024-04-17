@@ -1,32 +1,32 @@
-import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from "react-redux";  
-import { verifyOTP } from '../../Features/actions/auth';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useEffect} from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { verifyOTP } from "../../Features/actions/auth";
+import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 const OtpVerification = () => {
-  // const navigate= useNavigate()
-  // const {isUserLoggedIn}= useSelector((state)=>state.auth)
-    const dispatch = useDispatch();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-      const onSubmit= (data)=>{
-        dispatch(verifyOTP(data))
-      }
+  const onSubmit = (data) => {
+    dispatch(verifyOTP(data));
+  };
 
-      // useEffect(()=>{
-      //   if(isUserLoggedIn){
-      //     navigate("/")
-      //   }
-      // },[isUserLoggedIn])
- 
-      return (
+  const { isUserLoggedIn,isLoading } = useSelector((state) => state?.auth);
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      console.log("entered here");
+      navigate("/");
+    }
+  }, [isUserLoggedIn]);
 
+  return (
     <>
       <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
         <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
@@ -36,50 +36,48 @@ const OtpVerification = () => {
                 <p>Otp Verification</p>
               </div>
               <div className="flex flex-row text-sm font-medium text-gray-400">
-                <p>We have sent a code to your email 
-                    {/* abc@gmaqil.com */}
-
+                <p>
+                  We have sent a code to your email
+                 
                 </p>
               </div>
             </div>
 
             <div>
-              <form 
-              onSubmit={handleSubmit(onSubmit)}
-              >
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col space-y-16">
                   <div className="flex flex-row items-center justify-between mx-auto w-full max-w-s">
-                    {/* You can use map to generate OTP input fields */}
-                    {/* {[1, 2, 3, 4, 5, 6].map((index) => ( */}
-                     
-                        <input
-                          {...register(`otp`, 
+                  
+
+                    <input
+                      {...register(
+                        `otp`
                         //   {
                         //     required: true,
                         //     minLength: 1,
                         //     maxLength: 1,
                         //     pattern: /^[0-9]*$/,
                         //   }
-                        )
-                        }
-                          className={`w-full h-full  text-center outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 ${
-                            errors[`otp`] ? "border-red-500" : ""
-                          }`}
-                          type="text"
-                          placeholder="Type the OTP here "
-                         
-                        />
-                    
-                    {/* ))} */}
+                      )}
+                      className={`w-full h-full p-5  text-center outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 ${
+                        errors[`otp`] ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Type the OTP here "
+                    />
+
+                  
                   </div>
 
                   <div className="flex flex-col space-y-5">
                     <div>
-                      <button
+                      <button disabled={isLoading}
                         className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-[#1D4ED8] border-none text-white text-sm shadow-sm"
                         type="submit"
                       >
-                        Verify Account
+                       {isLoading ? (
+                <ClipLoader color="#c4c2c2" />
+              ) : (<>Verify Account</>)}
                       </button>
                     </div>
 
@@ -102,7 +100,7 @@ const OtpVerification = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default OtpVerification
+export default OtpVerification;
