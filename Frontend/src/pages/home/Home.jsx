@@ -40,6 +40,27 @@ const Home = () => {
   // const BASE_URL = "http://localhost:6500/api/v1";
 
   // getting the hero section data
+
+  const getDehiHeroSectionData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/delhiHeroSection`);
+      console.log(response?.data);
+      setHeroSectionData(response?.data?.data[0]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const delhiFooterSection = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/delhiFooter`);
+      console.log(response?.data);
+      setFooterSectionData(response?.data?.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const getHeroSectionData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/heroSection`);
@@ -71,15 +92,21 @@ const Home = () => {
   }
   // useEffects
   useEffect(() => {
-    getHeroSectionData();
-    FooterSection();
+    if (locality == "" && cityName?.toLowerCase() == "delhi") {
+      getDehiHeroSectionData();
+      delhiFooterSection();
+    } else {
+      getHeroSectionData();
+      FooterSection();
+    }
+
     // navigate(`${params?.city?.toLowerCase()}`);
 
     // setSearchParams((params) => {
     //   params.set("city", `${cityName}`);
     //   return params;
     // });
-  }, []);
+  }, [cityName, locality]);
   console.log("helllo", cityName, locality);
   // function
 
