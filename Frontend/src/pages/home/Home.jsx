@@ -111,7 +111,7 @@ const Home = () => {
   // function
 
   return (
-    <div className="items-center px-4 max-w-screen-2xl mx-auto md:px-8">
+    <div className="items-center sm:px-4 max-w-screen-2xl mx-auto md:px-8">
       <section class="bg-white dark:bg-gray-900">
         <div class=" px-4 mx-auto max-w-screen-xl text-center pt-4 lg:pt-8 lg:px-12">
           {heroSectionData ? (
@@ -171,7 +171,7 @@ const Home = () => {
                       "delhi"
                   ),
               }}
-              className="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
+              className=" text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
             ></div>
           ) : (
             "loading"

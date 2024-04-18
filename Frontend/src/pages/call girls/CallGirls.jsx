@@ -27,8 +27,8 @@ const CallGirls = () => {
   // ------------------------------------------------------------------------------------------
 
   return (
-    <div className=" flex justify-center flex-col bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 ">
-      <h1 className="text-bold md:text-3xl text-2xl lg:text-4xl">
+    <div className="mb-10 flex justify-center flex-col bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 ">
+      <h1 className="font-bold md:text-3xl text-2xl lg:text-4xl p-3 ">
         Find Us in More Top Cities in India
       </h1>
       <div className=" bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700  p-3 flex gap-2 overflow-hidden flex-wrap">
@@ -38,7 +38,7 @@ const CallGirls = () => {
             return (
               <div>
                 <h1
-                  className="text-2xl text-pink-600 font-bold bg-white p-3 cursor-pointer m-2"
+                  className="text-2xl text-pink-600 font-bold bg-white rounded-lg p-3 cursor-pointer m-2"
                   onClick={(e) => {
                     cityHandler(e, data?.name);
                     window.scrollTo({ top: 0, behavior: "smooth" });

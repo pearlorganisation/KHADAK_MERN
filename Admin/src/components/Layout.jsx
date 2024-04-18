@@ -50,7 +50,7 @@ export default function Layout() {
     },
   ];
 
-//   const { isUserLoggedIn,isLogInSuccess } = useSelector((state) => state?.auth);
+  // const { isUserLoggedIn,isLogInSuccess } = useSelector((state) => state?.auth);
 const isUserLoggedIn= true;
   return isUserLoggedIn ? (
     <>

@@ -1,30 +1,37 @@
 import React, { useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { verifyOTP } from "../../Features/actions/auth";
+import { logIn, verifyOTP } from "../../Features/actions/auth";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
 const OtpVerification = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const { userData,loggedInUserData,isLoading } = useSelector((state) => state?.auth);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+console.log(loggedInUserData)
+  const handleResendOtp = ()=>{
+  dispatch(logIn(loggedInUserData))
+  }
   const onSubmit = (data) => {
     dispatch(verifyOTP(data));
   };
 
-  const { isUserLoggedIn,isLoading } = useSelector((state) => state?.auth);
-  useEffect(() => {
-    if (isUserLoggedIn) {
-      console.log("entered here");
-      navigate("/");
-    }
-  }, [isUserLoggedIn]);
+  
+
+  // useEffect(() => {
+  //   if (!userData?.success) {
+  //     console.log("entered here");
+  //     navigate("/");
+  //   }
+  // }, [navigate,userData]);
 
   return (
     <>
@@ -81,17 +88,17 @@ const OtpVerification = () => {
                       </button>
                     </div>
 
-                    {/* <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
+                    <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                       <p>Didn't receive code?</p>
                       <a
                         className="flex flex-row items-center text-blue-600"
-                        href="http://"
-                        target="_blank"
+                        onClick={handleResendOtp}
+                       
                         rel="noopener noreferrer"
                       >
                         Resend
                       </a>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </form>

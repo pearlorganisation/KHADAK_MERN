@@ -11,16 +11,20 @@ const initialState = {
   errorMessage: "",
   isLogInSuccess: false,
   isUserLoggedIn: false,
-  loggedInUserData: {},
-
+  loggedInUserData: null,
   userData: [],
+
 };
 
 // -------------------------------------- Slices------------------------------------------------
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+  storeLoginData:(state,action)=>{
+    state.loggedInUserData = action.payload
+  }
+  },
   extraReducers: (builder) => {
     builder
 
@@ -28,13 +32,13 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.isSuccess = false;
         state.isLogInSuccess = false;
-      
+
         state.errorMessage = "";
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.loggedInUserData = action.payload;
+        
         state.isLogInSuccess = true;
         state.userData = action.payload.data;
         toast.success("OTP sent to your email successfully", {
@@ -61,13 +65,18 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isUserLoggedIn= true;
-        
+        state.userData = action.payload.data;
+        console.log(state.userData)
+        toast.success("Login successfully", {
+          position: "top-center",
+         }); 
       })
       .addCase(verifyOTP.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isUserLoggedIn = false;  
         state.errorMessage = action.payload;
+        console.log(state?.errorMessage)
         toast.error(state?.errorMessage, {
           position: "top-right",
         });
@@ -78,4 +87,4 @@ const authSlice = createSlice({
 
 // ===========================================Exports==================================================
 export default authSlice.reducer;
-export const {} = authSlice.actions;
+export const {storeLoginData} = authSlice.actions;

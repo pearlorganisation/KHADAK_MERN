@@ -79,10 +79,10 @@ const ViewContact = () => {
             <thead className="bg-gray-50 text-gray-600 font-medium border-b">
               <tr>
               <th className="py-3 ps-2">S.No</th>
-                <th className="py-3 px-6">Profile Photo</th>
-                <th className="py-3 px-6">Name</th>
-                <th className="py-3 px-6">City</th>
-                <th className="py-3 px-6">Locality</th>
+                <th className="py-3 px-3">Profile Photo</th>
+                <th className="py-3 px-3">Name</th>
+                <th className="py-3 ">City</th>
+                <th className="py-3 px-3">Locality</th>
                 {/* <th className="py-3 px-6">Whatsapp</th> */}
                 {/* <th className="py-3 px-6">Description</th> */}
                 <th className="py-3 px-3">Actions</th>
@@ -115,19 +115,19 @@ const ViewContact = () => {
                  item?.city?.toLowerCase()?.includes(search?.toLowerCase())
                }).map((item, idx) => (
                   <tr key={idx}>
-                    <td className="py-3 ps-2 whitespace-nowrap">
+                    <td className="py-3 ps-4 whitespace-nowrap">
                         {idx+1}.
                     </td>
-                    <td className="py-3 ps-2 pe-4 whitespace-nowrap min-h-40 min-w-48">
-                      <img className='h-40 w-48 rounded-lg' src={item?.profileImage} />
+                    <td className="py-3 ps-2 pe-4 whitespace-nowrap min-h-32 min-w-32">
+                      <img className='h-32 w-32 rounded-lg' src={item?.profileImage} />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 py-4 whitespace-nowrap">
                       {item?.title}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="py-4 whitespace-nowrap">
                     {item?.city}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 py-4 whitespace-nowrap">
                     {item?.locality}
                     </td>
                     {/* <td className="px-6 py-4 whitespace-nowrap">
@@ -140,14 +140,14 @@ const ViewContact = () => {
                     </td> */}
                     
                     <td className="pe-2 whitespace-nowrap">
-                    <a
+                    <button
                         onClick={() => {
                           navigate(`/updateContact/${item?._id}`, { state: item  });
                         }}  
                         className="py-2  font-semibold text-indigo-500 hover:text-indigo-600 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         Edit
-                      </a>
+                      </button>
                       <button
                         onClick={() => {
                           handleModal(item?._id);

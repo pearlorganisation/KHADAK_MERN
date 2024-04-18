@@ -5,7 +5,7 @@ import logo from "../../../assets/delhimazzaLogo.png";
 const Footer = () => {
   return (
     <div>
-      <footer class="bg-gray-300 dark:bg-gray-900">
+      <footer class="bg-red-600 dark:bg-gray-900 ">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
@@ -13,12 +13,12 @@ const Footer = () => {
                 <img src={logo} class="h-16 me-3" alt=" Logo" />
               </Link>
             </div>
-            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3 text-white">
               <div>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                <h2 class="mb-6 text-sm font-semibold uppercase dark:text-white">
                   DelhiMazza
                 </h2>
-                <ul class="text-black dark:text-gray-400 font-medium">
+                <ul class=" dark:text-gray-400 font-medium">
                   <li class="mb-4">
                     <Link href="https://flowbite.com/" class="hover:underline">
                       Home
@@ -55,10 +55,10 @@ const Footer = () => {
                 </ul>
               </div> */}
               <div>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                <h2 class="mb-6 text-sm font-semibold  uppercase dark:text-white">
                   Legal
                 </h2>
-                <ul class="text-black dark:text-gray-400 font-medium">
+                <ul class=" dark:text-gray-400 font-medium">
                   <li class="mb-4">
                     <Link href="#" class="hover:underline">
                       Privacy Policy
@@ -75,7 +75,7 @@ const Footer = () => {
           </div>
           <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
           <div class="sm:flex sm:items-center sm:justify-between">
-            <span class="text-sm text-black sm:text-center dark:text-gray-400">
+            <span class="text-sm sm:text-center text-white dark:text-gray-400">
               © 2020{" "}
               <Link href="/" class="hover:underline uppercase">
                 DelhiMazza

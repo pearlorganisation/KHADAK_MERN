@@ -23,6 +23,17 @@ const UpdateContact = () => {
 
 console.log(localityOptions)
 
+const temp  = locationData.find(item2 => {
+          
+  const temp2 = item2?.localities.some(ite =>{
+
+   return ite === item?.locality
+ })
+
+ return temp2
+ 
+})
+
   const {
     register,
     handleSubmit,control,resetField,setValue } = useForm({
@@ -30,6 +41,9 @@ console.log(localityOptions)
           title: item?.title|| "",
           profileImage: item?.profileImage|| "",
           phoneNumber: item?.phoneNumber|| "",
+          city:  (locationData.map(item => ({ value: item?.name, label: item?.name }))).
+          find( (c) => c.value === item?.city) || "",
+          locality:  temp?.localities?.map(it => ({ value: it, label: it }))?.find( im => im.value === item?.locality) || "",
   }
         });
 
@@ -95,17 +109,7 @@ const {city,locality}= newData
             dispatch(getLocation())
             },[])
            
-            const temp  = locationData.find(item2 => {
           
-               const temp2 = item2?.localities.some(ite =>{
-
-                return ite === item?.locality
-              })
-           
-              return temp2
-              
-            })
-            console.log(temp?.localities?.map(it => ({ value: it, label: it }))?.find( im => im.value === item?.locality),"temp")
   return (
     <div>
         <div className="bg-gray-100">
