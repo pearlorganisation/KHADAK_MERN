@@ -66,7 +66,7 @@ export const verifyOtp = async (req, res) => {
     const otpDoc = await otpModel.findOne({ otp });
 
     if (!otpDoc) {
-      console.log("incorrect otp");
+      // console.log("incorrect otp");
       return res
         .status(400)
         .json({ success: false, message: "OTP is Incorrect" });
@@ -83,7 +83,7 @@ export const verifyOtp = async (req, res) => {
         .json({ success: false, message: "OTP is expired" });
     }
 
-    console.log("final header error");
+    // console.log("final header error");
 
     res
       .status(200)

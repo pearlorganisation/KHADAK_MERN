@@ -135,7 +135,6 @@ const Home = () => {
                   cityName[0].toUpperCase() + cityName.slice(1) ||
                   "Delhi"
               )}`}
-              
             </title>
             <link rel="canonical" href={`${window?.location?.href}`} />
             <meta
@@ -173,7 +172,7 @@ const Home = () => {
                       "delhi"
                   ),
               }}
-              className="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 "
+              className=" text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
             ></div>
           ) : (
             "loading"

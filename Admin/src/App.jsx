@@ -30,6 +30,7 @@ import UpdateDelhiHeaderContent from "./pages/DelhiHeaderContent/UpdateHeaderCon
 import ViewDelhiFooterContent from "./pages/DelhiFooterContent/ViewFooterContent";
 import UpdateDelhiFooterContent from "./pages/DelhiFooterContent/UpdateFooterContent";
 import CreateDelhiFooterContent from "./pages/DelhiFooterContent/CreateFooterContent";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   // const { isUserLoggedIn } = useAuth();
@@ -38,7 +39,7 @@ const App = () => {
   const isUserLoggedIn = true
 
   const getRoutes = () => {
-    // if (isUserLoggedIn) {
+  
     return [
       {
         path: "/",
@@ -149,7 +150,11 @@ const App = () => {
   const router = createBrowserRouter(getRoutes());
 
   return (
-    <div>
+    <div><Toaster
+    position="top-right"
+    reverseOrder={false}
+    containerClassName="overflow-auto"
+  />
       <RouterProvider router={router}>
         <Outlet />
       </RouterProvider>

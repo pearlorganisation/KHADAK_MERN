@@ -27,7 +27,7 @@ export const sendMail = async (req,res,email, otp) => {
 
     let data = await ejs.renderFile(templatePath, { email, otp });
     let mailOptions = {
-      from: "avnish@pearlorganisation.com",
+      from: process.env.NODEMAILER_MAIL,
       to: email,
       subject: "Khadak Otp",
       html: data,
