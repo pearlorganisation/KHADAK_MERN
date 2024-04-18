@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import logo from "../../assets/delhimazzaLogo.png";
 
 const Blogs = () => {
   // -----------------------------useState------------------------------------------
@@ -46,6 +47,7 @@ const Blogs = () => {
     <>
       <Helmet>
         <title>Blog - Delhi Mazza Call Girls & Escorts Latest News</title>
+        <link rel="canonical" href={`${window?.location?.href}`} />
         <meta
           name="description"
           content="Delhi Mazza Call Girls & Escorts blogs, Latest News, Article and Contact WhatsApp Number with Profile List in Indian Cities"
@@ -57,24 +59,33 @@ const Blogs = () => {
           blogData.length > 0 &&
           blogData.map((data) => {
             return (
-              <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-[300px]">
-                <a href="#" alt="">
+              <div class="relative max-w-sm bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 border border-gray-200 rounded-lg shadow  w-[300px]">
+                <div class="relative">
+                  <a href="#" alt="">
+                    <img
+                      class="rounded-t-lg"
+                      src={data?.profileImage}
+                      alt=""
+                      className="h-[300px] w-[300px] object-cover"
+                    />
+                  </a>
                   <img
-                    class="rounded-t-lg"
-                    src={data?.profileImage}
-                    alt=""
-                    className="h-[300px] w-[300px] object-cover"
+                    src={logo}
+                    width={100}
+                    alt="watermark"
+                    className="absolute top-[50%] right-[50%]  opacity-50"
+                    style={{ transform: "translate(50%,-50%)" }}
                   />
-                </a>
+                </div>
                 <div class="p-5">
                   <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
                       {data?.title}
                     </h5>
                   </a>
                   <p
                     dangerouslySetInnerHTML={{ __html: data?.description }}
-                    class="mb-3 font-normal text-gray-700 dark:text-gray-400"
+                    class="mb-3 font-normal text-gray-700 "
                   ></p>
                   <div
                     onClick={() => {
@@ -86,7 +97,7 @@ const Blogs = () => {
                         { state: data }
                       );
                     }}
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 "
                   >
                     Read more
                     <svg

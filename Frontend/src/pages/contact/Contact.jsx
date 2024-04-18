@@ -43,6 +43,7 @@ const Contact = () => {
     <div>
       <Helmet>
         <title>Contact Us - Delhi Mazza Call Girls and Escort Profiles</title>
+        <link rel="canonical" href={`${window?.location?.href}`} />
         <meta
           name="description"
           content="Contact Us at Delhi Mazza For Advertising, Booking and Reports Profile Listing"

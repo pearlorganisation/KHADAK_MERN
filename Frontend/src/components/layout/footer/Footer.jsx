@@ -5,7 +5,7 @@ import logo from "../../../assets/delhimazzaLogo.png";
 const Footer = () => {
   return (
     <div>
-      <footer class="bg-gray-300 dark:bg-gray-900">
+      <footer class="bg-gray-300 ">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
@@ -15,10 +15,10 @@ const Footer = () => {
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                   DelhiMazza
                 </h2>
-                <ul class="text-black dark:text-gray-400 font-medium">
+                <ul class="text-black  font-medium">
                   <li class="mb-4">
                     <Link href="https://flowbite.com/" class="hover:underline">
                       Home
@@ -55,10 +55,10 @@ const Footer = () => {
                 </ul>
               </div> */}
               <div>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                   Legal
                 </h2>
-                <ul class="text-black dark:text-gray-400 font-medium">
+                <ul class="text-black  font-medium">
                   <li class="mb-4">
                     <Link href="#" class="hover:underline">
                       Privacy Policy
@@ -73,9 +73,9 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+          <hr class="my-6 border-gray-200 sm:mx-auto  lg:my-8" />
           <div class="sm:flex sm:items-center sm:justify-between">
-            <span class="text-sm text-black sm:text-center dark:text-gray-400">
+            <span class="text-sm text-black sm:text-center ">
               © 2020{" "}
               <Link href="/" class="hover:underline uppercase">
                 DelhiMazza
@@ -83,10 +83,7 @@ const Footer = () => {
               . All Rights Reserved.
             </span>
             <div class="flex mt-4 sm:justify-center sm:mt-0">
-              <Link
-                href="#"
-                class="text-black hover:text-gray-900 dark:hover:text-white"
-              >
+              <Link href="#" class="text-black hover:text-gray-900 ">
                 <svg
                   class="w-4 h-4"
                   aria-hidden="true"
@@ -102,10 +99,7 @@ const Footer = () => {
                 </svg>
                 <span class="sr-only">Facebook page</span>
               </Link>
-              <Link
-                href="#"
-                class="text-black hover:text-gray-900 dark:hover:text-white ms-5"
-              >
+              <Link href="#" class="text-black hover:text-gray-900  ms-5">
                 <svg
                   class="w-4 h-4"
                   aria-hidden="true"
@@ -117,10 +111,7 @@ const Footer = () => {
                 </svg>
                 <span class="sr-only">Discord community</span>
               </Link>
-              <Link
-                href="#"
-                class="text-black hover:text-gray-900 dark:hover:text-white ms-5"
-              >
+              <Link href="#" class="text-black hover:text-gray-900  ms-5">
                 <svg
                   class="w-4 h-4"
                   aria-hidden="true"
@@ -136,10 +127,7 @@ const Footer = () => {
                 </svg>
                 <span class="sr-only">Twitter page</span>
               </Link>
-              <Link
-                href="#"
-                class="text-black hover:text-gray-900 dark:hover:text-white ms-5"
-              >
+              <Link href="#" class="text-black hover:text-gray-900  ms-5">
                 <svg
                   class="w-4 h-4"
                   aria-hidden="true"
@@ -155,10 +143,7 @@ const Footer = () => {
                 </svg>
                 <span class="sr-only">GitHub account</span>
               </Link>
-              <Link
-                href="#"
-                class="text-black hover:text-gray-900 dark:hover:text-white ms-5"
-              >
+              <Link href="#" class="text-black hover:text-gray-900  ms-5">
                 <svg
                   class="w-4 h-4"
                   aria-hidden="true"

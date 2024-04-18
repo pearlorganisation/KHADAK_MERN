@@ -112,10 +112,10 @@ const Home = () => {
 
   return (
     <div className="items-center px-4 max-w-screen-2xl mx-auto md:px-8">
-      <section class="bg-white dark:bg-gray-900">
+      <section class="bg-white ">
         <div class=" px-4 mx-auto max-w-screen-xl text-center pt-4 lg:pt-8 lg:px-12">
           {heroSectionData ? (
-            <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+            <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl ">
               {heroSectionData?.title?.replace(
                 /\[city\]/g,
                 (locality && locality[0]?.toUpperCase() + locality.slice(1)) ||
@@ -135,7 +135,9 @@ const Home = () => {
                   cityName[0].toUpperCase() + cityName.slice(1) ||
                   "Delhi"
               )}`}
+              
             </title>
+            <link rel="canonical" href={`${window?.location?.href}`} />
             <meta
               name="description"
               content={`${metaDescription?.replace(
@@ -171,14 +173,14 @@ const Home = () => {
                       "delhi"
                   ),
               }}
-              className="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 dark:text-gray-400"
+              className="mb-8 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-28 "
             ></div>
           ) : (
             "loading"
           )}
         </div>
       </section>
-      <section class=" dark:bg-gray-900">
+      <section class=" ">
         <div class=" px-4 mx-auto max-w-screen-xl text-center  lg:px-12">
           <CallGirlsList BASE_URL={BASE_URL} />
           {/* <CallGirlsList />

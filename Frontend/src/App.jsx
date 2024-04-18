@@ -10,12 +10,9 @@ import CallGirls from "./pages/call girls/CallGirls.jsx";
 import { store } from "./features/store.js";
 import { Provider } from "react-redux";
 import BlogReadMore from "./pages/blogs/BlogReadMore.jsx";
-
+import { useEffect } from "react";
 
 function App() {
-
-
-  
   const router = createBrowserRouter([
     {
       path: "/",

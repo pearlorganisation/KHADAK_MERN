@@ -2,13 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
+import logo from "../../assets/delhimazzaLogo.png";
 
 // import { getContact } from "../../features/slices/contactSlice";
 
 const CallGirlsList = ({ BASE_URL }) => {
   // -----------------------------------Hooks----------------------------------------
   const { locality } = useSelector((state) => state?.contact);
-  // const params = useParams();
+  const params = useParams();
   // const [searchParams, setSearchParams] = useSearchParams();
   const { cityName } = useSelector((state) => state.contact);
   // --------------------------------------------------------------------------------
@@ -67,11 +68,24 @@ const CallGirlsList = ({ BASE_URL }) => {
           .map((data) => {
             return (
               <div class=" bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 w-full my-10 grid grid-cols-[40%_auto] md:grid-cols-[20%_auto]  rounded-xl border border-spacing-2 border-red-600 px-2 md:px-4 md:py-4 py-2 text-left   md:text-left">
-                <div class="mb-4 md:mb-0 h-[170px] w-[150px] md:h-[180px] md:w-[180px]  overflow-hidden">
+                <div class="mb-4 md:mb-0 h-[170px] w-[150px] md:h-[180px] md:w-[180px]  overflow-hidden relative">
+                  {data?.profileImage ? (
+                    <img
+                      class="rounded-lg h-full w-full object-cover h-[170px] w-[150px] md:h-[180px] md:w-[180px] "
+                      src={data?.profileImage}
+                      alt=""
+                    />
+                  ) : (
+                    <div class="rounded-lg h-full w-full object-cover h-[170px] w-[150px] md:h-[180px] md:w-[180px] ">
+                      loading
+                    </div>
+                  )}
                   <img
-                    class="rounded-lg h-full w-full object-cover"
-                    src={data?.profileImage}
-                    alt=""
+                    src={logo}
+                    width={100}
+                    alt="watermark"
+                    className="absolute top-[50%] right-[50%]  opacity-50"
+                    style={{ transform: "translate(50%,-50%)" }}
                   />
                 </div>
                 <div class="flex flex-col justify-between  h-[100px] md:h-[180px] ">
@@ -91,14 +105,17 @@ const CallGirlsList = ({ BASE_URL }) => {
                     <a
                       href={`https://api.whatsapp.com/send?phone=${encodeURIComponent(
                         data?.phoneNumber
-                      )}`}
+                      )}&text=${window.location.href}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       class="w-full rounded-lg border-2 bg-green-600 px-2 py-1  md:px-4 md:py-2 font-medium text-white text-center"
                     >
                       WhatsApp
                     </a>
-                    <a href={`tel:${data?.phoneNumber}`} class="w-full rounded-lg border-2 border-transparent bg-blue-600 px-2 py-1  md:px-4 md:py-2 font-medium text-white text-center">
+                    <a
+                      href={`tel:${data?.phoneNumber}`}
+                      class="w-full rounded-lg border-2 border-transparent bg-blue-600 px-2 py-1  md:px-4 md:py-2 font-medium text-white text-center"
+                    >
                       Call Now
                     </a>
                   </div>
