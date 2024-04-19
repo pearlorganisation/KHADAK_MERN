@@ -17,6 +17,7 @@ const CallGirlsList = ({ BASE_URL }) => {
   const { selectedLocality } = useSelector((state) => state.location);
 
   const getContacts = async (url) => {
+    console.log(url);
     console.log(url, "hii");
     try {
       const response = await axios.get(

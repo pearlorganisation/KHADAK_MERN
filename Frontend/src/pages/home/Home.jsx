@@ -18,7 +18,7 @@ const Home = () => {
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [footerSectionData, setFooterSectionData] = useState(null);
   const [metaDescription, setMetaDescription] = useState(
-    " Being one of the top call girls in [city] adverts it features best call girl Contact Numbers, and online escort girl booking 24x7 for Home And Hotel Room Services."
+    "Being one of the top call girls in [city] adverts it features best call girl Contact Numbers, and online escort girl booking 24x7 for Home And Hotel Room Services."
   );
   const [metaTitle, setMetaTitle] = useState(
     "Call Girls in [city], Escort Service Available 24x7 in [city]"
@@ -34,6 +34,7 @@ const Home = () => {
     dispatch(changeCity("Delhi"));
     dispatch(changeLocality(""));
   }
+  console.log(params.city);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   console.log(BASE_URL);
 

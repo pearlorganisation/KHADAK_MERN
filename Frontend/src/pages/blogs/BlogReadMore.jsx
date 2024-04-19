@@ -25,7 +25,7 @@ const BlogReadMore = () => {
           <meta name="description" content={`${blogMetaDescription}`} />
         </Helmet>
       </div>
-      <div className="border rounded-lg border-slate-300 p-6 mx-48 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 space-y-6 text-center">
+      <div className="border rounded-lg lg:w-[50%] dm:w-[70%] w-[90%] border-slate-300 p-6 mx-48 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 space-y-6 text-center">
         <div className="relative">
           <img
             src={data?.profileImage}
