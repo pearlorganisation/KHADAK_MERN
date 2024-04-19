@@ -11,10 +11,11 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { changeLocality } from "../../features/slices/contactSlice";
+import { changeCity, changeLocality } from "../../features/slices/contactSlice";
 
 const Location = ({ BASE_URL }) => {
   const [location, setLocation] = useState();
+  const params = useParams();
   const navigate = useNavigate();
   // const [searchParams, setSearchParams] = useSearchParams();
   // const params = useParams();
@@ -48,10 +49,28 @@ const Location = ({ BASE_URL }) => {
   }, []);
   return (
     <div className="w-full p-4 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 mb-5">
-      <h1 className="text-2xl font-bold sm:text-4xl">Areas of Top Call Girls in {selectedCity}</h1>
+      <h1 className="text-2xl font-bold sm:text-4xl">
+        Areas of Top Call Girls in {selectedCity}
+      </h1>
       {Array.isArray(location) &&
         location.length > 0 &&
         location.map((data) => {
+          console.log(
+            "rhis is how we roll",
+            // params?.city?.includes(data?.name.toLowerCase())
+            params?.city
+          );
+
+          {
+            const urlcity = params?.city
+              ?.toLowerCase()
+              ?.includes(data?.name?.toLowerCase());
+            if (urlcity) {
+              dispatch(changeCity(data?.name));
+              dispatch(changeLocality(""));
+            }
+            console.log(urlcity);
+          }
           if (data?.name?.toLowerCase() == selectedCity.toLowerCase()) {
             return (
               <div className="my-8">
