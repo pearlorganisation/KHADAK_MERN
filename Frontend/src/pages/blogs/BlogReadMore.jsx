@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import logo from "../../assets/delhimazzaLogo.png";
 
 const BlogReadMore = () => {
   const { state: data } = useLocation();
@@ -16,19 +17,28 @@ const BlogReadMore = () => {
 
   return (
     <div className="space-y-2 mb-16">
-      <div className="border rounded-lg border-slate-300 p-3 mt-16 mx-48 bg-gradient-to-r from-pink-600 to-pink-500 space-y-5 text-center">
-        <div className="font-bold text-4xl text-white">{data?.title}</div>
+      <div className="border rounded-lg border-slate-300 p-3 mt-16 mx-48 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 space-y-5 text-center">
+        <div className="font-bold text-4xl text-gray-700">{data?.title}</div>
         <Helmet>
           <title>{data?.title}</title>
+          <link rel="canonical" href={`${window?.location?.href}`} />
           <meta name="description" content={`${blogMetaDescription}`} />
         </Helmet>
       </div>
-      <div className="border rounded-lg border-slate-300 p-6 mx-48 bg-gradient-to-r from-pink-600 to-pink-500 space-y-6 text-center">
-        <img
-          src={data?.profileImage}
-          alt=""
-          className="mx-auto rounded-lg w-[800px] h-[500px]"
-        />
+      <div className="border rounded-lg border-slate-300 p-6 mx-48 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 space-y-6 text-center">
+        <div className="relative">
+          <img
+            src={data?.profileImage}
+            alt=""
+            className="mx-auto rounded-lg w-[800px] h-[500px]"
+          />
+          <img
+            src={logo}
+            alt="watermark"
+            className="absolute top-[50%] right-[50%]  opacity-50 w-[100px] md:w-[300px]"
+            style={{ transform: "translate(50%,-50%)" }}
+          />
+        </div>
 
         <div
           id="blogDescription"

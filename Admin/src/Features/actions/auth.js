@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { instance } from "../../services/axiosInterceptor";
 
+
+
 //Login Api
 
 export const logIn = createAsyncThunk(
@@ -13,10 +15,10 @@ export const logIn = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      return response.data;
+      return response;
     } catch (error) {
       
-      return rejectWithValue(error.message);
+      return rejectWithValue(error);
     }
   }
 );
@@ -32,9 +34,9 @@ export const verifyOTP = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      return response?.data;
+      return response;
     } catch (error) {
-      return rejectWithValue(error?.message);
+      return rejectWithValue(error);
     }
   }
 );

@@ -8,18 +8,13 @@ import { clearState } from "../../features/store";
 import { changeCity, changeLocality } from "../../features/slices/contactSlice";
 
 const Layout = () => {
-
-
-
   return (
-    <div className="">
-    
-        <>
-          <Header />
-          <Outlet />
-          <Footer />
-        </>
-      
+    <div className="prevent-select" onContextMenu={(e) => e.preventDefault()}>
+      <>
+        <Header />
+        <Outlet />
+        <Footer />
+      </>
     </div>
   );
 };

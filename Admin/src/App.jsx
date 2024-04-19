@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  Outlet,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Auth/Login";
 import ViewContact from "./pages/Contacts/ViewContact";
-import  CreateContact  from "./pages/Contacts/CreateContact";
+import CreateContact from "./pages/Contacts/CreateContact";
 import CreateLocation from "./pages/Locations/CreateLocation";
 import ViewLocation from "./pages/Locations/ViewLocations";
 import CreateCity from "./pages/Locations/CreateCity";
@@ -25,139 +30,133 @@ import UpdateDelhiHeaderContent from "./pages/DelhiHeaderContent/UpdateHeaderCon
 import ViewDelhiFooterContent from "./pages/DelhiFooterContent/ViewFooterContent";
 import UpdateDelhiFooterContent from "./pages/DelhiFooterContent/UpdateFooterContent";
 import CreateDelhiFooterContent from "./pages/DelhiFooterContent/CreateFooterContent";
+import { Toaster } from "react-hot-toast";
 
+const App = () => {
+  // const { isUserLoggedIn } = useAuth();
 
+  // const { isUserLoggedIn, isLogInSuccess } = useSelector((state) => state.auth);
+  const isUserLoggedIn = true
 
-
-
-  const App = () => {
-    // const { isUserLoggedIn } = useAuth();
-    
-    // const {isUserLoggedIn , isLoading} = useSelector((state)=>state.auth)
-    const isUserLoggedIn = true
-useEffect(()=>{
-
-},[isUserLoggedIn])
-  const getRoutes=()=>{
-    if(isUserLoggedIn){
-      return [
-        {
-          path: "/",
-          element: <Layout />,
-    
-          children: [
-            {
-              path: "/",
-              element: <Home />,
-            },
-            {
-              path: "/contact",
-              element: <ViewContact />,
-            },
-            {
-              path: "/createContact",
-              element: <CreateContact />,
-            },
-            {
-              path: "/updateContact/:key",
-              element: <UpdateContact/>,
-            },
-            {
-              path: "/location",
-              element: <ViewLocation />,
-            },
-            {
-              path: "/addLocation",
-              element: <CreateLocation />,
-            },
-            {
-              path: "/addCity",
-              element: <CreateCity />,
-            },
-            {
-              path: "/blog",
-              element: <ViewBlogs />,
-            },
-            {
-              path: "/createBlog",
-              element: <CreateBlog />,
-            },
-            {
-              path: "/updateBlog/:id",
-              element: <UpdateBlog />,
-            },
-            {
-              path: "/header",
-              element: <ViewHeaderContent />,
-            },
-            {
-              path: "/updateHeader/:key",
-              element: <UpdateHeaderContent />,
-            },
-
-
-            {
-              path: "/delhiHeader",
-              element: <ViewDelhiHeaderContent />,
-            },
-            {
-              path: "/updateDelhiHeader/:key",
-              element: <UpdateDelhiHeaderContent />,
-            },
-
-    
-            {
-              path: "/footer",
-              element: <ViewFooterContent />,
-            },
-            {
-              path: "/updateFooter/:id",
-              element: <UpdateFooterContent />,
-            },
-            {
-              path: "/createFooter/",
-              element: <CreateFooterContent />,
-            },
-
-
-            {
-              path: "/delhiFooter",
-              element: <ViewDelhiFooterContent />,
-            },
-            {
-              path: "/updateDelhiFooter/:id",
-              element: <UpdateDelhiFooterContent />,
-            },
-            {
-              path: "/createDelhiFooter/",
-              element: <CreateDelhiFooterContent />,
-            },
-    
-         
-          ],
-        },
-
-      ]
-    }
-    else{
-      return [{
-        path:"/",
-        element: <Login />,
-
-      },
+  const getRoutes = () => {
+  
+    return [
       {
-        path:"/otpVerification",
-        element: <OtpVerification/>,
+        path: "/",
+        element: <Layout />,
 
-      }]
-    }
-  }
+        children: [
+          {
+            path: "/",
+            element: !isUserLoggedIn ? <Login /> : <Home />, // Render Login page only if user is not logged in
+          },
+          {
+            path: "/otpVerification",
+            element:
+              !isUserLoggedIn && isLogInSuccess ? (
+                <OtpVerification />
+              ) : (
+                <Navigate to="/" />
+              ),
+          },
+          {
+            path: "/",
+            element: <Home />,
+          },
+          {
+            path: "/contact",
+            element: <ViewContact />,
+          },
+          {
+            path: "/createContact",
+            element: <CreateContact />,
+          },
+          {
+            path: "/updateContact/:key",
+            element: <UpdateContact />,
+          },
+          {
+            path: "/location",
+            element: <ViewLocation />,
+          },
+          {
+            path: "/addLocation",
+            element: <CreateLocation />,
+          },
+          {
+            path: "/addCity",
+            element: <CreateCity />,
+          },
+          {
+            path: "/blog",
+            element: <ViewBlogs />,
+          },
+          {
+            path: "/createBlog",
+            element: <CreateBlog />,
+          },
+          {
+            path: "/updateBlog/:id",
+            element: <UpdateBlog />,
+          },
+          {
+            path: "/header",
+            element: <ViewHeaderContent />,
+          },
+          {
+            path: "/updateHeader/:key",
+            element: <UpdateHeaderContent />,
+          },
+
+          {
+            path: "/delhiHeader",
+            element: <ViewDelhiHeaderContent />,
+          },
+          {
+            path: "/updateDelhiHeader/:key",
+            element: <UpdateDelhiHeaderContent />,
+          },
+
+          {
+            path: "/footer",
+            element: <ViewFooterContent />,
+          },
+          {
+            path: "/updateFooter/:id",
+            element: <UpdateFooterContent />,
+          },
+          {
+            path: "/createFooter/",
+            element: <CreateFooterContent />,
+          },
+
+          {
+            path: "/delhiFooter",
+            element: <ViewDelhiFooterContent />,
+          },
+          {
+            path: "/updateDelhiFooter/:id",
+            element: <UpdateDelhiFooterContent />,
+          },
+          {
+            path: "/createDelhiFooter/",
+            element: <CreateDelhiFooterContent />,
+          },
+        ],
+      },
+    ];
+  
+  };
   const router = createBrowserRouter(getRoutes());
 
   return (
-    <div>
+    <div><Toaster
+    position="top-right"
+    reverseOrder={false}
+    containerClassName="overflow-auto"
+  />
       <RouterProvider router={router}>
-        <Layout />
+        <Outlet />
       </RouterProvider>
     </div>
   );

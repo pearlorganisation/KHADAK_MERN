@@ -48,7 +48,7 @@ const Location = ({ BASE_URL }) => {
   }, []);
   return (
     <div className="w-full p-4 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 mb-5">
-      <h1 className="text-4xl">Areas of Top Call Girls in {selectedCity}</h1>
+      <h1 className="text-2xl font-bold sm:text-4xl">Areas of Top Call Girls in {selectedCity}</h1>
       {Array.isArray(location) &&
         location.length > 0 &&
         location.map((data) => {
@@ -56,11 +56,11 @@ const Location = ({ BASE_URL }) => {
             return (
               <div className="my-8">
                 {/* <h1 className="text-3xl text-left text-rose-500">{data?.name}</h1> */}
-                <div className="flex  flex-wrap text-pink-800 w-full">
+                <div className="flex flex-wrap  text-pink-600 font-semibold  w-full gap-5">
                   {data?.localities.map((locality) => {
                     return (
                       <p
-                        className="text-xl mx-5 text-bold cursor-pointer"
+                        className="text-xl mx-5 text-bold border border-white p-1 rounded-lg bg-white cursor-pointer"
                         onClick={() => {
                           localityHandler(locality);
                           window.scrollTo({ top: 0, behavior: "smooth" });
