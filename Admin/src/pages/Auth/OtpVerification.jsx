@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logIn, verifyOTP } from "../../Features/actions/auth";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+import { resetState } from "../../Features/slices/auth";
 
 const OtpVerification = () => {
   const navigate = useNavigate();
@@ -20,18 +21,22 @@ console.log(loggedInUserData)
   const handleResendOtp = ()=>{
   dispatch(logIn(loggedInUserData))
   }
+
+
   const onSubmit = (data) => {
     dispatch(verifyOTP(data));
   };
-
+ const handleBackToLogin = ()=>{
+  dispatch(resetState());
+ }
   
 
-  // useEffect(() => {
-  //   if (!userData?.success) {
-  //     console.log("entered here");
-  //     navigate("/");
-  //   }
-  // }, [navigate,userData]);
+  useEffect(() => {
+    setTimeout(() => {
+      // Clear Redux state after 5 minutes
+      dispatch(resetState());
+    }, 300000);
+  }, []);
 
   return (
     <>
@@ -44,7 +49,7 @@ console.log(loggedInUserData)
               </div>
               <div className="flex flex-row text-sm font-medium text-gray-400">
                 <p>
-                  We have sent a code to your email
+                  We have sent a code to your email and valid for 5 minutes
                  
                 </p>
               </div>
@@ -75,7 +80,7 @@ console.log(loggedInUserData)
 
                   
                   </div>
-
+              
                   <div className="flex flex-col space-y-5">
                     <div>
                       <button disabled={isLoading}
@@ -90,15 +95,24 @@ console.log(loggedInUserData)
 
                     <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                       <p>Didn't receive code?</p>
-                      <a
+                      <button
                         className="flex flex-row items-center text-blue-600"
                         onClick={handleResendOtp}
                        
                         rel="noopener noreferrer"
                       >
                         Resend
-                      </a>
+                      </button>
                     </div>
+                    
+                    <button
+                        className="flex flex-row items-center text-blue-600 font-bold text-center"
+                        onClick={handleBackToLogin}
+                       
+                        rel="noopener noreferrer"
+                      >
+                       Back to Login Page
+                      </button>
                   </div>
                 </div>
               </form>

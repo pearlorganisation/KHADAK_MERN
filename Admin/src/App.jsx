@@ -33,10 +33,9 @@ import CreateDelhiFooterContent from "./pages/DelhiFooterContent/CreateFooterCon
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  // const { isUserLoggedIn } = useAuth();
 
-  // const { isUserLoggedIn, isLogInSuccess } = useSelector((state) => state.auth);
-  const isUserLoggedIn = true
+  const { isUserLoggedIn, isLogInSuccess } = useSelector((state) => state.auth);
+  // const isUserLoggedIn = true
 
   const getRoutes = () => {
   

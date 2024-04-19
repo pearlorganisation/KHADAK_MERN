@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import OtpVerification from "../pages/Auth/OtpVerification";
+import { resetState } from "../Features/slices/auth";
 
 export default function Layout() {
+  const dispatch = useDispatch()
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+
+  const handleBackToLogin = ()=>{
+    dispatch(resetState());
+  }
 
   const sideBarItems = [
     {
@@ -50,8 +56,8 @@ export default function Layout() {
     },
   ];
 
-  // const { isUserLoggedIn,isLogInSuccess } = useSelector((state) => state?.auth);
-const isUserLoggedIn= true;
+  const { isUserLoggedIn,isLogInSuccess } = useSelector((state) => state?.auth);
+// const isUserLoggedIn= true;
   return isUserLoggedIn ? (
     <>
       {/*  <!-- Component: Side navigation menu with user profile and alert message --> */}
@@ -190,9 +196,9 @@ const isUserLoggedIn= true;
                           />
                         </svg>
                       </div>
-                      <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm font-medium">
+                      <button type="button" onClick={handleBackToLogin} className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm font-medium">
                         Logout
-                      </div>
+                      </button>
                     </a>
                   </li>
                 </ul>

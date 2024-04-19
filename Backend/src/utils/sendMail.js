@@ -15,8 +15,8 @@ export const sendMail = async (req,res,email, otp) => {
       port: 465,
       service: "gmail",
       auth: {
-        user: process.env.NODEMAILER_MAIL,
-        pass: process.env.GOOGLE_APP_PASSWORD,
+        user: process.env.ADMIN_NODEMAILER_MAIL,
+        pass: process.env.ADMIN_GOOGLE_APP_PASSWORD,
       },
     });
 

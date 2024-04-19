@@ -68,22 +68,22 @@ const CallGirlsList = ({ BASE_URL }) => {
           })
           .map((data) => {
             return (
-              <div class=" bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 w-full mb-10 grid grid-cols-[40%_auto] md:grid-cols-[20%_auto]  rounded-xl border border-spacing-2 border-red-600 px-2 md:px-4 md:pb-2 py-2 text-left   md:text-left">
-                <div class="md:mb-0 h-[100px] w-[100px] md:h-[180px] md:w-[180px] mb-20  overflow-hidden">
+              <div class=" bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 w-full mb-10 grid grid-cols-[50%_auto] md:grid-cols-[20%_auto]  rounded-xl border border-spacing-2 border-red-600 px-1 md:px-4 md:pb-2 py-2 text-left md:text-left">
+                <div class="md:mb-0 h-[150px] w-[120px] md:h-[180px] md:w-[180px] mb-10  overflow-hidden">
                   <img
                     class="rounded-lg h-full w-full object-cover"
                     src={data?.profileImage}
                     alt=""
                   />
                 </div>
-                <div class="flex flex-col justify-between  md:h-[180px] ">
+                <div class="flex flex-col justify-between ">
                   <div>
                     <p class="text-text-lg leading-4 sm:text-lg md:text-2xl font-medium text-gray-700 mb-2">
                       {data?.title}
                     </p>
                     <p
                       dangerouslySetInnerHTML={{ __html: data?.description }}
-                      class="mb-4 text-xs md:text-sm line-clamp-5 md:line-clamp-4 font-medium text-gray-700"
+                      class="text-xs md:text-sm line-clamp-5 md:line-clamp-4 font-medium text-gray-700"
                     >
                       {/* {data?.description} */}
                     </p>
@@ -98,7 +98,7 @@ const CallGirlsList = ({ BASE_URL }) => {
                       rel="noopener noreferrer"
                       class="w-full rounded-lg border-2 bg-green-600 px-2 py-1  md:px-4 md:py-2 font-medium text-white text-center"
                     >
-                      WhatsApp
+                      Whats App
                     </a>
                     <a
                       href={`tel:${data?.phoneNumber}`}
