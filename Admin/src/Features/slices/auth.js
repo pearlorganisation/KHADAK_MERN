@@ -23,7 +23,8 @@ const authSlice = createSlice({
   reducers: {
   storeLoginData:(state,action)=>{
     state.loggedInUserData = action.payload
-  }
+  },
+  resetState: (state) => initialState, // Reset state to initialState
   },
   extraReducers: (builder) => {
     builder
@@ -87,4 +88,4 @@ const authSlice = createSlice({
 
 // ===========================================Exports==================================================
 export default authSlice.reducer;
-export const {storeLoginData} = authSlice.actions;
+export const {storeLoginData,resetState} = authSlice.actions;
