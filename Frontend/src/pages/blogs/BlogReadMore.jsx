@@ -16,8 +16,8 @@ const BlogReadMore = () => {
   }, []);
 
   return (
-    <div className="space-y-2 mb-16">
-      <div className="border rounded-lg border-slate-300 p-3 mt-16 mx-48 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 space-y-5 text-center">
+    <div className="space-y-2 mb-8 mx-2">
+      <div className="border rounded-lg border-slate-300 p-3 mt-6 sm:mt-10 sm:mx-48 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 text-center">
         <div className="font-bold text-4xl text-gray-700">{data?.title}</div>
         <Helmet>
           <title>{data?.title}</title>
@@ -25,12 +25,12 @@ const BlogReadMore = () => {
           <meta name="description" content={`${blogMetaDescription}`} />
         </Helmet>
       </div>
-      <div className="border rounded-lg lg:w-[50%] dm:w-[70%] w-[90%] border-slate-300 p-6 mx-48 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 space-y-6 text-center">
+      <div className="border rounded-lg  border-slate-300 p-6 bg-gradient-to-r from-amber-50 to-cyan-50 text-gray-700 space-y-6 text-center flex flex-col sm:mx-48">
         <div className="relative">
           <img
             src={data?.profileImage}
             alt=""
-            className="mx-auto rounded-lg w-[800px] h-[500px]"
+            className="mx-auto rounded-lg sm:w-[800px] sm:h-[500px]"
           />
           <img
             src={logo}
