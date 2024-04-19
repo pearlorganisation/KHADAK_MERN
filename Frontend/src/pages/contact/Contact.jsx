@@ -18,7 +18,7 @@ const Contact = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:6500/api/v1/mail", {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/mail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
