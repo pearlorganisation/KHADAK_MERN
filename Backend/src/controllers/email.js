@@ -9,7 +9,7 @@ import { sendMail } from "../utils/sendMail.js";
 // @route - POST /mail/sendOtp
 // @access - PUBLIC
 
-export const sendOtp = async (req, res) => {
+export const forgotPasswordSendOtp = async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -22,7 +22,9 @@ export const sendOtp = async (req, res) => {
 
     const currentDate = new Date();
 
-    await otpModel.deleteMany({ expiresAt: { $lt: currentDate } });
+    await otpModel.deleteMany({ expiresAt: { $lt: currentDate } },{
+      type:"FORGOTPASSWORD"
+    });
 
     const user = await auth.find({ email });
 
@@ -37,12 +39,31 @@ export const sendOtp = async (req, res) => {
 
     await sendMail(req, res, email, otp);
 
-    await otpModel.findOneAndUpdate(
-      { email },
+    const otpDoc= await otpModel.findOneAndUpdate(
+      { email,type:"FORGOTPASSWORD" },
       { otp, expiresAt: new Date(Date.now() + 300000) },
       { $new: true } // return the modified otpDoc not the previous one
     );
-    res.status(200).json({ status: true, message: "Otp sent successfully!!" });
+    
+    if (!otpDoc) {
+      let doc = new otpModel({
+        email,
+        type:"FORGOTPASSWORD",
+        otp,
+        expiresAt: new Date(Date.now() + 300000), //expiry time of otp 5mins
+      });
+
+    await doc.save().then(() => {
+          return res
+            .status(200)
+            .json({ success: true, message: "OTP sent successfully" });
+        });
+      } else {
+          return res
+            .status(200)
+            .json({ success: true, message: "OTP sent successfully" });
+        }
+    // res.status(200).json({ status: true, message: "Otp sent successfully!!" });
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -53,7 +74,7 @@ export const sendOtp = async (req, res) => {
 
 export const verifyOtp = async (req, res) => {
   try {
-    const { otp } = req.body;
+    const { otp,email } = req.body;
 
     if (!otp) {
       console
@@ -63,7 +84,7 @@ export const verifyOtp = async (req, res) => {
       return res;
     }
 
-    const otpDoc = await otpModel.findOne({ otp });
+    const otpDoc = await otpModel.findOne({ otp ,email});
 
     if (!otpDoc) {
       // console.log("incorrect otp");

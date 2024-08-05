@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 const otpSchema = new mongoose.Schema(
   {
     otp: String,
+    type:{
+      type: String,
+      default:"LOGIN",
+      enum:["LOGIN","FORGOTPASSWORD"]
+    },
     email: String,
     expiresAt: {
       type: Date,
